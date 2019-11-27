@@ -1,4 +1,6 @@
 theme: jekyll-theme-tactile
+title: Brent Farris' Website
+description: My blog about mostly computer science stuff
 plugins:
   - jekyll-relative-links
 relative_links:
