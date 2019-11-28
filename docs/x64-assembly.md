@@ -2,10 +2,53 @@
 Something that I have gotten really into recently is x64 Assembly programming. So, I thought I would jot down some of the notes that I've collected from developing in the language. I am using the **MASM** assembler in a **Visual Studio** environment as their memory, registers, and debugging tools work well for my needs. *Note: I will use routine, sub-routine, procedure, and function interchangeably, but they all effectively mean the same thing.*
 
 **JMP**
+- [Register quick tips](#register-quick-tips)
 - [Microsoft procedure calling conventions](#microsoft-procedure-calling-conventions)
 - [Microsoft procedure call weirdness](#microsoft-procedure-call-weirdness)
 - [Setting up a x64 only project in Visual Studio](#setting-up-a-x64-only-project-in-visual-studio)
 - [Code examples](#code-examples)
+
+## Register quick tips
+Below is a quick reference table of registers and their purpose. This isn't 100% accurate to all the purposes of each register, but it is good enough to get started. Note that the all registers in a row are the same register, just the lower bits as you move to the right of the row. So **64-bit** is the whole register, **32-bit** is the lower half of the register, **16-bit** is the lower half of 32, and **8-bit** is the lower half of 16. *Note: there are high registers (ah, bh, ch, dh), but not for the newer registers (r8-r15) so we are skipping those for now to make this table loop pretty.*
+
+| 64-bit | 32-bit | 16-bit | 8-bit | purpose |
+| :----: | :----: | :----: | :---: | :-----: |
+| rax    | eax    | ax     | al    | general |
+| rbx    | ebx    | bx     | bl    | general |
+| rcx    | ecx    | cx     | cl    | general/counting |
+| rdx    | edx    | dx     | dl    | general |
+| rsi    | esi    | si     |       | stack index |
+| rip    | eip    | ip     |       | instruction pointer |
+| r8     | r8d    | r8w    | r8b   | general |
+| r9     | r9d    | r9w    | r9b   | general |
+| r10    | r10d   | r10w   | r10b  | general |
+| r11    | r11d   | r11w   | r11b  | general |
+| r12    | r12d   | r12w   | r12b  | general |
+| r13    | r13d   | r13w   | r13b  | general |
+| r14    | r14d   | r14w   | r14b  | general |
+| r15    | r15d   | r15w   | r15b  | general |
+
+There are some registers that have special behavior based on the instruction that you are using. **RCX** combined with the **loop** instruction is one such set. Below is an example that will increment the value in the `rax` register 8 times.
+
+```asm
+mov rcx, 8
+loop_8_times:
+inc rax
+loop loop_8_times
+```
+
+As you can see, the `loop` instruction basically decrements the `rcx` register until it reaches the value of 0. When `rcx` contains the value of 0 then the loop will end. Below is an example of the same code without the loop instruction to describe the behavior.
+
+```asm
+mov rcx, 8
+loop_8_times:
+inc rax
+dec rcx
+cmp rcx, 0
+jnz loop_8_times
+```
+
+**; TODO:  Make a table for the FPU registers**
 
 ## Microsoft procedure calling conventions
 First of all, [this document](https://docs.microsoft.com/en-us/cpp/build/x64-calling-convention?view=vs-2019) is very helpful for understanding Microsoft calling conventions.
