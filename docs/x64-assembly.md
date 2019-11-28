@@ -1,6 +1,11 @@
 # x64 Assembly
 Something that I have gotten really into recently is x64 Assembly programming. So, I thought I would jot down some of the notes that I've collected from developing in the language. I am using the **MASM** assembler in a **Visual Studio** environment as their memory, registers, and debugging tools work well for my needs.
 
+**JMP**
+- [Microsoft procedure calling conventions](#microsoft-procedure-calling-conventions)
+- [Microsoft procedure call weirdness](#microsoft-procedure-call-weirdness)
+- [Setting up a x64 only project in Visual Studio](#setting-up-a-x64-only-project-in-visual-studio)
+
 ## Microsoft procedure calling conventions
 First of all, [this document](https://docs.microsoft.com/en-us/cpp/build/x64-calling-convention?view=vs-2019) is very helpful for understanding Microsoft calling conventions.
 
