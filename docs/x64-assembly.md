@@ -5,6 +5,7 @@ Something that I have gotten really into recently is x64 Assembly programming. S
 - [Microsoft procedure calling conventions](#microsoft-procedure-calling-conventions)
 - [Microsoft procedure call weirdness](#microsoft-procedure-call-weirdness)
 - [Setting up a x64 only project in Visual Studio](#setting-up-a-x64-only-project-in-visual-studio)
+- [Code examples](#code-examples)
 
 ## Microsoft procedure calling conventions
 First of all, [this document](https://docs.microsoft.com/en-us/cpp/build/x64-calling-convention?view=vs-2019) is very helpful for understanding Microsoft calling conventions.
