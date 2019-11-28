@@ -1,4 +1,5 @@
-theme: jekyll-theme-tactile
+#theme: jekyll-theme-tactile
+remote_theme: jekyll/minima
 title: Brent Farris' Website
 description: Mostly about computer science stuff
 plugins:
@@ -8,3 +9,7 @@ relative_links:
   collections: true
 include:
   - index.md
+titles_from_headings:
+  enabled:     false
+  strip_title: true
+  collections: false
