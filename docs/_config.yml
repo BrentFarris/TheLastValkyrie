@@ -9,3 +9,7 @@ relative_links:
   collections: true
 include:
   - index.md
+titles_from_headings:
+  enabled:     false
+  strip_title: true
+  collections: false
