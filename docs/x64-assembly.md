@@ -29,21 +29,39 @@ add rsp, 32					; Return the stack pointer to original location
 
 ## Setting up a x64 only project in Visual Studio
 You will need to create a C++ project as you normally would. Though you are selecting this to be a C++ project, we will not be creating any C/C++ file types, we will only be creating `.asm` files.
+
 ![create project](https://i.imgur.com/bSTEXxK.png)
+
 Make sure to give your project a suitable name during the configuration step.
+
 ![configure project](https://i.imgur.com/uANUd1m.png)
+
 Something that I like to do is get rid of the normal Visual Studio solution explorer folders and just show all files so that I can setup the directories how I want to set them up.
+
 ![show all files in visual studio](https://i.imgur.com/xEovGhd.png)
+
 Next we need to enable the MASM assembler in the build customizations
+
 ![build customizations](https://i.imgur.com/PmhGv79.png)
+
 ![masm assembler build customization](https://i.imgur.com/pHpopaB.png)
+
 Now lets create a `src/main.asm` file to make sure things are setup correctly. When you create the file, right click on it and go to the file's properties.
+
 ![asm file properties](https://i.imgur.com/KaZtEgj.png)
+
 You should see that the file type is set to **Microsoft Macro Assembler**.
+
 ![asm file item type](https://i.imgur.com/QhMLYlf.png)
+
 Next, you need to set the label that will serve as your entry point in the Visual Studio project properties. To keep things simple, we will name our entry point label `main`. So to set this up you need to go to project properties.
+
 ![project properties](https://i.imgur.com/zVPiaed.png)
+
 Then you need to go to the Linker->Advanced settings and set the **Entry Point** value to `main`. *Note: Make sure that you are in x64 mode and not x86*.
+
 ![entry point label setting](https://i.imgur.com/0ZYcoG4.png)
+
 Now that you have done all that setup, turn your debugger to x64 mode (through the dropdown in Visual Studio next to the debug button) and test things out.
+
 ![assembly running](https://i.imgur.com/cak8imM.png)
