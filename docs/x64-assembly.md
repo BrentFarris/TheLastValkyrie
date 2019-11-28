@@ -25,13 +25,13 @@ Lastly, when calling a procedure, the return value for the call (if any) will be
 ## Microsoft procedure call weirdness
 Something that I haven't found in the Microsoft documentation or anywhere else is an answer to the weirdness that I had when calling procedures like `HeapAlloc` and `HeapFree`. Calling these procedures and then doing a `ret` would cause a memory access error. These procedures would make use of 32 bytes of the stack but it would be the current stack. What this would do is mess up the return address that was set onto the stack by the previous `call` instruction, in my case it changed the address to the value `03h` for some reason. Since I'm not experienced enough to understand why this is yet, the solution I found was to move the stack index before and after calling them.
 ```asm
-sub rsp, 32		; The call to HeapAlloc uses 32 bytes on the stack
+sub rsp, 32	; The call to HeapAlloc uses 32 bytes on the stack
 call HeapAlloc
-add rsp, 32		; Return the stack pointer to original location
+add rsp, 32	; Return the stack pointer to original location
 ;...
-sub rsp, 32		; The call to HeapAlloc uses 32 bytes on the stack
+sub rsp, 32	; The call to HeapAlloc uses 32 bytes on the stack
 call HeapAlloc
-add rsp, 32		; Return the stack pointer to original location
+add rsp, 32	; Return the stack pointer to original location
 ```
 
 ## Setting up a x64 only project in Visual Studio
@@ -83,18 +83,18 @@ What better way to learn something than through some code examples. Below are so
 ; Returns length of string in RAX        ;
 ;****************************************;
 strleninline PROC
-	push rbx				; Save the state of rbx since we are going to use bl
-	push rcx				; Save the state of rcx since we are going to use bl
-	mov rcx, rax			; Create a copy of rax to diff at end
+	push rbx		; Save the state of rbx since we are going to use bl
+	push rcx		; Save the state of rcx since we are going to use bl
+	mov rcx, rax		; Create a copy of rax to diff at end
 strleninline_loop:
-	mov bl, [rax]			; Copy the ascii letter at the rax address into bl
-	inc rax					; Go to the next ascii letter at rax
-	cmp bl, 0				; Check to see if the character is a \0
+	mov bl, [rax]		; Copy the ascii letter at the rax address into bl
+	inc rax			; Go to the next ascii letter at rax
+	cmp bl, 0		; Check to see if the character is a \0
 	jnz strleninline_loop	; If not \0 then continue through the loop
-	dec rax					; We don't want to count \0 as part of the length
-	sub rax, rcx			; Put the length in rax by subtracting address locations
-	pop rcx					; Restore the state of rcx
-	pop rbx					; Restore the state of rbx
+	dec rax			; We don't want to count \0 as part of the length
+	sub rax, rcx		; Put the length in rax by subtracting address locations
+	pop rcx			; Restore the state of rcx
+	pop rbx			; Restore the state of rbx
 	ret
 strleninline ENDP
 ```
@@ -107,23 +107,23 @@ strleninline ENDP
 ; Returns 0 in RAX if false, anything otherwise is true ;
 ;*******************************************************;
 strstartswith PROC
-	push rcx				; Save the state of rcx
-	push rdx				; Save the state of rdx
-	mov rdx, rax			; Copy rax to rdx since we are going to call strlen routine
+	push rcx		; Save the state of rcx
+	push rdx		; Save the state of rdx
+	mov rdx, rax		; Copy rax to rdx since we are going to call strlen routine
 	call strlen
-	mov rcx, rax			; Move the len of the needle string into our counter register
-	mov rax, 0				; Set the return to false
+	mov rcx, rax		; Move the len of the needle string into our counter register
+	mov rax, 0		; Set the return to false
 strstartswith_loop:
-	mov r8b, [rbx]			; Get the character from haystack string
-	cmp r8b, [rdx]			; Compare character from the needle string
+	mov r8b, [rbx]		; Get the character from haystack string
+	cmp r8b, [rdx]		; Compare character from the needle string
 	jnz strstartswith_exit
-	inc rbx					; Move to the next character in haystack string
-	inc rdx					; Move to the next character in needle string
+	inc rbx			; Move to the next character in haystack string
+	inc rdx			; Move to the next character in needle string
 	loop strstartswith_loop
-	mov rax, 1				; The string starts with match!
+	mov rax, 1		; The string starts with match!
 strstartswith_exit:
-	pop rdx					; Restore the state of rdx
-	pop rcx					; Restore the state of rcx
+	pop rdx			; Restore the state of rdx
+	pop rcx			; Restore the state of rcx
 	ret
 strstartswith ENDP
 ```
@@ -136,47 +136,47 @@ strstartswith ENDP
 ; Returns -1 in RAX if not found, otherwise RAX = index ;
 ;*******************************************************;
 strindexof PROC public
-	push rcx				; Save the state of rcx
-	push rdx				; Save the state of rdx
-	push rax				; Save the haystack to the stack
-	push rbx				; Save the needle to the stack
-	mov rdx, rax			; Copy rax to rdx since we are going to call strlen routine
+	push rcx		; Save the state of rcx
+	push rdx		; Save the state of rdx
+	push rax		; Save the haystack to the stack
+	push rbx		; Save the needle to the stack
+	mov rdx, rax		; Copy rax to rdx since we are going to call strlen routine
 	call strlen
-	mov rcx, rax			; Move the len of the haystack into our counter register
-	mov rax, rdx			; Set the found address to the starting address
-	dec rax					; Make it so that sub rax, haystack will be -1
-	cmp rcx, 0				; Check to make sure we are not looping through a 0 string
+	mov rcx, rax		; Move the len of the haystack into our counter register
+	mov rax, rdx		; Set the found address to the starting address
+	dec rax			; Make it so that sub rax, haystack will be -1
+	cmp rcx, 0		; Check to make sure we are not looping through a 0 string
 	jz strindexof_exit_loop
 strindexof_loop:
-	mov r8b, [rdx]			; Get the character from haystack string
-	cmp r8b, [rbx]			; Compare character from the needle string
+	mov r8b, [rdx]		; Get the character from haystack string
+	cmp r8b, [rbx]		; Compare character from the needle string
 	jne strindexof_notfound
-	mov r8, [rsp+8]			; Get the haystack from the stack without popping
-	cmp rax, r8				; See if rax has already been set, otherwise set it
+	mov r8, [rsp+8]		; Get the haystack from the stack without popping
+	cmp rax, r8		; See if rax has already been set, otherwise set it
 	jge strindexof_check
-	mov rax, rdx			; rax is -1 from haystack address, so it needs to be set
+	mov rax, rdx		; rax is -1 from haystack address, so it needs to be set
 strindexof_check:
-	inc rbx					; Go to the next letter in the needle
-	mov r8b, [rbx]			; Get the character code for the next letter in needle
-	cmp r8b, 0				; If it is the 0 string terminator, then we need to end
+	inc rbx			; Go to the next letter in the needle
+	mov r8b, [rbx]		; Get the character code for the next letter in needle
+	cmp r8b, 0		; If it is the 0 string terminator, then we need to end
 	jz strindexof_exit_loop
 	jmp strindexof_continue
 strindexof_notfound:
-	pop rbx					; Reset the needle to it's starting address
-	pop rax					; Reset rax to haystack starting address
-	push rax				; Put the value back onto the stack for the haystack
-	push rbx				; Push needle starting address back onto stack
-	dec rax					; Make it so that sub rax, haystack will be -1
+	pop rbx			; Reset the needle to it's starting address
+	pop rax			; Reset rax to haystack starting address
+	push rax		; Put the value back onto the stack for the haystack
+	push rbx		; Push needle starting address back onto stack
+	dec rax			; Make it so that sub rax, haystack will be -1
 strindexof_continue:
-	inc rdx					; Move to the next character in haystack string
+	inc rdx			; Move to the next character in haystack string
 	loop strindexof_loop
 strindexof_exit_loop:
-	pop rbx					; Remove the stored neele address as it isn't needed
-	pop rdx					; Reset the haystack pointer to beginning of string
-	sub rax, rdx			; Get the address difference of the needle and haystack
+	pop rbx			; Remove the stored neele address as it isn't needed
+	pop rdx			; Reset the haystack pointer to beginning of string
+	sub rax, rdx		; Get the address difference of the needle and haystack
 strindexof_exit:
-	pop rdx					; Restore the state of rdx
-	pop rcx					; Restore the state of rcx
+	pop rdx			; Restore the state of rdx
+	pop rcx			; Restore the state of rcx
 	ret
 strindexof ENDP
 ```
