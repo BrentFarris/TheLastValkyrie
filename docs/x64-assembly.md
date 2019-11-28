@@ -25,13 +25,13 @@ Lastly, when calling a procedure, the return value for the call (if any) will be
 ## Microsoft procedure call weirdness
 Something that I haven't found in the Microsoft documentation or anywhere else is an answer to the weirdness that I had when calling procedures like `HeapAlloc` and `HeapFree`. Calling these procedures and then doing a `ret` would cause a memory access error. These procedures would make use of 32 bytes of the stack but it would be the current stack. What this would do is mess up the return address that was set onto the stack by the previous `call` instruction, in my case it changed the address to the value `03h` for some reason. Since I'm not experienced enough to understand why this is yet, the solution I found was to move the stack index before and after calling them.
 ```asm
-sub rsp, 32					; The call to HeapAlloc uses 32 bytes on the stack
+sub rsp, 32		; The call to HeapAlloc uses 32 bytes on the stack
 call HeapAlloc
-add rsp, 32					; Return the stack pointer to original location
+add rsp, 32		; Return the stack pointer to original location
 ;...
-sub rsp, 32					; The call to HeapAlloc uses 32 bytes on the stack
+sub rsp, 32		; The call to HeapAlloc uses 32 bytes on the stack
 call HeapAlloc
-add rsp, 32					; Return the stack pointer to original location
+add rsp, 32		; Return the stack pointer to original location
 ```
 
 ## Setting up a x64 only project in Visual Studio
