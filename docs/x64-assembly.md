@@ -3,7 +3,7 @@ Something that I have gotten really into recently is x64 Assembly programming. S
 
 **JMP**
 - [Register quick tips](#register-quick-tips)
-- [C procedure calling conventions](#c-procedure-calling-conventions)
+- [Fast-call procedure calling conventions](#fast-call-procedure-calling-conventions)
 - [Microsoft procedure call weirdness](#microsoft-procedure-call-weirdness)
 - [Setting up a x64 only project in Visual Studio](#setting-up-a-x64-only-project-in-visual-studio)
 - [Code examples](#code-examples)
@@ -50,7 +50,7 @@ jnz loop_8_times
 
 **; TODO:  Make a table for the FPU registers**
 
-## C procedure calling conventions
+## Fast-call procedure calling conventions
 First of all, [this document](https://docs.microsoft.com/en-us/cpp/build/x64-calling-convention?view=vs-2019) is very helpful for understanding Microsoft calling conventions.
 
 In short, Microsoft uses ECX, EDX, R8, and R9 as the first four arguments for a procedure call and any remaining arguments should be pushed onto the stack. Below is a sample from their docs:
