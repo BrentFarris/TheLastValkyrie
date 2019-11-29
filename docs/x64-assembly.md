@@ -1,3 +1,9 @@
+---
+title: x64 Assembly cheat sheet
+description: A cheat sheet on how to use MASM and x64 assembly in visual studio
+tags: x64 assembly masm cheat-sheet
+---
+
 # x64 Assembly
 Something that I have gotten really into recently is x64 Assembly programming. So, I thought I would jot down some of the notes that I've collected from developing in the language. I am using the **MASM** assembler in a **Visual Studio** environment as their memory, registers, and debugging tools work well for my needs. *Note: I will use routine, sub-routine, procedure, and function interchangeably, but they all effectively mean the same thing.*
 
