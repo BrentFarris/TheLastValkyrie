@@ -81,7 +81,7 @@ halloc PROC
 	ret
 halloc ENDP
 ```
-What you will notice in the above code is the instructions `sub rsp, 20h` and `add rsp, 20h` which are adding and removing the shadow space respectively. This is a little bit annoying but I personally don't require the shadow space when I am calling routines that I don't intend to expose to a higher level language like C. This means that I mainly only have to add it when I am calling into a function that I would like to use from the higher level language library.
+What you will notice in the above code is the instructions `sub rsp, 20h` and `add rsp, 20h` which are adding and removing the shadow space respectively. This is a little bit annoying but I personally don't require the shadow space when I am calling routines that I don't intend to expose to a higher level language like C. This means that I mainly only have to add it when I am calling into a function that I would like to use from the higher level language library. For a short added reading on this, check out this Microsoft [blog post](https://devblogs.microsoft.com/oldnewthing/20160623-00/?p=93735).
 
 ## Shadow space and function arguments
 At this point you might be wondering, if there are more than 4 arguments to a function call and the remaining arguments are put onto the stack, how does this work with shadow space? Since the fast-call calling convention requires the shadow space (whether or not it uses it) and that alters the stack, your question should be, "do I push to args to the stack before or after adding the shadow space?". The answer is to push the args **before** you add the shadow space.
@@ -142,6 +142,10 @@ Then you need to go to the Linker->Advanced settings and set the **Entry Point**
 Now that you have done all that setup, turn your debugger to x64 mode (through the dropdown in Visual Studio next to the debug button) and test things out.
 
 ![assembly running](https://i.imgur.com/cak8imM.png)
+
+**NOTE:** if you are getting an error when building some-time in the future that says something along the lines of `unresolved external symbol __imp___CrtDbgReportW`, the problem seems to be the multi-threaded debugging runtime library setting. Changing from "Multi-threaded Debug DLL (/MDd)" to "Multi-threaded DLL (/MD)" in the visual studio project settings seems to have done the trick. You can find it in `Project Settings->C/C++->Code Generation->Runtime Library`.
+
+![unresolved external symbol __imp___CrtDbgReportW solution](https://i.imgur.com/GObJQyP.png)
 
 ## Code examples
 What better way to learn something than through some code examples. Below are some ASCII string query routines that I have written in x64. *Note: these routines are slower, but it works good for example sake. I use a faster versions of these routine in my personal code that account for cache lines and heap access.*
