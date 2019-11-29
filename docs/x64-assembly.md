@@ -4,7 +4,7 @@ Something that I have gotten really into recently is x64 Assembly programming. S
 **JMP**
 - [Register quick tips](#register-quick-tips)
 - [Fast-call procedure calling conventions](#fast-call-procedure-calling-conventions)
-- [Microsoft procedure call weirdness](#microsoft-procedure-call-weirdness)
+- [Fast-call procedure shadow space (home space)](#fast-call-procedure-shadow-space-(home-space))
 - [Setting up a x64 only project in Visual Studio](#setting-up-a-x64-only-project-in-visual-studio)
 - [Code examples](#code-examples)
 
@@ -65,17 +65,21 @@ func2(float a, double b, float c, double d, float e);
 ```
 Lastly, when calling a procedure, the return value for the call (if any) will be put into RAX.
 
-## Microsoft procedure call weirdness
-Something that I haven't found in the Microsoft documentation or anywhere else is an answer to the weirdness that I had when calling procedures like `HeapAlloc` and `HeapFree`. Calling these procedures and then doing a `ret` would cause a memory access error. These procedures would make use of 32 bytes of the stack but it would be the current stack. What this would do is mess up the return address that was set onto the stack by the previous `call` instruction, in my case it changed the address to the value `03h` for some reason. Since I'm not experienced enough to understand why this is yet, the solution I found was to move the stack index before and after calling them.
+## Fast-call procedure shadow space (home space)
+When using fast-call it is important to note that if the routine is either to be called from another language such as C or C++, or if you are calling a function that is in another language like C or C++, you need to make sure to support **shadow space** also known as **home space**. I'll call it **shadow space** from now on because it sounds cooler. This shadow space is 32 bytes long (since we are in 64-bit assembly). Basically what it boils down to is that you need to move the stack pointer `RSP` 32 bytes before doing a `call` (keep in mind 16 byte alignment of the stack). Let's take a look at Microsoft's `HeapAlloc` function (basically `malloc`) as an example of how this would work. Below is our own implementation of `malloc` which we will call `halloc` and use the Windows api function `HeapAlloc`.
 ```asm
-sub rsp, 32	; The call to HeapAlloc uses 32 bytes on the stack
-call HeapAlloc
-add rsp, 32	; Return the stack pointer to original location
-;...
-sub rsp, 32	; The call to HeapAlloc uses 32 bytes on the stack
-call HeapAlloc
-add rsp, 32	; Return the stack pointer to original location
+halloc PROC
+	mov r8, rcx		; Add the number of bytes to allocate
+	call GetProcessHeap	; Store the process heap address in RAX
+	mov rcx, rax		; The heap address is 1st arg
+	mov rdx, 00h		; No flags to alter memory allocation
+	sub rsp, 20h		; Shadow space
+	call HeapAlloc
+	add rsp, 20h		; Remove shadow space
+	ret
+halloc ENDP
 ```
+What you will notice in the above code is the instructions `sub rsp, 20h` and `add rsp, 20h` which are adding and removing the shadow space respectively. This is a little bit annoying but I personally don't require the shadow space when I am calling routines that I don't intend to expose to a higher level language like C. This means that I mainly only have to add it when I am calling into a function that I would like to use from the higher level language library.
 
 ## Setting up a x64 only project in Visual Studio
 You will need to create a C++ project as you normally would. Though you are selecting this to be a C++ project, we will not be creating any C/C++ file types, we will only be creating `.asm` files.
