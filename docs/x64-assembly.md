@@ -4,7 +4,7 @@ Something that I have gotten really into recently is x64 Assembly programming. S
 **JMP**
 - [Register quick tips](#register-quick-tips)
 - [Fast-call procedure calling conventions](#fast-call-procedure-calling-conventions)
-- [Fast-call procedure shadow space (home space)](#fast-call-procedure-shadow-space-(home-space))
+- [Fast-call procedure shadow space (home space)](##fast-call-procedure-shadow-space-home-space)
 - [Setting up a x64 only project in Visual Studio](#setting-up-a-x64-only-project-in-visual-studio)
 - [Code examples](#code-examples)
 
