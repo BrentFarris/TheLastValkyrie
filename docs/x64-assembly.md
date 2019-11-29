@@ -4,7 +4,7 @@ Something that I have gotten really into recently is x64 Assembly programming. S
 **JMP**
 - [Register quick tips](#register-quick-tips)
 - [Fast-call procedure calling conventions](#fast-call-procedure-calling-conventions)
-- [Fast-call procedure shadow space (home space)](##fast-call-procedure-shadow-space-home-space)
+- [Fast-call procedure shadow space (home space)](#fast-call-procedure-shadow-space-home-space)
 - [Setting up a x64 only project in Visual Studio](#setting-up-a-x64-only-project-in-visual-studio)
 - [Code examples](#code-examples)
 
@@ -80,6 +80,9 @@ halloc PROC
 halloc ENDP
 ```
 What you will notice in the above code is the instructions `sub rsp, 20h` and `add rsp, 20h` which are adding and removing the shadow space respectively. This is a little bit annoying but I personally don't require the shadow space when I am calling routines that I don't intend to expose to a higher level language like C. This means that I mainly only have to add it when I am calling into a function that I would like to use from the higher level language library.
+
+## Stack 16 byte alignment
+TBD
 
 ## Setting up a x64 only project in Visual Studio
 You will need to create a C++ project as you normally would. Though you are selecting this to be a C++ project, we will not be creating any C/C++ file types, we will only be creating `.asm` files.
