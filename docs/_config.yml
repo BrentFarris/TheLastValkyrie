@@ -2,6 +2,8 @@
 remote_theme: jekyll/minima
 title: Brent Farris' Website
 description: Mostly about computer science stuff
+tagline: Mostly about computer science stuff
+author: Brent Farris
 plugins:
   - jekyll-relative-links
 relative_links:
