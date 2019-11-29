@@ -5,6 +5,8 @@ Something that I have gotten really into recently is x64 Assembly programming. S
 - [Register quick tips](#register-quick-tips)
 - [Fast-call procedure calling conventions](#fast-call-procedure-calling-conventions)
 - [Fast-call procedure shadow space (home space)](#fast-call-procedure-shadow-space-home-space)
+- [Shadow space and function arguments](#shadow-space-and-function-arguments)
+- [Stack 16 byte alignment](#stack-16-byte-alignment)
 - [Setting up a x64 only project in Visual Studio](#setting-up-a-x64-only-project-in-visual-studio)
 - [Code examples](#code-examples)
 
@@ -81,8 +83,26 @@ halloc ENDP
 ```
 What you will notice in the above code is the instructions `sub rsp, 20h` and `add rsp, 20h` which are adding and removing the shadow space respectively. This is a little bit annoying but I personally don't require the shadow space when I am calling routines that I don't intend to expose to a higher level language like C. This means that I mainly only have to add it when I am calling into a function that I would like to use from the higher level language library.
 
+## Shadow space and function arguments
+At this point you might be wondering, if there are more than 4 arguments to a function call and the remaining arguments are put onto the stack, how does this work with shadow space? Since the fast-call calling convention requires the shadow space (whether or not it uses it) and that alters the stack, your question should be, "do I push to args to the stack before or after adding the shadow space?". The answer is to push the args **before** you add the shadow space.
+```asm
+mov rcx, 1		; Arg 1
+mov rdx, 2		; Arg 2
+mov r8, 3		; Arg 3
+mov r9, 4		; Arg 4
+push 5			; Push the 5+ arguments onto the stack first
+sub rsp, 20h		; Shadow space
+call someFunction
+add rsp, 20h		; Remove shadow space
+```
+
 ## Stack 16 byte alignment
-TBD
+Something I am aware of, but honestly haven't fully explored, is that the stack is on a 16-byte alignment. That is to say that if you are to push only 1 8-byte value onto the stack, you should padd it by adding the other 8 bytes. You could push the value 2x or, more preferrably, just move the stack pointer. Below is an example of this exact scenario.
+```asm
+mov rax, 99	; Some value from somewhere
+push rax	; Push an 8-byte value onto the stack
+sub rsp, 8	; Move the stack pointer by 8 bytes to keep it 16-byte aligned
+```
 
 ## Setting up a x64 only project in Visual Studio
 You will need to create a C++ project as you normally would. Though you are selecting this to be a C++ project, we will not be creating any C/C++ file types, we will only be creating `.asm` files.
