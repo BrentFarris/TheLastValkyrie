@@ -88,6 +88,23 @@ halloc ENDP
 ```
 What you will notice in the above code is the instructions `sub rsp, 20h` and `add rsp, 20h` which are adding and removing the shadow space respectively. This is a little bit annoying but I personally don't require the shadow space when I am calling routines that I don't intend to expose to a higher level language like C. This means that I mainly only have to add it when I am calling into a function that I would like to use from the higher level language library. For a short added reading on this, check out this Microsoft [blog post](https://devblogs.microsoft.com/oldnewthing/20160623-00/?p=93735).
 
+Something I like to do is to have a routine for doing shadow space calling for me. Basically you pass the function you want to create shadow space for calling into `rax` (in my case) and then you add and remove the stack space around the call as you normally do.
+```asm
+;*********************************************;
+; RAX = Function that should be shadow called ;
+; Returns whatever the function call returns  ;
+;*********************************************;
+shadowCall PROC
+	pop rbx		; Get the return address pointer in a non-volitile register
+	and rsp, not 8	; Make sure that the current stack is 16-byte aligned
+	sub rsp, 20h	; Add the shadow space
+	call rax	; Call the function
+	add rsp, 20h	; Remove the shadow space
+	jmp rbx		; Go back to the stored instruction address
+shadowCall ENDP
+```
+The above instructions has a few things going on. The most interesting thing that is going on is that we do `pop rbx`. The reasoning for this is because we don't want our return address to be part of the shadow space as it might get overwritten by the external function. So we need to remove it from the stack and store it in a non-volitile register to return with later. The second thing is that we are using `and rsp, not 8`. This just makes sure that the stack is 16-byte aligned before it does the external call, otherwise you'll probably wind up with a memory access violation.
+
 ## Shadow space and function arguments
 At this point you might be wondering, if there are more than 4 arguments to a function call and the remaining arguments are put onto the stack, how does this work with shadow space? Since the fast-call calling convention requires the shadow space (whether or not it uses it) and that alters the stack, your question should be, "do I push to args to the stack before or after adding the shadow space?". The answer is to push the args **before** you add the shadow space.
 ```asm
@@ -107,6 +124,15 @@ Something I am aware of, but honestly haven't fully explored, is that the stack 
 mov rax, 99	; Some value from somewhere
 push rax	; Push an 8-byte value onto the stack
 sub rsp, 8	; Move the stack pointer by 8 bytes to keep it 16-byte aligned
+```
+Often you'll want to start your program off on the right foot by aligning it. Believe it or not, it doesn't always start off aligned.
+```asm
+.code
+main PROC
+	and rsp, not 08h	; Make sure that the stack is 8-bytes aligned
+	; ...
+main ENDP
+END
 ```
 
 ## Setting up a x64 only project in Visual Studio
