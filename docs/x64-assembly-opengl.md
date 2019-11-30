@@ -7,6 +7,13 @@ image: https://i.imgur.com/bQfW9zf.png
 
 Something I've been really wanting to do is to create a simple game in Assembly (any platform might do). One of the problems I was having was trying to figure out what platform I wanted to create the game for. My ideal platform would be a 16-bit platform because I loved that era of games, but at the same time, I want to be able to use modern tools and debuggers. I think the next best thing would just be to develop a game on a modern CPU; so I decided that I'll just assemble my game for the x64 architecture.
 
+**JMP**
+- [How to render graphics](how-to-render-graphics)
+- [Tools & libs needed](#tools-libs-needed)
+- [Main file](#main-file)
+- [Calling GLFW initialize to check setup](#calling-glfw-initialize-to-check-setup)
+- [Getting a window showing up](#getting-a-window-showing-up)
+
 ## How to render graphics!?
 Well, one of the more complicated problems when it comes to modern computers is that they are very complex and hidden behind endless layers of programs running on the OS it has to run through. Days of being able to just take control of the machine to run your programs have been long gone and isn't coming back (except in homebrew stuff). This brings up a pretty big question, "how to render to screen?". Well, as I was saying, computers have become vastly more complicated in recent years and there is a lot of wordy documentation but not much tutorial-like material. In order to get to the" meat and potatoes" of of writing a game, I've decided that I'll work with existing libraries for OpenGL and operating system events/windowing.
 
