@@ -26,14 +26,19 @@ I might come back and update this on how to get the libs setup for usage, howeve
 ## Main file
 The entry point for our program is going to be `main` just as described in the example on how to setup x64 assembly. There are a few libraries that you need to include before we can start using the various 3rd party dependencies that we've downloaded. Below is the bare bones **main.asm** file that we need to get started.
 ```asm
-includelib legacy_stdio_definitions.lib ; memcpy and stuff
-includelib ucrt.lib                     ; main c functions and stuff
-includelib vcruntime.lib                ; 
-includelib msvcrt.lib
+includelib legacy_stdio_definitions.lib	; printf, etc.
+includelib ucrt.lib			; malloc, calloc, free, etc.
+includelib vcruntime.lib		; memcpy, strstr, etc.
 
-main PROC
-  sub rsp, 20h      ; Shadow space for following call
-  call ExitProcess
+extern ExitProcess: PROC		; Windows function for exiting process
+
+.code
+main PROC		; The entry point for our application
+  sub rsp, 28h		; Shadow space (+8 bytes) for following call
+  call ExitProcess	; Exit our application
 main ENDP
 END
 ```
+As you can see, since we are using libraries that were developed in C, we also need to include the standard C runtime libraries. There are functions like `HeapAlloc` that Windows offers, which then we wouldn't need to include these libraries; however, most C libraries (such as the ones we are using) use the C standard library functions. If you compile and run  this program, it should open and close as it does nothing but exit itself, but no errors is the key here.
+
+**NOTE:** If you get an error like `unresolved external symbol __imp___CrtDbgReportW`, be sure to check out the **NOTE** that is near the end of the [visual studio x64 assembly setup](hx64-assembly.md#setting-up-a-x64-only-project-in-visual-studio) tutorial.
