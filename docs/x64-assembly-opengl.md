@@ -33,12 +33,41 @@ includelib vcruntime.lib		; memcpy, strstr, etc.
 extern ExitProcess: PROC		; Windows function for exiting process
 
 .code
-main PROC		; The entry point for our application
-  sub rsp, 28h		; Shadow space (+8 bytes) for following call
-  call ExitProcess	; Exit our application
+main PROC			; The entry point for our application
+	sub rsp, 28h		; Shadow space (+8 bytes) for following call
+	call ExitProcess	; Exit our application
 main ENDP
 END
 ```
 As you can see, since we are using libraries that were developed in C, we also need to include the standard C runtime libraries. There are functions like `HeapAlloc` that Windows offers, which then we wouldn't need to include these libraries; however, most C libraries (such as the ones we are using) use the C standard library functions. If you compile and run  this program, it should open and close as it does nothing but exit itself, but no errors is the key here.
 
 **NOTE:** If you get an error like `unresolved external symbol __imp___CrtDbgReportW`, be sure to check out the **NOTE** that is near the end of the [visual studio x64 assembly setup](hx64-assembly.md#setting-up-a-x64-only-project-in-visual-studio) tutorial.
+
+## Calling GLFW initialize to check setup
+Now that we have the libraries setup and included all the libs that we needed, lets make sure everything is working by making a call to initialize GLFW and see the response code.
+```asm
+includelib legacy_stdio_definitions.lib	; printf, etc.
+includelib ucrt.lib			; malloc, calloc, free, etc.
+includelib vcruntime.lib		; memcpy, strstr, etc.
+
+extern ExitProcess: PROC	; Windows function for exiting process
+extern glfwInit: PROC		; The C glfwInit function
+
+.code
+main PROC			; The entry point for our application
+	sub rsp, 28h		; Shadow space (+8 bytes) for the glfwInit call
+	call glfwInit		; Call glfwInit and check response
+	add rsp, 28h		; Remove the shadow space that was added
+	; TODO:  Put a breakpoint on the above or below line and look at RAX
+	; RAX should hold the value 01h
+	sub rsp, 28h		; Shadow space (+8 bytes) for following call
+	call ExitProcess	; Exit our application
+main ENDP
+END
+```
+Below you'll see that I placed a breakpoint after calling the glfwInit function and if you look at the value in `RAX` you will see `01h` which means it was successfully initialized.
+
+![glfwInit in x64 assembly should be 01h](https://i.imgur.com/btJ8swi.png)
+
+## Getting a window showing up
+TBD
