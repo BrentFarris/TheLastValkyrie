@@ -34,7 +34,8 @@ extern ExitProcess: PROC		; Windows function for exiting process
 
 .code
 main PROC			; The entry point for our application
-	sub rsp, 28h		; Shadow space (+8 bytes) for following call
+	and rsp, not 08h	; Make sure that the stack is 16-byte aligned
+	sub rsp, 20h		; Shadow space (+8 bytes) for following call
 	call ExitProcess	; Exit our application
 main ENDP
 END
@@ -55,19 +56,20 @@ extern glfwInit: PROC		; The C glfwInit function
 
 .code
 main PROC			; The entry point for our application
-	sub rsp, 28h		; Shadow space (+8 bytes) for the glfwInit call
+	and rsp, not 08h	; Make sure that the stack is 16-byte aligned
+	sub rsp, 20h		; Shadow space (+8 bytes) for the glfwInit call
 	call glfwInit		; Call glfwInit and check response
-	add rsp, 28h		; Remove the shadow space that was added
+	add rsp, 20h		; Remove the shadow space that was added
 	; TODO:  Put a breakpoint on the above or below line and look at RAX
 	; RAX should hold the value 01h
-	sub rsp, 28h		; Shadow space (+8 bytes) for following call
+	sub rsp, 20h		; Shadow space (+8 bytes) for following call
 	call ExitProcess	; Exit our application
 main ENDP
 END
 ```
 Below you'll see that I placed a breakpoint after calling the glfwInit function and if you look at the value in `RAX` you will see `01h` which means it was successfully initialized.
 
-![glfwInit in x64 assembly should be 01h](https://i.imgur.com/btJ8swi.png)
+![glfwInit in x64 assembly should be 01h](https://i.imgur.com/bQfW9zf.png)
 
 ## Getting a window showing up
 TBD
