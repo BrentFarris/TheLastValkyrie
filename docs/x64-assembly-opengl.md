@@ -9,7 +9,7 @@ Something I've been really wanting to do is to create a simple game in Assembly 
 
 **JMP**
 - [How to render graphics](#how-to-render-graphics)
-- [Tools & libs needed](#tools-libs-needed)
+- [Tools & libs needed](#tools--libs-needed)
 - [Main file](#main-file)
 - [Calling GLFW initialize to check setup](#calling-glfw-initialize-to-check-setup)
 - [Getting a window showing up](#getting-a-window-showing-up)
