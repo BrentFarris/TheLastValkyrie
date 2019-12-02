@@ -62,7 +62,9 @@ lda #$09
 sta $08f0
 brk
 ```
-The last 3 lines should be familiar to you since you either know 6502 by heart or you've went through the Easy 6502 tutorial. We just put the value **9** into the **A** register. Then we store the value of **A** into the memory address of **$08f0**. But what about the first 2 lines of the source code? I got some answers from the Facebook group on what these mean.
+What is that funny looking **!byte** mean? Well after some fumbling around on the internet, I found that these are known as "pseudo opcodes". I found the documentation for them [here](http://www.cbmhardware.de/show.php?r=14&id=7).
+
+The last 3 lines should be familiar to you since you either know 6502 by heart or you've went through the Easy 6502 tutorial. We just put the value **9** into the **A** register. Then we store the value of **A** into the memory address of **$08f0**. So, what about the first 2 lines of the source code? I got some answers from the Facebook group on what these mean.
 
 **\*=$0801** = BASIC launcher
 
