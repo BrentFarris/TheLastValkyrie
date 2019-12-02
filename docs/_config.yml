@@ -2,7 +2,7 @@
 remote_theme: BrentFarris/minima
 title: Brent Farris' Website
 description: Mostly about computer science stuff, sometimes other stuff
-tagline: Mostly about computer science stuff, sometimes other stuff
+tagline: Some assembly required
 author: Brent Farris
 plugins:
   - jekyll-relative-links
