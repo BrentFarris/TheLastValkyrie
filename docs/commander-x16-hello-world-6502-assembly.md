@@ -13,8 +13,21 @@ I am spoiled by visual studio (where I develop x86 and x64 assembly code) for wi
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/jgdMaYVfSpo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-------- Links in the video -------
-- Easy 6502 Tutorials ► https://skilldrick.github.io/easy6502
-- Commander X16 Docs/Emulator ► https://github.com/commanderx16
-- Acme 6502 Assembler ► https://sourceforge.net/projects/acme-crossass/files/win32/
-- Code in video ► https://gist.github.com/BrentFarris/b143b1e2442385721df65df084561903
+## Video Description
+I was looking around the 8-bit guy's Commander X16 Facebook project page to find a getting started tutorial on how to write assembly for the machine but could not find anything that was a bare-bones, simple tutorial. So after a lot of reverse engineering and reading of many different documents for both the Commodore 64 (C64) and user made programs on the Commander X16 I finally got something working. So in this video I wanted to show the very basics of how to get started in both 6502 Assembly programming as well as how to get a program running in the Commander X16 emulator. This might not be 100% correct or accurate, but as far as I can tell, it is doing exactly what I want it to do. This tutorial will go over how to go from 0 to having a 6502 assembled program that you wrote running on the Commander X16 (well at least the emulator).
+
+------- Video Links -------
+- Easy 6502 Tutorials ► [https://skilldrick.github.io/easy6502](https://skilldrick.github.io/easy6502)
+- Commander X16 Docs/Emulator ► [https://github.com/commanderx16](https://github.com/commanderx16)
+- Acme 6502 Assembler ► [https://sourceforge.net/projects/acme-crossass/files/win32/](https://sourceforge.net/projects/acme-crossass/files/win32/)
+- Commander X16 Facebook  ► [https://www.facebook.com/groups/CommanderX16](https://www.facebook.com/groups/CommanderX16)
+- Code in video ► [https://gist.github.com/BrentFarris/b143b1e2442385721df65df084561903](https://gist.github.com/BrentFarris/b143b1e2442385721df65df084561903)
+
+```asm
+*=$0801
+	!byte $01,$08,$0b,$08,$01,$00,$9e,$32,$30,$36,$31,$00,$00,$00
+
+lda #$09
+sta $08f0
+brk
+```
