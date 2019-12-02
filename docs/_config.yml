@@ -1,8 +1,8 @@
 #theme: jekyll-theme-tactile
 remote_theme: BrentFarris/minima
 title: Brent Farris' Website
-description: Mostly about computer science stuff
-tagline: Mostly about computer science stuff
+description: Mostly about computer science stuff, sometimes other stuff
+tagline: Mostly about computer science stuff, sometimes other stuff
 author: Brent Farris
 plugins:
   - jekyll-relative-links
