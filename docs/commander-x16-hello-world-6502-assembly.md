@@ -90,10 +90,10 @@ Now that we have the source code we are ready to assemble it. We just need to op
 ```bat
 "C:\Program Files (x86)\CommanderX16\acme\acme.exe" --cpu 6502 --outfile helloworld.prg main.asm
 ```
-1) **"C:\Program Files (x86)\CommanderX16\acme\acme.exe"** = The path to the Acme assembler
-2) **--cpu 6502** = The cpu architecture we are targeting
-3) **--outfile helloworld.prg** = The program file we are going to create
-4) **main.asm** = Our source code
+1. **"C:\Program Files (x86)\CommanderX16\acme\acme.exe"** = The path to the Acme assembler
+2. **--cpu 6502** = The cpu architecture we are targeting
+3. **--outfile helloworld.prg** = The program file we are going to create
+4. **main.asm** = Our source code
 
 Running this command will create the file **helloworld.prg** which is the program we want to run on the Commander X16.
 
