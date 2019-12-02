@@ -5,7 +5,7 @@ tags: 6502 assembly acme commander-x16 8-bit-guy video-memory
 image: https://i.imgur.com/VqNrLYh.png
 ---
 
-First of all, if you don't know how to make a 6502 Assembled project from scratch and run it on the Commander X16, check out [the other Commander X16 page](commander-x16-hello-world-6502-assembly.md) I made on how to do that.
+First of all, if you don't know how to make a 6502 Assembled project from scratch and run it on the Commander X16, check out the [Commander X16 hello world 6502 Assembly](commander-x16-hello-world-6502-assembly.md) page I made on how to do that.
 
 Just dropping this here and will fill out the page later
 
