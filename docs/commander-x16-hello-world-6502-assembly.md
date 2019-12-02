@@ -66,7 +66,7 @@ The last 3 lines should be familiar to you since you either know 6502 by heart o
 
 **\*=$0801** = BASIC launcher
 
-Now lets go over what the byes are after `!byte`.
+Now lets go over what the bytes are after `!byte`.
 
 **$01,$08** = Two bytes tell the computer to LOAD the .PRG file at the $0801 address (this two bytes are NOT going to be loaded into memory they just tell "where to put the program in to memory")
 
