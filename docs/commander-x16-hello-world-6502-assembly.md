@@ -116,4 +116,6 @@ Now that you've ran this command you will want to type the following (the **.** 
 ```
 You should see the value `.,08F0 09 00` show up on the screen. Since we see **09** we know that our program ran successfully. If you want to be sure, you can run `MON` before you run the program and view the address, it should say **00 BRK**. Then run the program and you should see the value **09**.
 
+![running the program and checking the monitor](https://i.imgur.com/Pes4Ywx.png)
+
 That's it, you've assembled your very own 6502 Assembly Commander X16 program from scratch and ran it on the machine (well, the emulator that is).
