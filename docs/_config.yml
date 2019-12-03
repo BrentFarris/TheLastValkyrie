@@ -4,6 +4,7 @@ title: Brent's Website
 description: Some Assembly required
 tagline: Some Assembly required
 author: Brent Farris
+email: TheLastValkyrie@aquamail.net
 plugins:
   - jekyll-relative-links
 relative_links:
