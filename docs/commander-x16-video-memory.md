@@ -26,9 +26,7 @@ STA $9F25 ; Select primary VRAM address
 LDA #$20
 STA $9F22 ; Set primary address bank to 0, stride to 2
 
-; VPOKE 0,0,1
-; VPOKE 0,1,8
-; The following is the same as the above
+; The following is the same as VPOKE 0,0,1
 
 ; Set the character to "B"
 LDA #0
@@ -37,6 +35,8 @@ LDA #0
 STA $9F21 ; Set primary address high byte to 0
 LDA #2
 STA $9F23 ; Writing $73 to primary address ($00:$0000)
+
+; The following is the same as VPOKE 0,1,8
 
 ; Set the color to orange
 lda #1
