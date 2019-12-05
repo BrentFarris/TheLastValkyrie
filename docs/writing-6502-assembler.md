@@ -1,6 +1,6 @@
 ---
 title: Writing a 6502 Assembler
-description: Going through and explaining the 6502 assembler that I wrote.
+description: Going through and explaining the 6502 assembler that I wrote
 tags: 6502 assembly assembler writing-6502 writing-assembler
 ---
 
