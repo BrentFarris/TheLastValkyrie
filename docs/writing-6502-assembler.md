@@ -4,24 +4,38 @@ description: Going through and explaining the 6502 assembler that I wrote.
 tags: 6502 assembly assembler writing-6502 writing-assembler
 ---
 
-So I wrote a 6502 Assembler which uses the same syntax you would find in most online tutorials like [this one](https://skilldrick.github.io/easy6502/index.html).
+So I wrote a 6502 Assembler which uses the same syntax you would find in most online tutorials like [this one](https://skilldrick.github.io/easy6502/index.html). I found the syntax simple and straight forward to what I needed and the documentation for many other assemblers fairly shotty and with their own unique symbols for things. Like not being able to do `define thing $9F` in other assemblers is fairly frustrating. For example, if you were to just copy the snake game directly from the above tutorial link, and paste it into a file, then run it through my assembler, it will assemble it to the same exact hexcode of the site. There are some additions that are required (such as program address offset) but we'll cover that stuff further down this page.
 
 **JMP**
 - [Setting the program offset](#setting-the-program-offset)
 - [Special instruction DCB](#special-instruction-dcb)
 - [Special symbols (#< and #>)](#special-symbols--and-)
+- [Instruction table](#instruction-table)
 
 ## Setting the program offset
-TBD
+Setting the program offset is fairly standard across the compilers I've looked at so I followed the same syntax. Below is an example of how you can set the program starting address in hexidecimal. Note that decimal is not supported because I don't see the necessity for it at the moment. Most computers like the Commodore 64 or [Commander X16](commander-x16-hello-world-6502-assembly.md) will tell you the program starting address in hex anyway.
+```asm
+*=$6502
+```
 
 ## Special instruction DCB
-TBD
+Something you don't see in the linked tutorial is an instruction named `DCB`. This is because it is not actually an instruction on the CPU, it is actually a keyword to put bytes directly within your program code. So if you had the following assembly code:
+```asm
+DEX
+player_data:
+DCB $99 $84 $F3 $1F
+```
+Then your program will have the following code (see the [instruction table](#instruction-table) for the instruction [DEX](#DEX) to see where the `CA` comes from):
+```asm
+CA 99 84 F3 1F
+```
 
 ## Special symbols (#< and #>)
 TBD
 
 I'm going to come back and update this when I have a bit more time, but I can at least drop the table for reference.
 
+## Instruction table
 [ADC](#ADC) / [AND](#AND) / [ASL](#ASL) / [BCC](#BCC) / [BCS](#BCS) / [BEQ](#BEQ) / [BIT](#BIT) / [BMI](#BMI) / [BNE](#BNE) / [BPL](#BPL) / [BRK](#BRK) / [BVC](#BVC) / [BVS](#BVS) / [CLC](#CLC) / [CLD](#CLD) / [CLI](#CLI) / [CLV](#CLV) / [CMP](#CMP) / [CPX](#CPX) / [CPY](#CPY) / [DCB](#DCB) / [DEC](#DEC) / [DEX](#DEX) / [DEY](#DEY) / [EOR](#EOR) / [INC](#INC) / [INX](#INX) / [INY](#INY) / [JMP](#JMP) / [JSR](#JSR) / [LDA](#LDA) / [LDX](#LDX) / [LDY](#LDY) / [LSR](#LSR) / [NOP](#NOP) / [ORA](#ORA) / [PHA](#PHA) / [PHP](#PHP) / [PLA](#PLA) / [PLP](#PLP) / [ROL](#ROL) / [ROR](#ROR) / [RTI](#RTI) / [RTS](#RTS) / [SBC](#SBC) / [SEC](#SEC) / [SED](#SED) / [SEI](#SEI) / [STA](#STA) / [STX](#STX) / [STY](#STY) / [TAX](#TAX) / [TAY](#TAY) / [TSX](#TSX) / [TXA](#TXA) / [TXS](#TXS) / [TYA](#TYA)
 
 | Mnemonic | Argument | OpCode | Flags | Clock | SkipClock | BoundsClock |
