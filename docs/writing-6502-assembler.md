@@ -19,7 +19,7 @@ Setting the program offset is fairly standard across the compilers I've looked a
 ```
 
 ## Special instruction DCB
-Something you don't see in the linked tutorial is an instruction named `DCB`. This is because it is not actually an instruction on the CPU, it is actually a keyword to put bytes directly within your program code. So if you had the following assembly code:
+Something you don't see in the linked tutorial is an instruction named `DCB`. This is because it is not an instruction on the CPU, it is more of an instruction for the assembler. It tells the assembler to put bytes directly within your program code. So if you had the following assembly code:
 ```asm
 DEX
 player_data:
@@ -31,7 +31,28 @@ CA 99 84 F3 1F
 ```
 
 ## Special symbols (#< and #>)
-TBD
+While developing in 6502 assembly you are going to want to get the address high byte and low byte for labels. This will help you to store jump addresses within the zero page of memory so you can essentially pass a label as an argument to a routine. Though this is primarily useful for labels, you could also just use the standard address syntax here as well. Below is an example of how it is used and what it will produce when used.
+```asm
+LDA #>try_something
+STA $00
+LDA #<try_something
+STA $01
+NOP
+try_something:  ; For learning, assume the address for this label is $18F3
+TAX
+;...
+```
+The following is what the assembler will turn your code into:
+```asm
+LDA #$18
+STA $00
+LDA #$F3
+STA $01
+NOP
+try_something:  ; For learning, assume the address for this label is $18F3
+TAX
+;...
+```
 
 I'm going to come back and update this when I have a bit more time, but I can at least drop the table for reference.
 
