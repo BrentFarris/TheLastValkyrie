@@ -9,7 +9,7 @@ So I wrote a 6502 Assembler which uses the same syntax you would find in most on
 **JMP**
 - [Setting the program offset](#setting-the-program-offset)
 - [Special instruction DCB](#special-instruction-DCB)
-- [Special symbols (#< and #>)](#special-symbols)
+- [Special symbols (#< and #>)](##special-symbols--and-)
 
 ## Setting the program offset
 TBD
