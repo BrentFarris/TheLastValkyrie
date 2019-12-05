@@ -54,9 +54,9 @@ TAX
 ;...
 ```
 
-I'm going to come back and update this when I have a bit more time, but I can at least drop the table for reference.
-
 ## Instruction table
+Below is a table of all the instructions for the assembler, note that there is a `DCB` instruction, this is because the following is completely auto-generated from the assembler source code using reflection.
+
 [ADC](#ADC) / [AND](#AND) / [ASL](#ASL) / [BCC](#BCC) / [BCS](#BCS) / [BEQ](#BEQ) / [BIT](#BIT) / [BMI](#BMI) / [BNE](#BNE) / [BPL](#BPL) / [BRK](#BRK) / [BVC](#BVC) / [BVS](#BVS) / [CLC](#CLC) / [CLD](#CLD) / [CLI](#CLI) / [CLV](#CLV) / [CMP](#CMP) / [CPX](#CPX) / [CPY](#CPY) / [DCB](#DCB) / [DEC](#DEC) / [DEX](#DEX) / [DEY](#DEY) / [EOR](#EOR) / [INC](#INC) / [INX](#INX) / [INY](#INY) / [JMP](#JMP) / [JSR](#JSR) / [LDA](#LDA) / [LDX](#LDX) / [LDY](#LDY) / [LSR](#LSR) / [NOP](#NOP) / [ORA](#ORA) / [PHA](#PHA) / [PHP](#PHP) / [PLA](#PLA) / [PLP](#PLP) / [ROL](#ROL) / [ROR](#ROR) / [RTI](#RTI) / [RTS](#RTS) / [SBC](#SBC) / [SEC](#SEC) / [SED](#SED) / [SEI](#SEI) / [STA](#STA) / [STX](#STX) / [STY](#STY) / [TAX](#TAX) / [TAY](#TAY) / [TSX](#TSX) / [TXA](#TXA) / [TXS](#TXS) / [TYA](#TYA)
 
 | Mnemonic | Argument | OpCode | Flags | Clock | SkipClock | BoundsClock |
