@@ -4,7 +4,21 @@ description: Going through and explaining the 6502 assembler that I wrote.
 tags: 6502 assembly assembler writing-6502 writing-assembler
 ---
 
-So last night I wrote a 6502 Assembler which uses the same syntax you would find in most online tutorials like [this one](https://skilldrick.github.io/easy6502/index.html). There are still some things I need to add to it such as the `BCD` instruction and the `#>`/`#<` symbols for addresses and labels. I also wrote the code in a way that would allow me to output useful information about the language such as the following table.
+So I wrote a 6502 Assembler which uses the same syntax you would find in most online tutorials like [this one](https://skilldrick.github.io/easy6502/index.html).
+
+**JMP**
+- [Setting the program offset](#setting-the-program-offset)
+- [Special instruction DCB](#special-instruction-DCB)
+- [Special symbols (#< and #>)](#special-symbols)
+
+## Setting the program offset
+TBD
+
+## Special instruction DCB
+TBD
+
+## Special symbols (#< and #>)
+TBD
 
 I'm going to come back and update this when I have a bit more time, but I can at least drop the table for reference.
 
