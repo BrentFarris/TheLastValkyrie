@@ -63,7 +63,7 @@ I'm going to come back and update this when I have a bit more time, but I can at
 | <a name="CPY">CPY</a> | #09 or #$F9 | 0xC0 | N Z C | 2 | 0 | 0 |
 | <a name="CPY">CPY</a> | $F9 | 0xC4 | N Z C | 3 | 0 | 0 |
 | <a name="CPY">CPY</a> | $0200 | 0xCC | N Z C | 4 | 0 | 0 |
-| <a name="DCB">DCB</a> | $F9 |   |  | 0 | 0 | 0 |
+| <a name="DCB">DCB</a> | $F9 | 0xFF |  | 0 | 0 | 0 |
 | <a name="DEC">DEC</a> | $F9 | 0xC6 | N Z | 5 | 0 | 0 |
 | <a name="DEC">DEC</a> | $F9,X | 0xD6 | N Z | 6 | 0 | 0 |
 | <a name="DEC">DEC</a> | $0200 | 0xCE | N Z | 6 | 0 | 0 |
