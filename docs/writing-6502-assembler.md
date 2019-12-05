@@ -8,7 +8,7 @@ So last night I wrote a 6502 Assembler which uses the same syntax you would find
 
 I'm going to come back and update this when I have a bit more time, but I can at least drop the table for reference.
 
-[ADC](#ADC) / [AND](#AND) / [ASL](#ASL) / [BCC](#BCC) / [BCS](#BCS) / [BEQ](#BEQ) / [BIT](#BIT) / [BMI](#BMI) / [BNE](#BNE) / [BPL](#BPL) / [BRK](#BRK) / [BVC](#BVC) / [BVS](#BVS) / [CLC](#CLC) / [CLD](#CLD) / [CLI](#CLI) / [CLV](#CLV) / [CMP](#CMP) / [CPX](#CPX) / [CPY](#CPY) / [DEC](#DEC) / [DEX](#DEX) / [DEY](#DEY) / [EOR](#EOR) / [INC](#INC) / [INX](#INX) / [INY](#INY) / [JMP](#JMP) / [JSR](#JSR) / [LDA](#LDA) / [LDX](#LDX) / [LDY](#LDY) / [LSR](#LSR) / [NOP](#NOP) / [ORA](#ORA) / [PHA](#PHA) / [PHP](#PHP) / [PLA](#PLA) / [PLP](#PLP) / [ROL](#ROL) / [ROR](#ROR) / [RTI](#RTI) / [RTS](#RTS) / [SBC](#SBC) / [SEC](#SEC) / [SED](#SED) / [SEI](#SEI) / [STA](#STA) / [STX](#STX) / [STY](#STY) / [TAX](#TAX) / [TAY](#TAY) / [TSX](#TSX) / [TXA](#TXA) / [TXS](#TXS) / [TYA](#TYA)
+[ADC](#ADC) / [AND](#AND) / [ASL](#ASL) / [BCC](#BCC) / [BCS](#BCS) / [BEQ](#BEQ) / [BIT](#BIT) / [BMI](#BMI) / [BNE](#BNE) / [BPL](#BPL) / [BRK](#BRK) / [BVC](#BVC) / [BVS](#BVS) / [CLC](#CLC) / [CLD](#CLD) / [CLI](#CLI) / [CLV](#CLV) / [CMP](#CMP) / [CPX](#CPX) / [CPY](#CPY) / [DCB](#DCB) / [DEC](#DEC) / [DEX](#DEX) / [DEY](#DEY) / [EOR](#EOR) / [INC](#INC) / [INX](#INX) / [INY](#INY) / [JMP](#JMP) / [JSR](#JSR) / [LDA](#LDA) / [LDX](#LDX) / [LDY](#LDY) / [LSR](#LSR) / [NOP](#NOP) / [ORA](#ORA) / [PHA](#PHA) / [PHP](#PHP) / [PLA](#PLA) / [PLP](#PLP) / [ROL](#ROL) / [ROR](#ROR) / [RTI](#RTI) / [RTS](#RTS) / [SBC](#SBC) / [SEC](#SEC) / [SED](#SED) / [SEI](#SEI) / [STA](#STA) / [STX](#STX) / [STY](#STY) / [TAX](#TAX) / [TAY](#TAY) / [TSX](#TSX) / [TXA](#TXA) / [TXS](#TXS) / [TYA](#TYA)
 
 | Mnemonic | Argument | OpCode | Flags | Clock | SkipClock | BoundsClock |
 | :------: | :------: | :----: | :---: | :---: | :-------: | :---------: |
@@ -63,6 +63,7 @@ I'm going to come back and update this when I have a bit more time, but I can at
 | <a name="CPY">CPY</a> | #09 or #$F9 | 0xC0 | N Z C | 2 | 0 | 0 |
 | <a name="CPY">CPY</a> | $F9 | 0xC4 | N Z C | 3 | 0 | 0 |
 | <a name="CPY">CPY</a> | $0200 | 0xCC | N Z C | 4 | 0 | 0 |
+| <a name="DCB">DCB</a> | $F9 |   |  | 0 | 0 | 0 |
 | <a name="DEC">DEC</a> | $F9 | 0xC6 | N Z | 5 | 0 | 0 |
 | <a name="DEC">DEC</a> | $F9,X | 0xD6 | N Z | 6 | 0 | 0 |
 | <a name="DEC">DEC</a> | $0200 | 0xCE | N Z | 6 | 0 | 0 |
