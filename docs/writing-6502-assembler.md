@@ -17,6 +17,12 @@ Setting the program offset is fairly standard across the compilers I've looked a
 ```asm
 *=$6502
 ```
+You can use this to change the relative address of the branch/jump addresses on the fly, this is useful if you use a feature of the system to setup something but your program code is starting at a different location (see below). Basically, the short of this is that when the assembler inputs the address for any branch or jump logic, it uses this relative address to know what value to replace labels with. Normally, when you type something like `JMP my_label` the assembler will replace it with `JMP $0608` then use that as the absolute address. If we used this exact example, let's imagine our address was set to `*=$0600`, if we then changed it to `*=0800` then the `JMP my_label` will be turned into `JMP $0808`.
+```asm
+*=$06FF ; Set relative address
+; Do some instructions that use the above relative address
+*=$0600 ; Set back to where program code is
+```
 
 ## Special instruction DCB
 Something you don't see in the linked tutorial is an instruction named `DCB`. This is because it is not an instruction on the CPU, it is more of an instruction for the assembler. It tells the assembler to put bytes directly within your program code. So if you had the following assembly code:
