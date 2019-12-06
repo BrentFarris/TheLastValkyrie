@@ -2,15 +2,36 @@
 title: Writing a 6502 Assembler
 description: Going through and explaining the 6502 assembler that I wrote
 tags: 6502 assembly assembler writing-6502 writing-assembler
+image: https://i.imgur.com/Ja6zIYk.png
 ---
 
 So I wrote a 6502 Assembler which uses the same syntax you would find in most online tutorials like [this one](https://skilldrick.github.io/easy6502/index.html). I found the syntax simple and straight forward to what I needed and the documentation for many other assemblers fairly shotty and with their own unique symbols for things. Like not being able to do `define thing $9F` in other assemblers is fairly frustrating. For example, if you were to just copy the snake game directly from the above tutorial link, and paste it into a file, then run it through my assembler, it will assemble it to the same exact hexcode of the site. There are some additions that are required (such as program address offset) but we'll cover that stuff further down this page.
 
 **JMP**
+- [Some background info and goals](#some-background-info-and-goals)
 - [Setting the program offset](#setting-the-program-offset)
 - [Special instruction DCB](#special-instruction-dcb)
 - [Special symbols (#< and #>)](#special-symbols--and-)
 - [Instruction table](#instruction-table)
+
+## Some background info and goals
+I wanted to make sure this assembler would assemble code that will work on any machine which runs 6502 machine code. So before writing out this page I made sure that it worked by writing a program that I could assemble and run on the Commodore 64 VICE emulator. For this I just quickly grabbed some code [from the internet](http://1amstudios.com/2014/12/07/c64-smooth-scrolling/) and assembled it using my assembler. From there I dropped the generated `.prg` file onto VICE to run it and it worked out great. Below is an image of VICE running the program and the source code I used.
+```asm
+*=$0800
+DCB $01 $08 $0b $08 $01 $00 $9e $32 $30 $36 $31 $00 $00 $00
+
+LDX #0		; X = 0
+loop:
+TXA  	        ; copy X to A
+STA $0400,X	; put A at $0400+X
+STA $d800,X	; put A as a color at $d800+x. Color RAM only considers the lower 4 bits, 
+		; so even though A will be > 15, this will wrap nicely around the 16 available colors
+INX		; X=X+1
+CPX #27		; have we written enough chars?
+BNE loop
+RTS		; all done
+```
+![working program in commodore 64 from assembly](https://i.imgur.com/Ja6zIYk.png)
 
 ## Setting the program offset
 Setting the program offset is fairly standard across the compilers I've looked at so I followed the same syntax. Below is an example of how you can set the program starting address in hexidecimal. Note that decimal is not supported because I don't see the necessity for it at the moment. Most computers like the Commodore 64 or [Commander X16](commander-x16-hello-world-6502-assembly.md) will tell you the program starting address in hex anyway.
