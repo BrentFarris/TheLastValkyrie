@@ -61,7 +61,17 @@ TAX
 ```
 
 ## Instruction table
-Below is a table of all the instructions for the assembler, note that there is a `DCB` instruction, this is because the following is completely auto-generated from the assembler source code using reflection.
+Below is a table of all the instructions for the assembler, note that there is a `DCB` instruction, this is because the following is completely auto-generated from the assembler source code using reflection. Below is a table to describe how the big table works.
+
+|   Column    | Description |
+| :---------: | :---------- |
+|  Mnemonic   | The instruction name |
+|  Argument   | The type of argument provided to the instruction |
+|   OpCode    | The hex code that is written to identify this instruction |
+|    Flags    | The flags that are affected by the invocation of this instruction  |
+|    Clock    | The number of clock cycles this instruction takes to execute |
+|  SkipClock  | Really only used on branches for if the branch is skipped |
+| BoundsClock | The additional clock cycles required if this instruction passes a page boundary during execution |
 
 [ADC](#ADC) / [AND](#AND) / [ASL](#ASL) / [BCC](#BCC) / [BCS](#BCS) / [BEQ](#BEQ) / [BIT](#BIT) / [BMI](#BMI) / [BNE](#BNE) / [BPL](#BPL) / [BRK](#BRK) / [BVC](#BVC) / [BVS](#BVS) / [CLC](#CLC) / [CLD](#CLD) / [CLI](#CLI) / [CLV](#CLV) / [CMP](#CMP) / [CPX](#CPX) / [CPY](#CPY) / [DCB](#DCB) / [DEC](#DEC) / [DEX](#DEX) / [DEY](#DEY) / [EOR](#EOR) / [INC](#INC) / [INX](#INX) / [INY](#INY) / [JMP](#JMP) / [JSR](#JSR) / [LDA](#LDA) / [LDX](#LDX) / [LDY](#LDY) / [LSR](#LSR) / [NOP](#NOP) / [ORA](#ORA) / [PHA](#PHA) / [PHP](#PHP) / [PLA](#PLA) / [PLP](#PLP) / [ROL](#ROL) / [ROR](#ROR) / [RTI](#RTI) / [RTS](#RTS) / [SBC](#SBC) / [SEC](#SEC) / [SED](#SED) / [SEI](#SEI) / [STA](#STA) / [STX](#STX) / [STY](#STY) / [TAX](#TAX) / [TAY](#TAY) / [TSX](#TSX) / [TXA](#TXA) / [TXS](#TXS) / [TYA](#TYA)
 
