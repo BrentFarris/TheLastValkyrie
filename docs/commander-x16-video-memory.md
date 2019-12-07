@@ -93,3 +93,14 @@ next_heart:
 	BNE next_heart
 BRK
 ```
+Looking at the code above, you may notice that we are incrementing the byte value we put into address `$9F20` 2 times each iteration of the loop. This is because we the first byte is the character we want to write, and the next byte over is the color we want to pick. So you can think of it as the following:
+
+| $9F20 Value |               Usage <x,y>               |
+| :---------: | :-------------------------------------- |
+|      0      | The character for top left corner <0,0> |
+|      1      | Color for previous <0,0>                |
+|      2      | The character for next space <1,0>      |
+|      3      | Color for previous <1,0>                |
+|      4      | The character for next space <2,0>      |
+|      5      | Color for previous <2,0>                |
+|     ...     | etc.                                    |
