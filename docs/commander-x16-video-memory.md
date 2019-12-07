@@ -16,7 +16,7 @@ First of all, if you don't know how to make a 6502 Assembled project from scratc
 ## Tutorial video
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ZXn-lpf9f_k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Click this link to learn about how I [wrote a 6502 Assembler](https://thelastvalkyrie.net/writing-6502-assembler.html).
+[Click this link to learn about how I wrote a 6502 Assembler](https://thelastvalkyrie.net/writing-6502-assembler.html).
 
 ## The BASIC idea
 Now that I have a program running within the emulator, I was interested in how I can do something small with the video chip. What I was finally able to do was set a character on the screen and pick it's color. My research materials were the [VERA documentation](https://github.com/commanderx16/x16-docs/blob/master/VERA%20Programmer's%20Reference.md#external-address-space) and a [helpful document](https://docs.google.com/document/d/1pFlevjsf_PRcOb0QLJp9IGihgYsVtUIxEW5ZZqtu0z0/) created by another member of the Facebook group.
