@@ -4,6 +4,8 @@ Below is just a collection of thoughts and studies that I've done on my spare ti
 
 12/05/2019: [Writing a 6502 Assembler](writing-6502-assembler.md)
 
+12/03/2019: [Drawing characters to screen on Commander X16 using 6502 Assembly](commander-x16-video-memory.md)
+
 12/01/2019: [Commander X16 hello world 6502 Assembly](commander-x16-hello-world-6502-assembly.md)
 
 11/29/2019: [x64 Assembly & OpenGL](x64-assembly-opengl.md)
