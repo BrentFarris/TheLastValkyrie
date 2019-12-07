@@ -86,7 +86,7 @@ TAX
 ```
 
 ## Instruction table
-Below is a table of all the instructions for the assembler, note that there is a `DCB` instruction, this is because the following is completely auto-generated from the assembler source code using reflection. Below is a table to describe how the big table works.
+Below is a table of all the instructions for the assembler, note that there is a `DCB` instruction, this is because the following is completely auto-generated from the assembler source code using reflection. Also (just below) is another table to describe how the big table works.
 
 |   Column    | Description |
 | :---------: | :---------- |
