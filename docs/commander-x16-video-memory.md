@@ -8,8 +8,15 @@ image: https://i.imgur.com/VqNrLYh.png
 First of all, if you don't know how to make a 6502 Assembled project from scratch and run it on the Commander X16, check out the [Commander X16 hello world 6502 Assembly](commander-x16-hello-world-6502-assembly.md) page I made on how to do that.
 
 **JMP**
+- [Tutorial video](#tutorial-video)
 - [The BASIC idea](#the-basic-idea)
 - [VPOKE to 6502 Assembly](#vpoke-to-6502-assembly)
+- [Drawing 5 green hearts](#drawing-5-green-hearts)
+
+## Tutorial video
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZXn-lpf9f_k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+Writing a 6502 Assembler ► https://thelastvalkyrie.net/writing-6502-assembler.html
 
 ## The BASIC idea
 Now that I have a program running within the emulator, I was interested in how I can do something small with the video chip. What I was finally able to do was set a character on the screen and pick it's color. My research materials were the [VERA documentation](https://github.com/commanderx16/x16-docs/blob/master/VERA%20Programmer's%20Reference.md#external-address-space) and a [helpful document](https://docs.google.com/document/d/1pFlevjsf_PRcOb0QLJp9IGihgYsVtUIxEW5ZZqtu0z0/) created by another member of the Facebook group.
@@ -19,38 +26,70 @@ I was watching [a video](https://www.facebook.com/adric22/videos/101576898274809
 ## VPOKE to 6502 Assembly
 So first we should describe the anatomy of VPOKE. This command takes 3 arguments **bank**, **address**, and **value** respectively. These directly translate over to assembly instructions as you can see in the following table.
 
-| VPOKE | Memory Address |
-| :---: | :------------: |
-| arg 1 |      $9F22     |
-| arg 2 |      $9f20     |
-| arg 3 |      $9f23     |
+| VPOKE | Memory Address |           Description         |
+| :---: | :------------: | :---------------------------- |
+| arg 1 |      $9F22     | Bank / stride                 |
+| arg 2 |      $9f20     | Low address for video memory  |
+| arg 3 |      $9f23     | Data address for video memory |
 
 ```asm
 *=$0801
-    !byte $01,$08,$0b,$08,$01,$00,$9e,$32,$30,$36,$31,$00,$00,$00
+!byte $01,$08,$0b,$08,$01,$00,$9e,$32,$30,$36,$31,$00,$00,$00
 
 LDA #0
-STA $9F25 ; Select primary VRAM address
-LDA #$20
-STA $9F22 ; Set primary address bank to 0, stride to 2
+STA $9F25	; Select primary VRAM address
+LDA #$20	; VPOKE 1st argument (The 0x00 in this is the 0 bank)
+STA $9F22	; Set primary address bank to 0, stride to 2
 
-; The following is the same as VPOKE 0,0,1
+; VPOKE 0,0,2
+; VPOKE 0,1,8
+; The following is the same as the above
 
 ; Set the character to "B"
+LDA #0		; VPOKE 2nd argument
+STA $9F20	; Set Primary address low byte to 0
 LDA #0
-STA $9F20 ; Set Primary address low byte to 0
-LDA #0
-STA $9F21 ; Set primary address high byte to 0
+STA $9F21	; Set primary address high byte to 0
 LDA #2
-STA $9F23 ; Writing $73 to primary address ($00:$0000)
-
-; The following is the same as VPOKE 0,1,8
+STA $9F23	; Writing $73 to primary address ($00:$0000)
 
 ; Set the color to orange
-lda #1
-sta $9f20	; Next byte over
-lda #8
-sta $9f23	; Write the color
-brk
+LDA #1		; VPOKE 2nd argument
+STA $9f20	; Next byte over
+LDA #8		; VPOKE 3rd argument
+STA $9f23	; Write the color
+BRK
 ```
-TBD
+
+## Drawing 5 green hearts
+Now that we have a basic understanding of how we can draw something to the screen. Let's try and draw 5 green hearts to the screen. The 2 things to know is that a heart character in PETSCII is $53 (see bottom left corner of [PETSCII square here](https://en.wikipedia.org/wiki/PETSCII)), and the second is that the code for green is `#5`.
+```asm
+*=$0801
+DCB $01,$08,$0b,$08,$01,$00,$9e,$32,$30,$36,$31,$00,$00,$00
+
+LDA #0		
+STA $9F25	; Select primary VRAM address
+LDA #$20	; VPOKE 1st argument (The 0x00 in this is the 0 bank)
+STA $9F22	; Set primary address bank to 0, stride to 2
+LDA #0
+STA $9F21	; Set primary address high byte to 0
+
+LDX #0		; Loop counter
+LDY #0		; Address offset
+next_heart:
+	TYA
+	STA $9F20	; Set Primary address low byte to 0
+    
+	LDA #$53	; <3
+	STA $9F23	; Data line
+	INY
+	TYA		; Next byte over is color
+	STA $9f20
+	LDA #5		; Green
+	STA $9f23	; Write the color
+	INX
+	INY
+	CPX #5
+	BNE next_heart
+BRK
+```
