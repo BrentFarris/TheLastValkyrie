@@ -32,6 +32,7 @@ So first we should describe the anatomy of VPOKE. This command takes 3 arguments
 | arg 2 |      $9f20     | Low address for video memory  |
 | arg 3 |      $9f23     | Data address for video memory |
 
+Check out the comments in the following code, you might also want to look back and forth between the code and the above table to get the full picture.
 ```asm
 *=$0801
 !byte $01,$08,$0b,$08,$01,$00,$9e,$32,$30,$36,$31,$00,$00,$00
@@ -43,20 +44,19 @@ STA $9F22	; Set primary address bank to 0, stride to 2
 
 ; VPOKE 0,0,2
 ; VPOKE 0,1,8
-; The following is the same as the above
+; The following is the same as the 2 above VPOKE statements
 
-; Set the character to "B"
 LDA #0		; VPOKE 2nd argument
 STA $9F20	; Set Primary address low byte to 0
-LDA #0
+LDA #0		; Not using the high byte, just want to stay on <0,0>
 STA $9F21	; Set primary address high byte to 0
-LDA #2
+LDA #2		; VPOKE 3rd argument (set the character to "B")
 STA $9F23	; Writing $73 to primary address ($00:$0000)
 
 ; Set the color to orange
-LDA #1		; VPOKE 2nd argument
+LDA #1		; VPOKE 2nd argument (next byte over)
 STA $9f20	; Next byte over
-LDA #8		; VPOKE 3rd argument
+LDA #8		; VPOKE 3rd argument (orange color code)
 STA $9f23	; Write the color
 BRK
 ```
@@ -65,7 +65,7 @@ BRK
 Now that we have a basic understanding of how we can draw something to the screen. Let's try and draw 5 green hearts to the screen. The 2 things to know is that a heart character in PETSCII is $53 (see bottom left corner of [PETSCII square here](https://en.wikipedia.org/wiki/PETSCII)), and the second is that the code for green is `#5`.
 ```asm
 *=$0801
-DCB $01,$08,$0b,$08,$01,$00,$9e,$32,$30,$36,$31,$00,$00,$00
+!byte $01,$08,$0b,$08,$01,$00,$9e,$32,$30,$36,$31,$00,$00,$00
 
 LDA #0		
 STA $9F25	; Select primary VRAM address
@@ -93,7 +93,7 @@ next_heart:
 	BNE next_heart
 BRK
 ```
-Looking at the code above, you may notice that we are incrementing the byte value we put into address `$9F20` 2 times each iteration of the loop. This is because we the first byte is the character we want to write, and the next byte over is the color we want to pick. So you can think of it as the following:
+Looking at the code above, you may notice that we are incrementing the byte value we put into address `$9F20` 2 times each iteration of the loop. This is because the first byte is the character we want to write, and the next byte over is the color we want to pick. So you can think of it as the following:
 
 | $9F20 Value |               Usage <x,y>               |
 | :---------: | :-------------------------------------- |
