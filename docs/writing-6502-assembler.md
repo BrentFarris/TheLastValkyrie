@@ -60,6 +60,11 @@ Then your program will have the following code (see the [instruction table](#ins
 ```asm
 CA 99 84 F3 1F
 ```
+**But wait, there's more!** The `DCB` command also serves for strings. I currently have it mapped to the Commodore 64 characters, but that is easy to change to any set (will add a configuration file later). The way you do this is by using the back-quote/back-tick **`` ` ``** character to wrap your strings. See the below example:
+```asm
+DCB `This is some text!`
+```
+What the assembler does, is during the line analysis phase in the beginning, it will check for the string and if found, convert each character to it's corresponding byte value. It does this by actually altering the text contents of the line, then everything from there on processes as it normally does.
 
 ## Special symbols (#< and #>)
 While developing in 6502 assembly you are going to want to get the address high byte and low byte for labels. This will help you to store jump addresses within the zero page of memory so you can essentially pass a label as an argument to a routine. Though this is primarily useful for labels, you could also just use the standard address syntax here as well. Below is an example of how it is used and what it will produce when used.
