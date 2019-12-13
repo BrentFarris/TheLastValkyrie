@@ -13,8 +13,6 @@ tags: book investigations of universal structures
 	- [Fractional exponents](#fractional-exponents)
     - [Graphing](#graphing)
 
-<div style="text-align: justify">
-
 ## Preface
 I can breathe, talk, and think like many others, but my fundamental knowledge of why and how I am doing such things is not present. To be able to achieve but not understand is the cause of my restlessness. This document serves as a personal analysis of this universe and its structures. For this reason, for those who dare to read it, you will find not one area of study, but many. I believe it is the duty of any human to continue to learn and develop our understanding of this universe from the initial breath to the final; and perhaps one day we will ultimately understand the universe that was bestowed upon us.
 
@@ -67,8 +65,4 @@ Fractional exponents can seem quite confusing but converting them to a root may 
 Notice that we took 1&frasl;3 and turned it into a cube root <sup>3</sup>&radic;. Likewise, if we had an exponent of 1&frasl;2 then we would end up with a square root <sup>2</sup>&radic;(27) and so on.
 
 ## Graphing
-
-
-<div align="center"></div>
-
-</div>
+As humans, we are very visual creatures and for most of us we are not able to understand something until we can see it in one way or another. A blind person may touch your face to see how you look, a musician may write their music down on paper to see how the song flows over time, an artist will use a live prop or person to see what they wish to draw onto their page. For mathematics graphs are the pictures that help us see and further understand the behavior of the formulas and equations. There are many ways to visualize math, however the easiest to work with are the graphs that we can draw by hand in two dimensions. Sure, I can say that x=3 or y=10 but what does that mean? What does that look like and what happens if I change x to 7? When we plot these onto a graph, we can really see the numbers take shape. Let's say that I told you that I have a triangle that had a length of 3, 4, and 5. Could you possibly imagine this triangle? Is it an isosceles, equilateral, acute, obtuse, or right triangle? Now if we were given the points that make up those lengths and plotted them onto a graph you would be able to quickly and easily see that this triangle is a right triangle.
