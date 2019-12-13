@@ -13,3 +13,5 @@ Below is just a collection of thoughts and studies that I've done on my spare ti
 11/27/2019: [x64 Assembly](x64-assembly.md)
 
 11/25/2019: [Object oriented design patterns](design-patterns.md)
+
+A page I like to just write my thoughs on can be found [here](investigations-of-universal-structures.md)
