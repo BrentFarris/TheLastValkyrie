@@ -7,11 +7,11 @@ tags: book investigations of universal structures
 - [Preface](#preface)
 - [Introduction and philosophy](#introduction-and-philosophy)
 - [Mathematics](#mathematics)
-    - [Exponents](#exponents)
-        - [Zero and one](#zero-and-one)
-	- [Negative exponents](#negative-exponents)
-	- [Fractional exponents](#fractional-exponents)
-    - [Graphing](#graphing)
+  - [Exponents](#exponents)
+    - [Zero and one](#zero-and-one)
+    - [Negative exponents](#negative-exponents)
+    - [Fractional exponents](#fractional-exponents)
+  - [Graphing](#graphing)
 
 ## Preface
 I can breathe, talk, and think like many others, but my fundamental knowledge of why and how I am doing such things is not present. To be able to achieve but not understand is the cause of my restlessness. This document serves as a personal analysis of this universe and its structures. For this reason, for those who dare to read it, you will find not one area of study, but many. I believe it is the duty of any human to continue to learn and develop our understanding of this universe from the initial breath to the final; and perhaps one day we will ultimately understand the universe that was bestowed upon us.
