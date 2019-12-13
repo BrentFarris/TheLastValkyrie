@@ -2,6 +2,7 @@
 title: Finding a point given an angle and magnitude
 description: I found myself asking the question "how do I find a point given an angle and magnitude" once upon a time, so I wrote it down.
 tags: angle magnitude math point point-from-angle
+image: https://i.imgur.com/7YZhHlk.jpg
 ---
 
 A few years back I was asking the question "how do I find a point given an angle and magnitude" when I was programming something. I wrote down the study I did back then and I thought I would put it up here as an easy place for review.
@@ -23,10 +24,12 @@ Note that since this is a square, we only need to find 1 point, then use that de
 <div align="center">y = magnitude × sinΘ=5 × sin(143.13) ≈ 5 × 0.6 ≈ 3</div>
 Now if you were to plot out these points on our given diagram you will obviously not get a square. There is one more thing we need to do and that is to add the offset of the x and y of our points to these values. So, since we are dealing with the top right point, we will need to add 6 and 5 respectively.
 <div align="center">p = &lt;x+6, y+5&gt; = &lt;2.01, 8&gt;</div>
+
 ![figure finding-a-point-given-an-angle-and-magnitude-3](https://i.imgur.com/OYA81n4.jpg)
 
 From this point you can do one of 2 things to find the other point of the square. One being you perform the same actions we’ve done up to this point except for the bottom left point of the triangle, or you can simply use the delta between the two points of the triangle that make up the edge of the square.
 <div align="center">x = 2.01 - 4 = - 2.01</div>
+
 ![figure finding-a-point-given-an-angle-and-magnitude-4](https://i.imgur.com/7YZhHlk.jpg)
 
 The previous image is the completed square which we were able to create from just two plotted points. As this section is about finding the point projected from an angle given a desired angle, this can be used for almost anything involving angles and finding points based on that because the real magic of this is being able to project in a direction based on a specific angle. Though we created a square we can create other shapes using this logic or even just project and plot any number of positions based on angles.
