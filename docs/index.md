@@ -2,8 +2,6 @@
 
 Below is just a collection of thoughts and studies that I've done on my spare time. In no way are they suppose to be cohesive posts, most of them are probably just covering a single concept.
 
-12/11/2019: [Finding a point given an angle and magnitude](finding-a-point-given-an-angle-and-magnitude.md)
-
 12/05/2019: [Writing a 6502 Assembler](writing-6502-assembler.md)
 
 12/03/2019: [Drawing characters to screen on Commander X16 using 6502 Assembly](commander-x16-video-memory.md)
