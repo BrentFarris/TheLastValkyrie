@@ -4,7 +4,7 @@ title: Brent's Website
 description: Mostly about computer science, but sometimes other stuff too
 tagline: Some Assembly required
 author: Brent Farris
-email: TheLastValkyrie@aquamail.net
+email: RetroScience@aquamail.net
 google_analytics: UA-154143529-1
 plugins:
   - jekyll-relative-links
