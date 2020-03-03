@@ -2,7 +2,7 @@
 
 Below is just a collection of thoughts and studies that I've done on my spare time. In no way are they suppose to be cohesive posts, most of them are probably just covering a single concept.
 
-02/29/2020: [Android NDK, JAR files, and Visual Studio](visual-studio-android-ndk-jar-files.md)
+02/29/2020: [Android NDK, JAR files, JNI, and Visual Studio](visual-studio-android-ndk-jar-files.md)
 
 12/05/2019: [Writing a 6502 Assembler](writing-6502-assembler.md)
 
