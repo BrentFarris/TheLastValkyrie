@@ -56,6 +56,33 @@ Notice the commented out line `System.loadLibrary`. You can call this as many ti
 ## Custom JAR files
 Now that we've setup our activity to better interact with JNI and load other libraries, we are going to look at how to add our own `.jar` files and access the types within them from native code.
 
-*Though this is not a tutorial on creating .jar files, I will say to make sure and compile your code with `-source 1.7 -target 1.7` so that it is matching Ant's versions we setup earlier.*
+### Building .jar files
+Make sure and compile your code with `-source 1.7 -target 1.7` so that it is matching Ant's versions we setup earlier. After you've built your `.class` files, ensure your folder structure is correct as it relates to the package path. If your package path for your class(es) is `package com.PackageName;` then you should have the .class file within a folder structure `com/PackageName/*.class`. When you build your `.jar` file it should be for the whole folder structure.
 
-TBD
+### Including .jar files in project
+Now that you have your `.jar` file, you should create a folder named `libs` in your `*.Packaging` project. Place your `.jar` file into this folder and make sure to right click it and select `Include In Project`.
+
+## Accessing your code inside the .jar file
+Lets assume for this part you've created a class named `Dummy` with a function that has the signature `void SayHi(string name)` which will print out "Hello, %s!" (%s = `name` input string of function). We will use JNI to access your code and invoke your method. Below is the code we will use to call our function. You can place it directly inside of your `void android_main(struct android_app* state)` function:
+```c
+JNIEnv* env = NULL;
+const ANativeActivity* activity = state->activity;
+(*activity->vm)->AttachCurrentThread(activity->vm, &env, 0);
+
+jobject jobj = activity->clazz;
+jclass clazz = (*env)->GetObjectClass(env, jobj);
+jmethodID getClassLoader = (*env)->GetMethodID(env, clazz, "getClassLoader", "()Ljava/lang/ClassLoader;");
+jobject cls = (*env)->CallObjectMethod(env, jobj, getClassLoader);
+jclass classLoader = (*env)->FindClass(env, "java/lang/ClassLoader");
+jmethodID findClass = (*env)->GetMethodID(env, classLoader, "loadClass", "(Ljava/lang/String;)Ljava/lang/Class;");
+jstring strClassName = (*env)->NewStringUTF(env, "com.PackageName.Dummy");
+jclass fancyActivityClass = (jclass)((*env)->CallObjectMethod(env, cls, findClass, strClassName));
+(*env)->DeleteLocalRef(env, strClassName);
+jmethodID sayHi = (*env)->GetStaticMethodID(env, fancyActivityClass, "SayHi", "(Ljava/lang/String;)V");
+jstring words = (*env)->NewStringUTF(env, "Brent");
+(*env)->CallStaticVoidMethod(env, fancyActivityClass, sayHi, words);
+(*env)->DeleteLocalRef(env, words);
+```
+Now those who have had a little exposure with JNI might say "Can't we just use the `(*env)->FindClass` method? While this may be true for normal Android built in classes, it is not true for our own custom class. The reasoning is that JNI can only look through what is currently on the stack, and believe it or not, even though our `FancyActivity` is running our code, it isn't on the stack so we can't even find it. So what we need to do is get the current activity, then find a method on it called `getClassLoader`. Once we have this function, we are free to load any class from anywhere that is loaded, even inside our `.jar` code.
+
+Hope this helps people who are having trouble. It tooke me a full day to figure out all of this stuff because there isn't anything straight forward on the internet, I had to dig really deep to find all the pieces to put this together!
