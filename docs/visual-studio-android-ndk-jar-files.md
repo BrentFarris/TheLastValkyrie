@@ -57,7 +57,9 @@ public class FancyActivity extends NativeActivity
 	}
 }
 ```
-Notice the commented out line `System.loadLibrary`. You can call this as many times as needed, but all you need to do is replace `"other_lib"` with the name of your library, like `System.loadLibrary("fmod");` or something similar. At this point you should be able to build without any issues
+Notice the commented out line `System.loadLibrary`. You can call this as many times as needed, but all you need to do is replace `"other_lib"` with the name of your library, like `System.loadLibrary("fmod");` or something similar. At this point you should be able to build without any issues.
+
+**Pro tip:** You should always add `System.loadLibrary("ProjectName");` where **ProjectName** is the name of the `.so` file that is generated for your NDK project build. This will allow you to call native functions from within your Java code (great for callbacks and the like).
 
 ## Custom JAR files
 Now that we've setup our activity to better interact with JNI and load other libraries, we are going to look at how to add our own `.jar` files and access the types within them from native code.
