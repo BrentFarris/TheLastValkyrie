@@ -204,7 +204,7 @@ Below is a table of all the instructions for the assembler, note that there is a
 | <a name="LSR">LSR</a> | A | 0x4A | N Z C | 2 | 0 | 0 |
 | <a name="LSR">LSR</a> | $F9 | 0x46 | N Z C | 5 | 0 | 0 |
 | <a name="LSR">LSR</a> | $F9,X | 0x56 | N Z C | 6 | 0 | 0 |
-| <a name="LSR">LSR</a> | $0200 | 0x4E | N Z C | 78 | 0 | 0 |
+| <a name="LSR">LSR</a> | $0200 | 0x4E | N Z C | 6 | 0 | 0 |
 | <a name="LSR">LSR</a> | $0200,X | 0x5E | N Z C | 7 | 0 | 0 |
 | <a name="NOP">NOP</a> |   | 0xEA |  | 2 | 0 | 0 |
 | <a name="ORA">ORA</a> | #09 or #$F9 | 0x09 | N O Z | 2 | 0 | 0 |
