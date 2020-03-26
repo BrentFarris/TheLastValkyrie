@@ -91,6 +91,7 @@ jstring words = (*env)->NewStringUTF(env, "Brent");
 (*env)->CallStaticVoidMethod(env, fancyActivityClass, sayHi, words);
 (*env)->DeleteLocalRef(env, words);
 ```
+
 Now those who have had a little exposure with JNI might say "Can't we just use the `(*env)->FindClass` method? While this may be true for normal Android built in classes, it is not true for our own custom class. The reasoning is that JNI can only look through what is currently on the stack, and believe it or not, even though our `FancyActivity` is running our code, it isn't on the stack so we can't even find it. So what we need to do is get the current activity, then find a method on it called `getClassLoader`. Once we have this function, we are free to load any class from anywhere that is loaded, even inside our `.jar` code.
 
 Hope this helps people who are having trouble. It tooke me a full day to figure out all of this stuff because there isn't anything straight forward on the internet, I had to dig really deep to find all the pieces to put this together!
