@@ -147,9 +147,8 @@ int32_t u8strlen(const char* str)
 		else if ((c & 0xE0) == 0xC0) i += 1;
 		else if ((c & 0xF0) == 0xE0) i += 2;
 		else if ((c & 0xF8) == 0xF0) i += 3;
-		else
+		else	// Invalid string
 		{
-			// Invalid string
 			len = -1;
 			break;
 		}
