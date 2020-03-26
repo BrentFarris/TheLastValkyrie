@@ -137,9 +137,9 @@ char* utf8 = u8"Hello World!";
 
 So in closing on the UTF-8 topic, please stop using `wchar_t`, `char16_t`, and all those other variants (except when you are forced to, due to 3rd party libraries). With that, I'll leave you with this helper function to get you started:
 ```c
-size_t u8strlen(const char* str)
+int32_t u8strlen(const char* str)
 {
-	size_t len = 0;
+	int32_t len = 0;
 	unsigned char c = str[0];
 	for (size_t i = 1; c != 0; len++)
 	{
@@ -147,6 +147,12 @@ size_t u8strlen(const char* str)
 		else if ((c & 0xE0) == 0xC0) i += 1;
 		else if ((c & 0xF0) == 0xE0) i += 2;
 		else if ((c & 0xF8) == 0xF0) i += 3;
+		else
+		{
+			// Invalid string
+			len = -1;
+			break;
+		}
 		c = str[i];
 	}
 	return len;
