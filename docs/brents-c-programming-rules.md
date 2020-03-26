@@ -1,4 +1,5 @@
-TBD
+Below are some rules that I have developed over a long period of time writing C programs. C is my favorite language and I love the freedom and exploration it allows me. I also love that it is so close to Assembly and I love writing assembly for much of the same reasons!
+
 ## Pure encapsulation
 One of the great things about C is that it allows for "pure encapsulation". What this means is that you can explain all the intent of your code through the header file and the developer who uses your lib/code never has to look at the actual implementations of the code. Now to take this a step further, well all know that C supports the `struct` keyword to group data, and we can also make the members of a struct hidden completely from the developer using the library. For example, we could declare the following header and C files:
 
@@ -128,16 +129,78 @@ Talking about strings, I'd like to point out that UTF-8 is fully compatible with
 char* utf8 = u8"Hello World!";
 ```
 
-So in closing on the UTF-8 topic, please stop using `wchar_t`, `char16_t`, and all those other variants (except when you are forced to due to 3rd party libraries).
+So in closing on the UTF-8 topic, please stop using `wchar_t`, `char16_t`, and all those other variants (except when you are forced to, due to 3rd party libraries). With that, I'll leave you with this helper function to get you started:
+```c
+size_t u8strlen(const char* str)
+{
+	size_t len = 0;
+	unsigned char c = str[0];
+	for (size_t i = 1; c != 0; len++)
+	{
+		if (c <= 127) i += 1;
+		else if ((c & 0xE0) == 0xC0) i += 1;
+		else if ((c & 0xF0) == 0xE0) i += 2;
+		else if ((c & 0xF8) == 0xF0) i += 3;
+		c = str[i];
+	}
+	return len;
+}
+```
 
 ## Don't use char for memory array, use uint8_t
+In making code readable, you should only use `char*` or `unsigned char*` for strings (character arrays). If you want a block of bytes/memory pointer, then you should use `uint8_t*` where `uint8_t` is part of `stdint.h`. This makes the code much more readable where memory is represented as an unsighned 8-bit array of numbers (byte array). Now you can trust when you see a `char*` that it is referring to a UTF-8 (or ASCII) character array (text).
+
 ## Use standard bool
+This one is easy:
+```c
+#include <stdbool.h>
+```
+
+Don't make defines for `false`, or `False`, or `FALSE` and it's true counterpart, please just use the standard library.
+
 ## Don't use static/global variables
+So `static` functions are fine, they are great for breaking up functions to be readable. However, `static` variables are bad and almost always not needed. Remember that we are living in a world where our CPUs are not getting faster, they are just coming in larger quantites. Always think about threadability and controlling mutation. Even with a variable that is static to a `C` file and not global, you never know if someone is using threads to call your functions.
+
 ## Prefer inline over macro
+Functions that are `inline` are much more readable, work better with your IDE code searching, and are much more readable when you get errors/warnings from the compiler. Some macros are great, don't ban them altogether, but do consider if you can do what you need through an inline function first.
+
 ## Test your functions
+C is beautiful in the fact that you don't need unit test frameworks to fully test your code. It's lack of objects and hidden state make it even better for testing. If you create a function, make a test for it and give it your known test case arguments. Did I mention that I love not having to have a big complicated mocking library to fully test my code? If your function takes in a complicated struct for some reason, feel free to `define` out/in a test function for creating the struct you expect to be testing (do NOT comprimise perfect encapsulation for the sake of testing).
+
 ## Write functions to do one thing
+Okay, this isn't a C only thing, but make sure your functions are not creating large call stacks. Feel free to use `static` local functions to break up the readability of large functions if you just can't seem to make functions do a single thing (for performance for example).
+
 ## Don't write systems, write modular pieces (think UNIX)
+Don't write big complicated systems to cover many problems, even if things are losely related in many ways. It is better to break up your code into useful functional pieces and cleverly put them together to have complex behavior. The beauty of [Unix](https://youtu.be/tc4ROCJYbm0) is that you can get many things done through many small programs pieced together. In the same way, you should develop useful functions that can be pieced together through data.
+
 ## Warnings are errors
-	- Enable /Wall
-	- Build 3rd party code into a lib, many libs have warnings and we can't have that with /wall and warnings as errors
+This one is a bit short. The idea is simple, warnings are errors.
+1. Make sure **ALL** warnings are enabled (`/Wall`).
+2. Make sure that you turn on **warnings as errors*
+
+*Note:* If you copied some source code from the internet that you need and it is producing warnings, turn it inot a lib and use the lib, **do not** comprimise your code for other people's un-checked code.
+
 ## If there is a standard, use it
+This was touched on before with `stdbool.h`, but if there is a standard function or type, use it. Use things like `int32_t` over just `int` hoping that `int` will be 32-bit. If there is a standard function for doing something, don't re-invent the wheel. Wrapping standard functions such as `malloc` and `free` I would consider a necessary evil if you are creating tools to detect memory leaks and the like though.
+
+## Use float epsilon for 0 checking
+First of all, don't check a floating point value against `0` or `0.0F`. Instead check it against Epsilon like in the following:
+```c
+#include <float.h>
+
+int main(void)
+{
+	float x = 1.0F;
+	x -= 1.0F;
+	if (fabsf(x) <= FLT_EPSILON)
+	{
+		// ... The value is basically 0, do some stuff
+	}
+	return 0;
+}
+```
+
+Alternatively you can choose a faractionally small number like `0.0001F` to check against if that is your cup of tea as well. The reason is floating point precision errors (which you probably know or have heard of by now). I enjoy `FLT_EPSILON` because it is part of the `float.h` lib and a standard for everyone to use.
+
+ ## More to come
+ There are inevitably more things I've forgotten about, but I've written this all in one sitting so this is good enough for now until I can update!
