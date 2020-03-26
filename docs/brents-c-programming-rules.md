@@ -182,7 +182,7 @@ C is beautiful in the fact that you don't need unit test frameworks to fully tes
 Okay, this isn't a C only thing, but make sure your functions are not creating large call stacks. Feel free to use `static` local functions to break up the readability of large functions if you just can't seem to make functions do a single thing (for performance for example).
 
 ## Don't write systems, write modular pieces (think UNIX)
-Don't write big complicated systems to cover many problems, even if things are losely related in many ways. It is better to break up your code into useful functional pieces and cleverly put them together to have complex behavior. The beauty of [Unix](https://youtu.be/tc4ROCJYbm0) is that you can get many things done through many small programs pieced together. In the same way, you should develop useful functions that can be pieced together through data.
+Don't write big complicated systems to cover many problems, even if things are losely related in many ways. It is better to break up your code into useful functional pieces and cleverly put them together to have complex behavior. The [beauty of Unix](https://youtu.be/tc4ROCJYbm0) is that you can get many things done through many small programs pieced together. In the same way, you should develop useful functions that can be pieced together through data.
 
 ## Warnings are errors
 This one is a bit short. The idea is simple, warnings are errors.
