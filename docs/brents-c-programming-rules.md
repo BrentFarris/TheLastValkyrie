@@ -206,7 +206,7 @@ int main(void)
 }
 ```
 
-Alternatively you can choose a faractionally small number like `0.0001F` to check against if that is your cup of tea as well. The reason is floating point precision errors (which you probably know or have heard of by now). I enjoy `FLT_EPSILON` because it is part of the `float.h` lib and a standard for everyone to use.
+Alternatively you can choose a fractionally small number like `0.0001F` to check against if that is your cup of tea as well. The reason is floating point precision errors (which you probably know or have heard of by now). I enjoy `FLT_EPSILON` because it is part of the `float.h` lib and a standard for everyone to use.
 
  ## More to come
  There are inevitably more things I've forgotten about, but I've written this all in one sitting so this is good enough for now until I can update!
