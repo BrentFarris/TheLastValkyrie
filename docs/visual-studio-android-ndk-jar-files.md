@@ -4,7 +4,7 @@ description: How to call custom class and functions from .jar files in Visual St
 tags: ndk android java jar custom-class jni visual-studio
 ---
 
-For those of you who don't know, I have been a (Visual Studio)[https://visualstudio.microsoft.com/vs/community/] user for a long time now, amoung other forms of IDEs I've used Visual Studio the most. Something else I also love to use is the C programming language (I wish VS was more up to date for C but it's good enough). One of the things you can do is develop for Android using NDK and Visual Studio which works fairly well, even though it is using Ant instead of Gradle, I find that it has suited all of my needs so far. That being said, I'm going to drop some tips here on how to make the development process a bit more friendly to be able to interact via JNI and native code.
+For those of you who don't know, I have been a [Visual Studio](https://visualstudio.microsoft.com/vs/community/) user for a long time now, amoung other forms of IDEs I've used Visual Studio the most. Something else I also love to use is the C programming language (I wish VS was more up to date for C but it's good enough). One of the things you can do is develop for Android using NDK and Visual Studio which works fairly well, even though it is using Ant instead of Gradle, I find that it has suited all of my needs so far. That being said, I'm going to drop some tips here on how to make the development process a bit more friendly to be able to interact via JNI and native code.
 
 ***Note:  I am assuming you've setup Visual Studio and installed native android development***
 
