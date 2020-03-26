@@ -9,9 +9,9 @@ Below are some rules that I have developed over a long period of time writing C 
 **JMP**
 - [Pure encapsulation](#pure-encapsulation)
 - [Memory ownership](#memory-ownership)
-- [Avoid void*](#avoid-void*)
+- [Avoid void*](#avoid-void)
 - [No need for typedef](#no-need-for-typedef)
-- [Don't over-complicate strings](#don't-over-complicate-strings)
+- [Don't over-complicate strings](#dont-over-complicate-strings)
 - [Use utf8 strings](#use-utf8-strings)
 - [Don't use char for memory array, use uint8_t](#don't-use-char-for-memory-array,-use-uint8_t)
 - [Use standard bool](#use-standard-bool)
