@@ -6,6 +6,25 @@ tags: c c-programming c-coding c-rules rules programming-rules tips
 
 Below are some rules that I have developed over a long period of time writing C programs. C is my favorite language and I love the freedom and exploration it allows me. I also love that it is so close to Assembly and I love writing assembly for much of the same reasons!
 
+**JMP**
+- [Pure encapsulation](#pure-encapsulation)
+- [Memory ownership](#memory-ownership)
+- [Avoid void*](#avoid-void*)
+- [No need for typedef](#no-need-for-typedef)
+- [Don't over-complicate strings](#don't-over-complicate-strings)
+- [Use utf8 strings](#use-utf8-strings)
+- [Don't use char for memory array, use uint8_t](#don't-use-char-for-memory-array,-use-uint8_t)
+- [Use standard bool](#use-standard-bool)
+- [Don't use static/global variables](#don't-use-static-global-variables)
+- [Prefer inline over macro](#prefer-inline-over-macro)
+- [Test your functions](#test-your-functions)
+- [Write functions to do one thing](#write-functions-to-do-one-thing)
+- [Don't write systems, write modular pieces (think UNIX)](#don't-write-systems,-write-modular-pieces-(think-unix))
+- [Warnings are errors](#warnings-are-errors)
+- [If there is a standard, use it](#if-there-is-a-standard,-use-it)
+- [Use float epsilon for 0 checking](#use-float-epsilon-for-0-checking)
+- [More to come](#more-to-come)
+
 ## Pure encapsulation
 One of the great things about C is that it allows for "pure encapsulation". What this means is that you can explain all the intent of your code through the header file and the developer who uses your lib/code never has to look at the actual implementations of the code. Now to take this a step further, well all know that C supports the `struct` keyword to group data, and we can also make the members of a struct hidden completely from the developer using the library. For example, we could declare the following header and C files:
 
