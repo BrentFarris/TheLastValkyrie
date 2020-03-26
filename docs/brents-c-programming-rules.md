@@ -15,7 +15,7 @@ Below are some rules that I have developed over a long period of time writing C 
 - [Use utf8 strings](#use-utf8-strings)
 - [Don't use char for memory array, use uint8_t](#dont-use-char-for-memory-array-use-uint8_t)
 - [Use standard bool](#use-standard-bool)
-- [Don't use static/global variables](#don't-use-static-global-variables)
+- [Don't use static or global variables](#dont-use-static-or-global-variables)
 - [Prefer inline over macro](#prefer-inline-over-macro)
 - [Test your functions](#test-your-functions)
 - [Write functions to do one thing](#write-functions-to-do-one-thing)
@@ -188,7 +188,7 @@ This one is easy:
 
 Don't make defines for `false`, or `False`, or `FALSE` and it's true counterpart, please just use the standard library.
 
-## Don't use static/global variables
+## Don't use static or global variables
 So `static` functions are fine, they are great for breaking up functions to be readable. However, `static` variables are bad and almost always not needed. Remember that we are living in a world where our CPUs are not getting faster, they are just coming in larger quantites. Always think about threadability and controlling mutation. Even with a variable that is static to a `C` file and not global, you never know if someone is using threads to call your functions.
 
 ## Prefer inline over macro
