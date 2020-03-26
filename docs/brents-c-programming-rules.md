@@ -1,0 +1,18 @@
+TBD
+- Pure encapsulation
+- Memory ownership
+- Avoid void*
+- No need for typedef
+- Don't over-complicate strings
+- Use utf8 strings
+- Don't use char for memory array, use uint8_t
+- Use standard bool
+- Don't use static/global variables
+- Prefer inline over macro
+- Test your functions
+- Write functions to do one thing
+- Don't write systems, write modular pieces (think UNIX)
+- Warnings are errors
+	- Enable /Wall
+	- Build 3rd party code into a lib, many libs have warnings and we can't have that with /wall and warnings as errors
+- If there is a standard, use it
