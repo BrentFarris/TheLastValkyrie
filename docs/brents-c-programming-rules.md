@@ -206,7 +206,7 @@ Don't write big complicated systems to cover many problems, even if things are l
 ## Warnings are errors
 This one is a bit short. The idea is simple, warnings are errors.
 1. Make sure **ALL** warnings are enabled (`/Wall`).
-2. Make sure that you turn on **warnings as errors*
+2. Make sure that you turn on **warnings as errors**
 
 *Note:* If you copied some source code from the internet that you need and it is producing warnings, turn it into a lib and use the lib, **do not** comprimise your code for other people's un-checked code.
 
