@@ -208,7 +208,7 @@ This one is a bit short. The idea is simple, warnings are errors.
 1. Make sure **ALL** warnings are enabled (`/Wall`).
 2. Make sure that you turn on **warnings as errors**
 
-*Note:* If you copied some source code from the internet that you need and it is producing warnings, turn it into a lib and use the lib, **do not** comprimise your code for other people's un-checked code.
+*Note: If you copied some source code from the internet that you need and it is producing warnings, turn it into a lib and use the lib, **do not** comprimise your code for other people's un-checked code. You'd be surprised how many popular libraries fail warnings as errors test (often they develop assuming 32-bit code).*
 
 ## If there is a standard, use it
 This was touched on before with `stdbool.h`, but if there is a standard function or type, use it. Use things like `int32_t` over just `int` hoping that `int` will be 32-bit. If there is a standard function for doing something, don't re-invent the wheel. Wrapping standard functions such as `malloc` and `free` I would consider a necessary evil if you are creating tools to detect memory leaks and the like though.
