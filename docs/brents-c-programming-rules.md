@@ -216,6 +216,7 @@ This was touched on before with `stdbool.h`, but if there is a standard function
 ## Use float epsilon for 0 checking
 First of all, don't check a floating point value against `0` or `0.0F`. Instead check it against Epsilon like in the following:
 ```c
+#include <math.h>
 #include <float.h>
 
 int main(void)
