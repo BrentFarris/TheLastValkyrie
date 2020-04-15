@@ -189,7 +189,7 @@ This one is easy:
 Don't make defines for `false`, or `False`, or `FALSE` and it's true counterpart, please just use the standard library.
 
 ## Don't use static or global variables
-So `static` functions are fine, they are great for breaking up functions to be readable. However, `static` variables are bad and almost always not needed. Remember that we are living in a world where our CPUs are not getting faster, they are just coming in larger quantites. Always think about threadability and controlling mutation. Even with a variable that is static to a `C` file and not global, you never know if someone is using threads to call your functions.
+So `static` functions are fine, they are great for breaking up functions to be readable. However, `static` variables are bad and almost always not needed. Remember that we are living in a world where our CPUs are not getting faster, they are just coming in larger quantities. Always think about threadability and controlling mutation. Even with a variable that is static to a `C` file and not global, you never know if someone is using threads to call your functions.
 
 ## Prefer inline over macro
 Functions that are `inline` are much more readable, work better with your IDE code searching, and are much more readable when you get errors/warnings from the compiler. Some macros are great, don't ban them altogether, but do consider if you can do what you need through an inline function first.
