@@ -18,4 +18,5 @@ There are plenty of places on the internet to learn how to write a ray tracer, s
 ## Porting CPU Raytrace To GPU
 
 ## CUDA performance
-
+First thing's first - One of the #1 things that is going to destroy your program's performance is global memory access. If you used `cudaMalloc` or the other variants to allocate memory to be used by your CUDA fragment, you've better ran out of constant, texture, or shared memory first. Constant memory is small (seems to be 65K for most people), you can find your available constant memory by using the info API and getting the value at runtime or by looking at your system info (image below).
+![image](https://user-images.githubusercontent.com/1002223/80874169-454aa600-8c6f-11ea-9372-ff07ca8b2761.png)
