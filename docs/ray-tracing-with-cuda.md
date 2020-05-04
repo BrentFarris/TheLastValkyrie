@@ -38,3 +38,5 @@ All this being said, it is called `constant` memory for a reason, it is cached a
 Keeping to 64 threads total in a block maximizes the performance, anything over that will cause the performance to degrade by 50% for each additional 64 threads in the block.
 
 Making more blocks in a grid does not improve performance because we only have a certian number of SMs (streaming multi-processors) that can do the work. So you will notice, as the resolution increases (even though we only have 64 threads in each block) the performance decreases.
+
+Cutting the number of spheres in half cuts down the time it takes to render by 1/3
