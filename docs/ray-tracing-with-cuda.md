@@ -32,3 +32,9 @@ TBD
 All this being said, it is called `constant` memory for a reason, it is cached and you are not to modify it. If your program needs to modify values that the CPU needs to access, then you should be using dynamic memory.
 
 **Rule #2**: Beware of program branching.
+
+
+## Notes for finishing this page
+Keeping to 64 threads total in a block maximizes the performance, anything over that will cause the performance to degrade by 50% for each additional 64 threads in the block.
+
+Making more blocks in a grid does not improve performance because we only have a certian number of SMs (streaming multi-processors) that can do the work. So you will notice, as the resolution increases (even though we only have 64 threads in each block) the performance decreases.
