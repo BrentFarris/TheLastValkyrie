@@ -40,3 +40,5 @@ Keeping to 64 threads total in a block maximizes the performance, anything over 
 Making more blocks in a grid does not improve performance because we only have a certian number of SMs (streaming multi-processors) that can do the work. So you will notice, as the resolution increases (even though we only have 64 threads in each block) the performance decreases.
 
 Cutting the number of spheres in half cuts down the time it takes to render by 1/3
+
+[Understanding the profiler](https://docs.nvidia.com/nsight-visual-studio-edition/2019.4/Nsight_Visual_Studio_Edition_User_Guide.htm#Profile_CUDA_Settings.htm%3FTocPath%3DAnalysis%2520Tools%7CCUDA%2520Experiments%7C_____0)
