@@ -168,6 +168,11 @@ size_t utf8len(const char* str)
 		{
 			inc = (c & 0xF0) >> 4;
 			inc -= 11;
+			if (inc == 0 || inc > 4)
+			{
+				len = 0;
+				break;
+			}
 		}
 		i += inc;
 		c = str[i];
@@ -196,7 +201,7 @@ bool utf8valid(const char* str)
 				inc = ((c & 0xF0) >> 4);
 				inc -= 11;
 				// Invalid string
-				if ((c & (0x80 >> inc)))
+				if (inc == 0 || inc > 4)
 					return false;
 			}
 		}
