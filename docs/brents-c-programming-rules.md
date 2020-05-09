@@ -157,22 +157,19 @@ char* utf8 = u8"Hello World!";
 
 So in closing on the UTF-8 topic, please stop using `wchar_t`, `char16_t`, and all those other variants (except when you are forced to, due to 3rd party libraries). With that, I'll leave you with this helper function to get you started:
 ```c
-size_t utf8len(const char* str)
+size_t utf8len(const char* const str)
 {
 	size_t len = 0;
-	char c = str[0];
-	for (size_t i = 0, inc = 0; c != 0; len++)
+	unsigned char c = str[0];
+	for (size_t i = 0, inc = 0; c != 0; ++len)
 	{
 		inc = 1;
 		if ((c & 0x80))
 		{
-			inc = (c & 0xF0) >> 4;
+			inc = c >> 4;
 			inc -= 11;
-			if (inc == 0 || inc > 4)
-			{
-				len = 0;
-				break;
-			}
+			if (inc == 0 || inc > 4)	// Invalid increment
+				return 0;
 		}
 		i += inc;
 		c = str[i];
@@ -182,9 +179,9 @@ size_t utf8len(const char* str)
 ```
 *Note:* This does not validate the utf8 string. I am not fond of making the length function also validate the string, for that we should create a separate method for validation. Using [this table I found on Wikipedia](https://en.wikipedia.org/wiki/UTF-8#Description) we can construct a validation function (also this table was used for the length function).
 ```c
-bool utf8valid(const char* str)
+bool utf8valid(const char* const str)
 {
-	char c = str[0];
+	unsigned char c = str[0];
 	for (size_t i = 1, inc = 0; c != 0; ++i)
 	{
 		if (inc > 1)
@@ -198,7 +195,7 @@ bool utf8valid(const char* str)
 			inc = 1;
 			if ((c & 0x80))
 			{
-				inc = ((c & 0xF0) >> 4);
+				inc = c >> 4;
 				inc -= 11;
 				// Invalid string
 				if (inc == 0 || inc > 4)
