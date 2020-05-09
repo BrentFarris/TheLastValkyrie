@@ -161,12 +161,12 @@ size_t u8strlen(const char* str)
 {
 	size_t len = 0;
 	unsigned char c = str[0];
-	for (size_t i = 1; c != 0; len++)
+	for (size_t i = 0; c != 0; len++)
 	{
 		if (c <= 127) i += 1;
-		else if ((c & 0xE0) == 0xC0) i += 1;
-		else if ((c & 0xF0) == 0xE0) i += 2;
-		else if ((c & 0xF8) == 0xF0) i += 3;
+		else if ((c & 0xE0) == 0xC0) i += 2;
+		else if ((c & 0xF0) == 0xE0) i += 3;
+		else if ((c & 0xF8) == 0xF0) i += 4;
 		else	// Invalid string
 		{
 			len = 0;
