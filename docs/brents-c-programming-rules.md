@@ -11,6 +11,7 @@ Below are some rules that I have developed over a long period of time writing C 
 - [Memory ownership](#memory-ownership)
 - [Avoid void*](#avoid-void)
 - [Don't over-complicate strings](#dont-over-complicate-strings)
+- [Don't over-complicate stdlib](#dont-over-complicate-stdlib)
 - [Use utf8 strings](#use-utf8-strings)
 - [Don't use char for memory array, use uint8_t](#dont-use-char-for-memory-array-use-uint8_t)
 - [Use standard bool](#use-standard-bool)
@@ -144,6 +145,9 @@ In most cases you should create a `struct` that explicitly defines what type is 
 
 ## Don't over-complicate strings
 If I want to live in the 2020 era of programming, that means I probably will wind up using more than one library to solve a problem. My new problem is that people think it is cute to typedef `char*` to some other name and only accept that name in their code. In the era of UTF8, that is completely un-necessary and makes me have to do a lot of senseless casting. If you want to encapsulate that you are using a string (so I don't know it) then cool, do that, but `typedef unsigned char* string` is not it. Please stick to the good ol' `char*` for strings.
+
+## Don't over-complicate stdlib
+TBD
 
 ## Use utf8 strings
 Talking about strings, I'd like to point out that UTF-8 is fully compatible with ASCII, this means we don't need special functions for special characters or non English characters. All of our usual suspects of functions work on UTF-8 such as `fopen`! There are some helpful other things we can use thanks to compilers such as placing `u8` in front of an in-line string:
