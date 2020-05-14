@@ -10,7 +10,6 @@ Below are some rules that I have developed over a long period of time writing C 
 - [Pure encapsulation](#pure-encapsulation)
 - [Memory ownership](#memory-ownership)
 - [Avoid void*](#avoid-void)
-- [No need for typedef](#no-need-for-typedef)
 - [Don't over-complicate strings](#dont-over-complicate-strings)
 - [Use utf8 strings](#use-utf8-strings)
 - [Don't use char for memory array, use uint8_t](#dont-use-char-for-memory-array-use-uint8_t)
@@ -142,9 +141,6 @@ Looking at this version, the developer knows they are in charge of freeing the `
 One stigma people have against C is the use of `void*`, some think it is necessary, some use it to solve problems quickly through the path of least resistance, I say that there are **very few** cases when `void*` is acceptable and most of the time your current problem isn't it. Like `NULL`, `void*` is a lazy solution to a problem and causes all kinds of un-necessary runtime checking.
 
 In most cases you should create a `struct` that explicitly defines what type is accepted or stored. The **biggest** advantage of this approach is that you put the compiler to work for you. There are all sorts of compile-time checks that will prevent you from doing something you shouldn't do. Also your IDE will be much more helpful when trying to navigate code as the IDE, nor the compiler, have any idea where a void* comes from or what it points to.
-
-## No need for typedef
-I'm with [Linus Torvolds](https://yarchive.net/comp/linux/typedefs.html) on this one, there is no need for the use of `typedef`. If you are afraid of typing a few extra letters to get things done, then why do you program? Typedef causes a lot of confusion and the naming schemes everyone comes up with to name these types are confusing at best. The worst thing is when a typedef hides a pointer, then even worse, people try to resolve that by putting the 3 letters "ptr" somewhere in the name, now you've ruined the whole not typing as much and made it completely confusing to read. I want to read C code and not have to parse people's random naming structure and hidden symbols. The silver lining of having to type `struct` a lot is that maybe that will encourage you to write less code?
 
 ## Don't over-complicate strings
 If I want to live in the 2020 era of programming, that means I probably will wind up using more than one library to solve a problem. My new problem is that people think it is cute to typedef `char*` to some other name and only accept that name in their code. In the era of UTF8, that is completely un-necessary and makes me have to do a lot of senseless casting. If you want to encapsulate that you are using a string (so I don't know it) then cool, do that, but `typedef unsigned char* string` is not it. Please stick to the good ol' `char*` for strings.
