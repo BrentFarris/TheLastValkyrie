@@ -13,7 +13,6 @@ There are plenty of places on the internet to learn how to write a ray tracer, s
 - [Ray Tracer Basic Concepts](#ray-tracer-basic-concepts)
 - [CPU program structure](#cpu-program-structure)
 - [Quick and dirty GPU rundown](#quick-and-dirty-gpu-rundown)
-- [GPU program structure](#quick-and-dirty-gpu-rundown)
 - [Porting CPU Raytrace To GPU](#porting-cpu-raytrace-to-gpu)
 - [CUDA performance](#cuda-performance)
   - [Rule #1 - Memory Access](#rule-1---memory-access)
@@ -56,9 +55,6 @@ int blockPosInGrid = blockIdx.x +
 	gridDim.x * blockIdx.y +
 	gridDim.x * gridDim.y * blockIdx.z;
 ```
-
-## GPU program structure
-TBD
 
 ## Porting CPU Raytrace To GPU
 Being that I wrote my prorgram code in C and not C++ I can only speak of the experience of porting C code over to Cuda. Honestly it was extremely easy because of the great support for C syntax compatability in Cuda. The primary thing I had to do was specify if each function was to run on the host (regular C software code) via the `__host__` prefix keyword and/or if it ran on the device (gpu code) via the `__device__` function prefix keyword. One absolutely annoying thing I didn't fully investigete in my port was why I couldn't have separate C files play well with my compiler. I was less interested in the symantics of separate files and spending hours on that, so I opted to write all the functions used in Cuda directly into the single `kernel.cu` file which allowed me to focus on the problem at hand. The last part after saying which functions go where was to call the `func<<<grid, block>>>(arg1, arg2, arg3);` function to run my code on the GPU. Of course there were a couple more things to worry about such as allocating memory on in cuda via `cudaMalloc` and getting my cpu data over through `cudaMemcpy`. One extra performance addition was to put all my spheres into constant memory by declaring
