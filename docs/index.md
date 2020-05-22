@@ -2,6 +2,8 @@
 
 Below is just a collection of thoughts and studies that I've done on my spare time. In no way are they suppose to be cohesive posts, most of them are probably just covering a single concept.
 
+05/15/2020 [Ray Tracing With Cuda](ray-tracing-with-cuda.md)
+
 04/26/2020: [Basic Cross Platform ncurses](basic-cross-platform-ncurses.md)
 
 03/26/2020: [Brent's C Programming Rules](brents-c-programming-rules.md)
