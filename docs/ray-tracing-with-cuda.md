@@ -16,7 +16,21 @@ TBD
 TBD
 
 ## Quick and dirty GPU rundown
-TBD
+- **Kernel** - A program to be copied (distributed) and ran across the GPU to run
+- **`__host__`** - A keyword to tell the compiler that the following function is to be built into the CPU-bound software
+- **`__device__`** - A keyword to tell the compiler that the following function is to be built into the GPU-bound software
+- **`__constant__`** - A keyword used to define a handle to constant memory on the GPU
+- **Threads** - A unit of work
+- **Blocks** - A container for many threads in x, y, and z dimensions
+- **Grids** - A container for many blocks in x, y, and z dimensions
+- **Warps** - Think of this as what you consider a thread, it can be associated with the execution of instructions
+- **Streaming Multiprocessor(s)** - Fancy word for the physical compute device(s) processing your instructions
+- **Dynamic Memory** - Memory that can be dynamically allocated, changed, and accessed
+- **Shared Memory** - A fixed amount of memory (you specify) that is shared between all threads in a block
+- **Constant Memroy** - A fixed size area of memory where you can read values from but not change them after written
+- **Texture Memory** - TBD (I've not used this extensively yet but is similar to constant memory)
+
+**Note** You can get the x, y, and z, index of your thread, block, and grid. This is how you are able to control the outcome of the program. Imagine you have 1 grid of blocks in a 128 x 128 x 1 (x, y, z) layout with 1 thread in each block. You can imagine that each x and y coordinate of the block can be thought of as an x and y coordinate for a pixel in an image. So this makes it easy to compute each pixel in a 128x128 image very efficiently while making it easier to think of each thread/block as a single pixel. **Remember** you can have an x, y, z for a thread, an x, y, z for a block, and an x, y, z for a grid; that's like 6 dimensions to work with! Perhaps you want to do something other than images, you want to do an AI neural network? Seems like a great way to utilize those dimensions to me!
 
 ## GPU program structure
 TBD
