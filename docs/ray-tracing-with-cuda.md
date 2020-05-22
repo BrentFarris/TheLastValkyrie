@@ -40,9 +40,8 @@ Where GPUs are extremely fast to run kernel code in parallel, they are awful at 
 ### Rule #3 - Be aware of your hardware "warps"
 When you first hear about "threads" in your GPU you might think, "oh cool, 65535 threads per block!". Well yes, you could do that, but your performance will most likely suffer from doing that. This is because what you think of as "threads" is probably better related to what are called "warps". Now you have way less warps than threads (think 32 or 64), so if you can hit that sweet spot of getting the exact amount of threads to match up to warps per block you'll be cranking out numbers really fast. I have don **many** tests and can tell you from experience, if you go over your warp size per block, you could very well take 2x+ longer time to execute your kernel. In my test I by blowing my warp size I went from 20ms to ray trace a 720p image to 53ms by going over my warp size per block (even by just a few threads).
 
-
 ### Rule #4 - More blocks != more performance
-
+So you think, well because of Rule #3 I should just spread out across more and more blocks and not cram a bunch of threads per block. Theoretically you'd be right, however you only have a limited number of SMs (streaming multi-processors) in your GPU. Let's say you only have 15 SMs. Well in this case cramming more blocks into your grid will not do anything other than better distribute your warps, at the end of the day you still only have the same amount of processors to work with. To better understand your processor, you'll want to (1) look at your hardware specs info and (2) test out different ranges of threads, blocks, and grids.
 
 ## Please read this very useful documentation!
 [Understanding the profiler](https://docs.nvidia.com/nsight-visual-studio-edition/2019.4/Nsight_Visual_Studio_Edition_User_Guide.htm#Profile_CUDA_Settings.htm%3FTocPath%3DAnalysis%2520Tools%7CCUDA%2520Experiments%7C_____0)
