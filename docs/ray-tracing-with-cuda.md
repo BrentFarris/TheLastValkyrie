@@ -87,4 +87,5 @@ When you first hear about "threads" in your GPU you might think, "oh cool, 65535
 So you think, well because of Rule #3 I should just spread out across more and more blocks and not cram a bunch of threads per block. Theoretically you'd be right, however you only have a limited number of SMs (streaming multi-processors) in your GPU. Let's say you only have 15 SMs. Well in this case cramming more blocks into your grid will not do anything other than better distribute your warps, at the end of the day you still only have the same amount of processors to work with. To better understand your processor, you'll want to (1) look at your hardware specs info and (2) test out different ranges of threads, blocks, and grids.
 
 ## Please read this very useful documentation!
+[Writing a raytracer 3 books](https://raytracing.github.io/)
 [Understanding the profiler](https://docs.nvidia.com/nsight-visual-studio-edition/2019.4/Nsight_Visual_Studio_Edition_User_Guide.htm#Profile_CUDA_Settings.htm%3FTocPath%3DAnalysis%2520Tools%7CCUDA%2520Experiments%7C_____0)
