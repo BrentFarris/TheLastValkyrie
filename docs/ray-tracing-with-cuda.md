@@ -9,6 +9,19 @@ image: https://i.imgur.com/GXtGeT3.png
 
 There are plenty of places on the internet to learn how to write a ray tracer, so that is exactly what I did, I found one online and learned about making a **lambert**, **metal**, and **glass** material ray tracer (with some configurable values). I had 1 problem with what I learned, the render took about 5 minutes and 5 seconds (on 1 thread) to generate a single 720x480 render. This is where I decided to learn GPU progrmaming and parallelize my code beyond a measly 8 threads. Something that is much more scarce to find online is GPU programming (GPGPU - general purpose gpu programming). I happen to have a pretty decent Nvidia card (GeForce GTX 1070) and so CUDA it was for me (though I also took a look at OpenCL).
 
+**JMP**
+- [Ray Tracer Basic Concepts](#ray-tracer-basic-concepts)
+- [CPU program structure](#cpu-program-structure)
+- [Quick and dirty GPU rundown](#quick-and-dirty-gpu-rundown)
+- [GPU program structure](#quick-and-dirty-gpu-rundown)
+- [Porting CPU Raytrace To GPU](#porting-cpu-raytrace-to-gpu)
+- [CUDA performance](#cuda-performance)
+- [Rule #1 - Memory Access](#rule-1---memory-access)
+- [Rule #2 - Beware of program branching](#rule-2---beware-of-program-branching)
+- [Rule #3 - Be aware of your hardware "warps"](#rule-3---be-aware-of-your-hardware-warps)
+- [Rule #4 - More blocks != more performance](#rule-4---more-blocks--more-performance)
+- [Please read this very useful documentation!](#please-read-this-very-useful-documentation)
+
 ## Ray Tracer Basic Concepts
 TBD
 
