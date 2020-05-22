@@ -22,12 +22,12 @@ There are plenty of places on the internet to learn how to write a ray tracer, s
 - [Please read this very useful documentation!](#please-read-this-very-useful-documentation)
 
 ## Ray Tracer Basic Concepts
-TBD (I'll be back to add this part in, I wanted to write out the important bits first)
+*TBD (I'll be back to add this part in, I wanted to write out the important bits first)*
 
 ![image](https://i.imgur.com/GXtGeT3.png)
 
 ## CPU program structure
-TBD (I'll be back to add this part in, I wanted to write out the important bits first)
+*TBD (I'll be back to add this part in, I wanted to write out the important bits first)*
 
 ## Quick and dirty GPU rundown
 - **Kernel** - A program to be copied (distributed) and ran across the GPU to run
