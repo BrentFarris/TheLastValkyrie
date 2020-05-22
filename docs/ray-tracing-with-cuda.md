@@ -25,20 +25,24 @@ TBD
 TBD
 
 ## CUDA performance
-**Rule #1**: One of the #1 things that is going to destroy your program's performance is dynamic memory access. If you used `cudaMalloc` or the other variants to allocate memory to be used by your CUDA fragment, you've better ran out of constant, texture, or shared memory first. Constant memory is small (seems to be 65K for most people), you can find your available constant memory by using the info API and getting the value at runtime or by looking at your system info (image below).
+There are a number of things to consider when it comes to writing performant code in Cuda. Without someone telling you about these rules, you are doomed to only learn through self experience; so hopefully I can give you a quick head start.
+
+### Rule #1 - Memory Access
+One of the #1 things that is going to destroy your program's performance is dynamic memory access. If you used `cudaMalloc` or the other variants to allocate memory to be used by your CUDA fragment, you've better ran out of constant, texture, or shared memory first. Constant memory is small (seems to be 65K for most people), you can find your available constant memory by using the info API and getting the value at runtime or by looking at your system info (image below).
 
 ![image](https://raw.githubusercontent.com/BrentFarris/TheLastValkyrie/master/docs/images/Ray%20Tracing%20With%20Cuda/gpu-const-mem-size.png?token=AAHUV3ZXRB2WWS5E3ZEIAXK6W4B2O)
 
 All this being said, it is called `constant` memory for a reason, it is cached and you are not to modify it. If your program needs to modify values that the CPU needs to access, then you should be using dynamic memory.
 
-**Rule #2**: Beware of program branching.
+### Rule #2 - Beware of program branching
+Where GPUs are extremely fast to run kernel code in parallel, they are awful at resolving code branching. Traditionally people think that if you start up 2 threads on a CPU you'll have a copy of the program running independantly on what seems like 2 different machines. Well we're going to flip that perception on it's head for parallel computaion on a GPU. Imagine that each time you have a branch (an if statement) in your code and you have 32 warps (what you think of as threads) computing a kernel function. The moment you hit an if statement, let's say 20 take the `if` path and 12 take the `else` path. What actually happens is the 12 that took the `else` path (in this hypothetical) completely stall! That's right, they are sitting there doing nothing. Now when the 20 warps finish the `if` branch then the 12 warps that were stalled can now process the `else` case; you guessed it, while the other 20 warps stall! You see the GPUs SMs (streaming multi-processors) want to be executing the same instruction across all the warps at the same time. So get out your thinking caps and do whatever you can to reduce as much branching in your algorithm as much as possible!
+
+### Rule #3 - Be aware of your hardware "warps"
+When you first hear about "threads" in your GPU you might think, "oh cool, 65535 threads per block!". Well yes, you could do that, but your performance will most likely suffer from doing that. This is because what you think of as "threads" is probably better related to what are called "warps". Now you have way less warps than threads (think 32 or 64), so if you can hit that sweet spot of getting the exact amount of threads to match up to warps per block you'll be cranking out numbers really fast. I have don **many** tests and can tell you from experience, if you go over your warp size per block, you could very well take 2x+ longer time to execute your kernel. In my test I by blowing my warp size I went from 20ms to ray trace a 720p image to 53ms by going over my warp size per block (even by just a few threads).
 
 
-## Notes for finishing this page
-Keeping to 64 threads total in a block maximizes the performance, anything over that will cause the performance to degrade by 50% for each additional 64 threads in the block.
+### Rule #4 - More blocks != more performance
 
-Making more blocks in a grid does not improve performance because we only have a certian number of SMs (streaming multi-processors) that can do the work. So you will notice, as the resolution increases (even though we only have 64 threads in each block) the performance decreases.
 
-Cutting the number of spheres in half cuts down the time it takes to render by 1/3
-
+## Please read this very useful documentation!
 [Understanding the profiler](https://docs.nvidia.com/nsight-visual-studio-edition/2019.4/Nsight_Visual_Studio_Edition_User_Guide.htm#Profile_CUDA_Settings.htm%3FTocPath%3DAnalysis%2520Tools%7CCUDA%2520Experiments%7C_____0)
