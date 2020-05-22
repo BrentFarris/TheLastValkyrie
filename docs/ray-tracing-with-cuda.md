@@ -17,9 +17,9 @@ TBD
 
 ## Quick and dirty GPU rundown
 - **Kernel** - A program to be copied (distributed) and ran across the GPU to run
-- **`__host__`** - A keyword to tell the compiler that the following function is to be built into the CPU-bound software
-- **`__device__`** - A keyword to tell the compiler that the following function is to be built into the GPU-bound software
-- **`__constant__`** - A keyword used to define a handle to constant memory on the GPU
+- **__host__** - A keyword to tell the compiler that the following function is to be built into the CPU-bound software
+- **__device__** - A keyword to tell the compiler that the following function is to be built into the GPU-bound software
+- **__constant__** - A keyword used to define a handle to constant memory on the GPU
 - **Threads** - A unit of work
 - **Blocks** - A container for many threads in x, y, and z dimensions
 - **Grids** - A container for many blocks in x, y, and z dimensions
