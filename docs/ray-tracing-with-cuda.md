@@ -25,6 +25,8 @@ There are plenty of places on the internet to learn how to write a ray tracer, s
 ## Ray Tracer Basic Concepts
 TBD
 
+![image](https://i.imgur.com/GXtGeT3.png)
+
 ## CPU program structure
 TBD
 
