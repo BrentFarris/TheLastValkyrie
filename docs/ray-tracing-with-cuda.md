@@ -16,10 +16,10 @@ There are plenty of places on the internet to learn how to write a ray tracer, s
 - [GPU program structure](#quick-and-dirty-gpu-rundown)
 - [Porting CPU Raytrace To GPU](#porting-cpu-raytrace-to-gpu)
 - [CUDA performance](#cuda-performance)
-- [Rule #1 - Memory Access](#rule-1---memory-access)
-- [Rule #2 - Beware of program branching](#rule-2---beware-of-program-branching)
-- [Rule #3 - Be aware of your hardware "warps"](#rule-3---be-aware-of-your-hardware-warps)
-- [Rule #4 - More blocks != more performance](#rule-4---more-blocks--more-performance)
+  - [Rule #1 - Memory Access](#rule-1---memory-access)
+  - [Rule #2 - Beware of program branching](#rule-2---beware-of-program-branching)
+  - [Rule #3 - Be aware of your hardware "warps"](#rule-3---be-aware-of-your-hardware-warps)
+  - [Rule #4 - More blocks != more performance](#rule-4---more-blocks--more-performance)
 - [Please read this very useful documentation!](#please-read-this-very-useful-documentation)
 
 ## Ray Tracer Basic Concepts
