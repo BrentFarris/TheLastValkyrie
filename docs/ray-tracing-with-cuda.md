@@ -58,9 +58,7 @@ int blockPosInGrid = blockIdx.x +
 
 ## Porting CPU Raytrace To GPU
 Being that I wrote my prorgram code in C and not C++ I can only speak of the experience of porting C code over to Cuda. Honestly it was extremely easy because of the great support for C syntax compatability in Cuda. The primary thing I had to do was specify if each function was to run on the host (regular C software code) via the `__host__` prefix keyword and/or if it ran on the device (gpu code) via the `__device__` function prefix keyword. One absolutely annoying thing I didn't fully investigete in my port was why I couldn't have separate C files play well with my compiler. I was less interested in the symantics of separate files and spending hours on that, so I opted to write all the functions used in Cuda directly into the single `kernel.cu` file which allowed me to focus on the problem at hand. The last part after saying which functions go where was to call the `func<<<grid, block>>>(arg1, arg2, arg3);` function to run my code on the GPU. Of course there were a couple more things to worry about such as allocating memory on in cuda via `cudaMalloc` and getting my cpu data over through `cudaMemcpy`. One extra performance addition was to put all my spheres into constant memory by declaring
-```c
-__constant__ struct Sphere cuda_Spheres[500];` and then `cudaMemcpyToSymbol(cuda_Spheres, spheres, sphereCount * sizeof(struct Sphere), 0, cudaMemcpyHostToDevice);
-```
+`__constant__ struct Sphere cuda_Spheres[500];` and then `cudaMemcpyToSymbol(cuda_Spheres, spheres, sphereCount * sizeof(struct Sphere), 0, cudaMemcpyHostToDevice);`
 to copy the spheres into constant memory (this made a huge performance increase over dynamic memory).
 
 ## CUDA performance
