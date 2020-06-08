@@ -1,7 +1,7 @@
 ---
 title: Brent's Drawings
 description: Just a bunch of my drawings I've made that I like
-tags: brent-drawing brent-farris brents-drawings drawings art
+tags: brent-drawing brents-drawings drawings art pen-art
 image: https://i.imgur.com/JXHXk6L.jpg
 ---
 
