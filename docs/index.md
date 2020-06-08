@@ -1,6 +1,8 @@
-[About](about.md) / [Contact Me](contact.md)
+[Drawings](drawings.md) / [About](about.md) / [Contact Me](contact.md)
 
 Below is just a collection of thoughts and studies that I've done on my spare time. In no way are they suppose to be cohesive posts, most of them are probably just covering a single concept.
+
+05/15/2020 [Ray Tracing With Cuda](ray-tracing-with-cuda.md)
 
 04/26/2020: [Basic Cross Platform ncurses](basic-cross-platform-ncurses.md)
 

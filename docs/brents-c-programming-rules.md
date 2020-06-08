@@ -10,8 +10,8 @@ Below are some rules that I have developed over a long period of time writing C 
 - [Pure encapsulation](#pure-encapsulation)
 - [Memory ownership](#memory-ownership)
 - [Avoid void*](#avoid-void)
-- [No need for typedef](#no-need-for-typedef)
 - [Don't over-complicate strings](#dont-over-complicate-strings)
+- [Don't over-complicate stdlib](#dont-over-complicate-stdlib)
 - [Use utf8 strings](#use-utf8-strings)
 - [Don't use char for memory array, use uint8_t](#dont-use-char-for-memory-array-use-uint8_t)
 - [Use standard bool](#use-standard-bool)
@@ -143,11 +143,11 @@ One stigma people have against C is the use of `void*`, some think it is necessa
 
 In most cases you should create a `struct` that explicitly defines what type is accepted or stored. The **biggest** advantage of this approach is that you put the compiler to work for you. There are all sorts of compile-time checks that will prevent you from doing something you shouldn't do. Also your IDE will be much more helpful when trying to navigate code as the IDE, nor the compiler, have any idea where a void* comes from or what it points to.
 
-## No need for typedef
-I'm with [Linus Torvolds](https://yarchive.net/comp/linux/typedefs.html) on this one, there is no need for the use of `typedef`. If you are afraid of typing a few extra letters to get things done, then why do you program? Typedef causes a lot of confusion and the naming schemes everyone comes up with to name these types are confusing at best. The worst thing is when a typedef hides a pointer, then even worse, people try to resolve that by putting the 3 letters "ptr" somewhere in the name, now you've ruined the whole not typing as much and made it completely confusing to read. I want to read C code and not have to parse people's random naming structure and hidden symbols. The silver lining of having to type `struct` a lot is that maybe that will encourage you to write less code?
-
 ## Don't over-complicate strings
 If I want to live in the 2020 era of programming, that means I probably will wind up using more than one library to solve a problem. My new problem is that people think it is cute to typedef `char*` to some other name and only accept that name in their code. In the era of UTF8, that is completely un-necessary and makes me have to do a lot of senseless casting. If you want to encapsulate that you are using a string (so I don't know it) then cool, do that, but `typedef unsigned char* string` is not it. Please stick to the good ol' `char*` for strings.
+
+## Don't over-complicate stdlib
+TBD
 
 ## Use utf8 strings
 Talking about strings, I'd like to point out that UTF-8 is fully compatible with ASCII, this means we don't need special functions for special characters or non English characters. All of our usual suspects of functions work on UTF-8 such as `fopen`! There are some helpful other things we can use thanks to compilers such as placing `u8` in front of an in-line string:
@@ -157,24 +157,57 @@ char* utf8 = u8"Hello World!";
 
 So in closing on the UTF-8 topic, please stop using `wchar_t`, `char16_t`, and all those other variants (except when you are forced to, due to 3rd party libraries). With that, I'll leave you with this helper function to get you started:
 ```c
-size_t u8strlen(const char* str)
+size_t utf8len(const char* const str)
 {
 	size_t len = 0;
 	unsigned char c = str[0];
-	for (size_t i = 1; c != 0; len++)
+	for (size_t i = 1; c != 0; ++len, ++i)
 	{
-		if (c <= 127) i += 1;
-		else if ((c & 0xE0) == 0xC0) i += 1;
-		else if ((c & 0xF0) == 0xE0) i += 2;
-		else if ((c & 0xF8) == 0xF0) i += 3;
-		else	// Invalid string
+		if ((c & 0x80))
 		{
-			len = 0;
-			break;
+			if (c < 192)	// Invalid increment
+				return 0;
+			c >>= 4;
+			if (c == 12)
+				c++;
+			i += c - 12;
 		}
 		c = str[i];
 	}
 	return len;
+}
+```
+*Note:* This does not validate the utf8 string. I am not fond of making the length function also validate the string, for that we should create a separate method for validation. Using [this table I found on Wikipedia](https://en.wikipedia.org/wiki/UTF-8#Description) we can construct a validation function (also this table was used for the length function).
+```c
+bool utf8valid(const char* const str)
+{
+	if (str == NULL)
+		return false;
+	unsigned char c = str[0];
+	for (size_t i = 1, inc = 0; c != 0; ++i)
+	{
+		if (inc > 1)
+		{
+			if ((c & 0xC0) != 0x80)
+				return false;
+			inc--;
+		}
+		else
+		{
+			inc = 1;
+			if ((c & 0x80))
+			{
+				if (c < 0xC0 || c >= 0xF8)
+					return false;
+				c >>= 4;
+				if (c == 12)
+					c++;
+				inc += c - 12;
+			}
+		}
+		c = str[i];
+	}
+	return true;
 }
 ```
 
@@ -235,7 +268,7 @@ int main(void)
 Alternatively you can choose a fractionally small number like `0.0001F` to check against if that is your cup of tea as well. The reason is floating point precision errors (which you probably know or have heard of by now). I enjoy `FLT_EPSILON` because it is part of the `float.h` lib and a standard for everyone to use.
 
 ## Zero Set Your Structs
-One thing that would get me when developing in C is pointers inside of objects not being set to `NULL`. Now I know I speak about hating that the idea of `NULL` exists, but when working with other people's code it is impossible for you not to run into a situation where you need to set a pointer to `NULL`, pass a `NULL` or check a pointer against `NULL`. So do yourself a favor and always use `calloc` (or `memset(thing, 0, sizeof(struct ThingType))` if it isn't a pointer or new memory). Of course this doesn't ban the use of `malloc`, in fact you should continue to use it on buffers, but as probrammers, we have a problem with not touching code that works and you think it is fine to just add in that extra field, but if it is a pointer and you don't initialize it to `NULL` where needed, you're in for a world of hurt.
+One thing that would get me when developing in C is pointers inside of objects not being set to `NULL`. Now I know I speak about hating that the idea of `NULL` exists, but when working with other people's code it is impossible for you not to run into a situation where you need to set a pointer to `NULL`, pass a `NULL` or check a pointer against `NULL`. So do yourself a favor and always use `calloc` (or `memset(&thing, 0, sizeof(struct ThingType))` if it isn't a pointer or new memory). Of course this doesn't ban the use of `malloc`, in fact you should continue to use it on buffers, but as probrammers, we have a problem with not touching code that works and you think it is fine to just add in that extra field, but if it is a pointer and you don't initialize it to `NULL` where needed, you're in for a world of hurt.
 
 ## More to come
 There are inevitably more things I've forgotten about, but I've written this all in one sitting so this is good enough for now until I can update!
