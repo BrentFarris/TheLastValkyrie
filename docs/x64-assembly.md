@@ -205,7 +205,7 @@ strleninline_loop:
 strleninline ENDP
 ```
 
-**strindexof** - Get the index of a string (needle) within another string (haystack)
+**strstartswith** - Determines if a string (haystack) starts with another string (needle)
 ```asm
 ;*******************************************************;
 ; RAX = Needle string (string should be in start)       ;
@@ -234,7 +234,7 @@ strstartswith_exit:
 strstartswith ENDP
 ```
 
-**strstartswith** - Determines if a string (haystack) starts with another string (needle)
+**strindexof** - Get the index of a string (needle) within another string (haystack)
 ```asm
 ;*******************************************************;
 ; RAX = Haystack string (string to check within)        ;

@@ -1,5 +1,5 @@
 ---
-title: Brent's Drawings
+title: Some of my drawings
 description: Just a bunch of my drawings I've made that I like
 tags: brent-drawing brents-drawings drawings art pen-art
 image: https://i.imgur.com/JXHXk6L.jpg
@@ -8,6 +8,15 @@ image: https://i.imgur.com/JXHXk6L.jpg
 I have yet to make any original art, but here are some drawings I've done while practicing. Some are from life but many are based on other artists I like (I guess you can call it fan art) and some random drawings I've seen that I liked a piece of and wanted to try myself.
 
 I really like Kim Jung Gi's style and have been drawing a lot only with a sharpie recently so here are some drawings from those exercises.
+
+> 2020-06-09
+![2020-06-09](https://i.imgur.com/IA1TRRR.jpg)
+
+> 2020-06-08
+![2020-06-08](https://i.imgur.com/tkifm9P.jpg)
+
+> 2020-06-08
+![2020-06-08](https://i.imgur.com/iZMb5aC.jpg)
 
 > 2020-06-07
 ![2020-06-07](https://i.imgur.com/JXHXk6L.jpg)
