@@ -10,10 +10,10 @@ I have yet to make any original art, but here are some drawings I've done while 
 I really like Kim Jung Gi's style and have been drawing a lot only with a sharpie recently so here are some drawings from those exercises.
 
 > 2020-06-13
-![2020-06-13](https://i.imgur.com/Id1V3gD.png)
+![2020-06-13](https://i.imgur.com/GTbmsPT.png)
 
 > 2020-06-12
-![2020-06-12](https://i.imgur.com/GTbmsPT.png)
+![2020-06-12](https://i.imgur.com/Id1V3gD.png)
 
 > 2020-06-09 / 2020-06-10
 ![2020-06-09 / 2020-06-10](https://i.imgur.com/uXWD5lB.png)
