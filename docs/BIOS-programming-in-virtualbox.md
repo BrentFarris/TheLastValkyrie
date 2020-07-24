@@ -115,5 +115,4 @@ dw 0xAA55		; Boot sector code trailer
 [Teletype BIOS interrupt Int 10/AH=0Eh](http://www.ctyme.com/intr/rb-0106.htm)
 
 Armed with this code, you can run the `build.sh` shell script listed above or just run the commands found within it. From this point you can startup your VirtualBox VM and be in awe of your glorious "Hello, World!" program running directly on a machine without the aid of an operating system! You should see something similar to the following:
-
 ![hello-world-in-action](https://i.imgur.com/2r2hRIg.png)
