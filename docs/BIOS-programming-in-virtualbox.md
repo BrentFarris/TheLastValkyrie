@@ -15,6 +15,9 @@ If you're viewing this guide it means you probably already know what BIOS is (ba
 - [Project setup](#project-setup)
 - [Writing our BIOS enabled code](#writing-our-bios-enabled-code)
   - [Hello, World!](#hello-world)
+  - [Quick and dirty debug output](#quick-and-dirty-debug-output)
+  - [Hello keyboard input](#hello-keyboard-input)
+  - [Hello pixel](#hello-pixel)
 
 ## Tools setup
 **VirtualBox** - The first thing you are going to need is [VirtualBox](https://www.virtualbox.org/). You could do this stuff right on real hardware, but there are risks with doing such a thing and alos it will take an awfully long time to debug things. Using a virtual machine is helpful for rapid iteration.
@@ -110,9 +113,16 @@ times 510-($-$$) db 0	; Pad (510 - current position) bytes of 0
 dw 0xAA55		; Boot sector code trailer
 ```
 
-***; TODO:  Explain each pice of the above assembly behond what is in the comments***
-
 You may notice that we used the instruction `int 10h` which could have also been `int 0x10` or `int 16`. This particular interrupt calls into the BIOS for a range of visual functions. The function we used to print to teletype was function `0Eh` which could have also been written as `0x0E` or `14`. When we call a BIOS interrupt, we need to supply a function code in the `ah` register, thus why we used `mov ah, 0Eh` before `int 10h`. To know more about this and other interrupt functions, see this awesome website: [Teletype BIOS interrupt Int 10/AH=0Eh](http://www.ctyme.com/intr/rb-0106.htm).
 
 Armed with this code, you can run the `build.sh` shell script listed above or just run the commands found within it. From this point you can startup your VirtualBox VM and be in awe of your glorious "Hello, World!" program running directly on a machine without the aid of an operating system! You should see something similar to the following:
 ![hello-world-in-action](https://i.imgur.com/2r2hRIg.png)
+
+### Quick and dirty debug output
+***; TBD***
+
+### Hello keyboard input
+***; TBD***
+
+### Hello pixel
+***; TBD***
