@@ -60,7 +60,7 @@ The very last thing to do to see anything on the screen is to write our boot loa
 
 ### Hello, World!
 Now I know you're eager to draw a pixel on the screen, but let's start with the very basic task of getting a "Hello, World!" on the screen. Please be sure to read all the comments in any of the following assembly code files. The comments give you all the context you'll need to understand what is going on. Going through and writing a paragraph for each assembly instruction line seems superfluous and time consuming haha. I like documenting things, but let's let the code do the talking on this one :).
-```asm
+```nasm
 BITS 16			; Instruct the system this is 16-bit code
 
 ; This is the entry point, nothing should happen before this
@@ -68,7 +68,7 @@ BITS 16			; Instruct the system this is 16-bit code
 main:
 	mov ax, 07C0h	; Setup 4KB stack space after this bootloader
 	add ax, 288	; (4096+515) / 16 bytes (aligned) per paragraph
-	cli		; Disable interrupts (solvs old DOS bug)
+	cli		; Disable interrupts (solves old DOS bug)
 	mov ss, ax	; Assign current stack segment
 	mov sp, 4096	; Setup our stack pointer
 	sti		; Enable interrupts (solvs old DOS bug)
