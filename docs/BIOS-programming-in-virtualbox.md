@@ -4,6 +4,14 @@ description: A quick getting started tutorial on how to write a minimal text/gra
 tags: bios x86 x64 assembly virtualbox graphics
 ---
 
+**JMP**
+- [Tools setup](#tool-setup)
+- [VM setup](#vm-setup)
+- [Project setup](#project-setup)
+- [Writing our BIOS enabled code](#writing-our-bios-enabled-code)
+- [CUDA performance](#cuda-performance)
+  - [Hello, World!](#hello-world)
+
 There are two things I want to explain how to do here, **(1)** basic BIOS interrupts and **(2)** setting the color of pixles plotted onto the screen. This is by no means suppose to be the most performant best way to do things, but I'm running this on a 4GHz processor list most anyone else who will be trying this; so I would consider it a great first step.
 
 If you're viewing this guide it means you probably already know what BIOS is (basic input output system) and you've probably already dabbled a bit in assembly. Both of these are technically not required since I'm going through all the steps, but knowing them probably will make the information here stick a bit better.
