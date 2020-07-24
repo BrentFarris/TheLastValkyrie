@@ -122,7 +122,7 @@ Armed with this code, you can run the `build.sh` shell script listed above or ju
 
 ### Quick and dirty debug output
 As you could imagine, debugging something that runs in the boot sector is a bit difficult. We don't have the ability to hit breakpoints or anything like that, so what can we do? Well, we just learned that we can print things to the screen, so lets write a little helper function to write the value in the `AH` register to the screen in binary format. This will help us debug registers, return values, and flags packed into a byte. A lot of the code below is the same as above, but jump down to the section labeled **Debug printing of bytes** to see the sub-routine added for printing the `AH` register value.
-```asm
+```nasm
 BITS 16			; Instruct the system this is 16-bit code
 
 ; This is the entry point, nothing should happen before this
@@ -238,7 +238,7 @@ We should see 9 printed out to the screen as it's binary representation now.
 
 ### Hello keyboard input
 What's the point of having a program that just prints things, that is the job of paper! Let us turn this thing into a computer by adding keyboard input shall we? We are going to make use of that handy `print_ah` routine we just wrote so that we can print out the scan code of the key we press on the keyboard. This way we can ensure it is working and also check which key has what scan code. Most of this code is the same, you can jump down to the **Reading keyboard input** section of the code to see how simple it is. Also be sure to check out the `.loop:` section as it has changed for debug printing our keystrokes.
-```asm
+```nasm
 BITS 16			; Instruct the system this is 16-bit code
 
 ; This is the entry point, nothing should happen before this
@@ -352,7 +352,7 @@ With this code we are able to type "text" on our keyboard and see the following 
 
 ### Hello pixel
 Last, but not least, the thing you probably came here for... Setting the color of a pixel on the screen. For with this power you can draw absolutely anything you want, even move it around now that you have keyboard input! Much like the other sections, I left the code the same and just added the needed code for setting the color of a single pixel on the screen. Jump down to the **Set graphics mode** and the **Plot a pixel** sections of the code. Also check out the code just before the `.loop:` section as it was slightly updated.
-```asm
+```nasm
 BITS 16			; Instruct the system this is 16-bit code
 
 ; This is the entry point, nothing should happen before this
@@ -483,7 +483,7 @@ THERE! Do you see it!? Our beautiful single white pixel.
 ![single-white-pixel](https://i.imgur.com/3TULPS5.png)
 
 Well, there you have it. A white pixel on the screen that you've plotted all on your own (with 99.99% the help of BIOS, and 0.01% from me of course). If you were curious enough to press some keys on your keyboard, you may have noticed it still prints text! Handy :). Hmm... wonder if we can change the color of the text being printed?... Of course we can, did you think I forgot about all those places in the code with the comment **Don't worry about me until the end of this guide**! Just need to drop in a little color instruction there now that we are in graphics mode:
-```asm
+```nasm
 print_char:
 	push ax		; Save the state of our AX register
 	push cx		; Save the CX register (due to int 10h clobbering)
