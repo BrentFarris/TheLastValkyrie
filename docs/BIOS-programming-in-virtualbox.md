@@ -7,7 +7,7 @@ image: https://i.imgur.com/XtdQjQh.png
 
 There are three things I want to explain how to do here, **(1)** basic BIOS interrupts, **(2)** reading keyboard input, and **(3)** setting the color of pixels plotted onto the screen. This is by no means suppose to be the most performant best way to do things, but I'm running this on a 4GHz processor (probably like anyone else who will be trying this); so I would consider it a great first step.
 
-If you're viewing this guide it means you probably already know what BIOS is (basic input output system) and you've probably already dabbled a bit in assembly. Both of these are technically not required since I'm going through all the steps, but knowing them probably will make the information here stick a bit better.
+If you're viewing this guide it means you probably already know what BIOS is (basic input output system) and you've probably already dabbled a bit in assembly. Both of these are technically not required since I'm going through all the steps, but knowing them will make the information here stick a bit better.
 
 
 **JMP**
