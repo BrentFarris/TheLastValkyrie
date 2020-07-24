@@ -14,7 +14,6 @@ If you're viewing this guide it means you probably already know what BIOS is (ba
 - [VM setup](#vm-setup)
 - [Project setup](#project-setup)
 - [Writing our BIOS enabled code](#writing-our-bios-enabled-code)
-- [CUDA performance](#cuda-performance)
   - [Hello, World!](#hello-world)
 
 ## Tools setup
