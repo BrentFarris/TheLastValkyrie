@@ -141,16 +141,33 @@ main:
 ; Constants
 ;------------------------------------------------------------------------------
 s_hi db "Hello, World!", 0Dh, 0Ah, "- Brent", 0Dh, 0Ah, 00h
+s_nl db 0Dh, 0Ah, 00h
 
 ;------------------------------------------------------------------------------
 ; The main loop of our program
 ;------------------------------------------------------------------------------
 run:
-	mov si, s_hi	; Set our si register to point to the hello message
-	call print	; Call our print subroutine to print the message
+	mov si, s_hi		; Set our SI register to hello message pointer
+	call print		; Call our print subroutine
+	mov ah, 09h		; Set the AH register to 9 so we can print it
+	call ah_to_str		; This should output 00001001 to the screen
 .loop:
-	jmp .loop	; Infinite loop to hold control of the computer
+	call read_keyboard	; Call our keyboard input subroutine
+	je .loop		; Return to loop if no key was pressed
+	call ah_to_str		; A key was pressed, so let's print it!
+	mov si, s_nl		; Move the new line bytes into SI register
+	call print		; Print a new line for readability
+	jmp .loop		; Infinite loop to hold control of the computer
 
+;------------------------------------------------------------------------------
+; Reading keyboard input
+;------------------------------------------------------------------------------
+read_keyboard:
+	mov ah, 00h	; 00h is the get key and clear buffer function in BIOS
+	int 16h		; Call the BIOS interrupt for keyboard functions
+	test ah, ah	; AH will be 0 if no key was pressed, allow je after
+	ret		; Return to caller with ZF and AH set
+	
 ;------------------------------------------------------------------------------
 ; Debug printing of bytes
 ;------------------------------------------------------------------------------
@@ -181,8 +198,8 @@ print_char:
 	push ax		; Save the state of our AX register
 	push cx		; Save the CX register (due to int 10h clobbering)
 	mov al, ah	; AL is used for the character to print
-	mov bl, 0Fh	; Don't worry about me until the end of this guide
 	mov ah, 0Eh	; Teletype BIOS interrupt function
+	mov bl, 0Fh	; Don't worry about me until the end of this guide
 	int 10h		; BIOS interrupt 10h (0x10 or 16 in decimal)
 	pop cx		; Restore the state of our CX register
 	pop ax		; Restore the state of our AX register
@@ -212,6 +229,9 @@ times 510-($-$$) db 0	; Pad (510 - current position) bytes of 0
 
 dw 0xAA55		; Boot sector code trailer
 ```
+
+We should see 9 printed out to the screen as it's binary representation now.
+![debug-print-9-to-binary](https://i.imgur.com/IujHYk4.png)
 
 ***NOTE***: Yes we have both duplicate and un-optimized code here that could be improved; but for the sake of example and readability, it is this way. I also just added in the debug print code without modifying the code from the previous "Hello, World!" example. I would highly suggest merging/refactoring the code later because it is wasting our precious 512 bytes we have to work with in our boot sector program.
 
