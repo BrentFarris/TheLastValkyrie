@@ -120,9 +120,320 @@ Armed with this code, you can run the `build.sh` shell script listed above or ju
 
 ### Quick and dirty debug output
 ***; TBD***
+```asm
+BITS 16			; Instruct the system this is 16-bit code
+
+; This is the entry point, nothing should happen before this
+; other than setting the instruction size
+main:
+	mov ax, 07C0h	; Setup 4KB stack space after this bootloader
+	add ax, 288	; (4096+515) / 16 bytes (aligned) per paragraph
+	cli		; Disable interrupts (solvs old DOS bug)
+	mov ss, ax	; Assign current stack segment
+	mov sp, 4096	; Setup our stack pointer
+	sti		; Enable interrupts (solvs old DOS bug)
+	mov ax, 07C0h	; 07C0h is where our program is located
+	mov ds, ax	; Set data segment to the load point of our program
+	call run	; Start the main loop
+
+;------------------------------------------------------------------------------
+; Constants
+;------------------------------------------------------------------------------
+s_hi db "Hello, World!", 0Dh, 0Ah, "- Brent", 0Dh, 0Ah, 00h
+
+;------------------------------------------------------------------------------
+; The main loop of our program
+;------------------------------------------------------------------------------
+run:
+	mov si, s_hi	; Set our si register to point to the hello message
+	call print	; Call our print subroutine to print the message
+.loop:
+	jmp .loop	; Infinite loop to hold control of the computer
+
+;------------------------------------------------------------------------------
+; Debug printing of bytes
+;------------------------------------------------------------------------------
+print_char:
+	push ax
+	push cx
+	mov al, ah
+	mov ah, 0Eh
+	mov bl, 01h
+	int 10h
+	pop cx
+	pop ax
+	ret
+
+ah_to_str:
+	push ax
+	push cx
+	mov ch, 80h
+	mov al, ah
+.ah_to_str_loop:
+	mov ah, al
+	and ah, ch
+	test ah, ah
+	je .ah_to_str_zero
+	mov ah, 31h
+	jmp .ah_to_str_print
+.ah_to_str_zero:
+	mov ah, 30h
+.ah_to_str_print:
+	call print_char
+	SHR ch, 01h
+	cmp ch, 00h
+	jne .ah_to_str_loop
+	pop cx
+	pop ax
+	ret
+
+;------------------------------------------------------------------------------
+; Print string subroutine (null terminated string print)
+;------------------------------------------------------------------------------
+print:
+	push ax		; Save the current value of the AX register
+	mov ah, 0Eh	; Our first BIOS interrupt:  Teletype output
+.repeat:
+	lodsb		; Load next character into AL register
+	cmp al, 00h	; Check if we are at end of string (0 = end of string)
+	je .done	; If AL is 0 then jump to done label
+	int 10h		; BIOS interrupt 10h (0x10 or 16 in decimal)
+	jmp .repeat	; Continue to next character in the string
+.done:
+	pop ax		; Restore the value to the AX register
+	ret		; Return to caller location
+
+;------------------------------------------------------------------------------
+; Boot loaders are 512 bytes in size so pad the remaining bytes with 0
+;------------------------------------------------------------------------------
+times 510-($-$$) db 0	; Pad (510 - current position) bytes of 0
+
+dw 0xAA55		; Boot sector code trailer
+```
 
 ### Hello keyboard input
 ***; TBD***
+```asm
+BITS 16			; Instruct the system this is 16-bit code
+
+; This is the entry point, nothing should happen before this
+; other than setting the instruction size
+main:
+	mov ax, 07C0h	; Setup 4KB stack space after this bootloader
+	add ax, 288	; (4096+515) / 16 bytes (aligned) per paragraph
+	cli		; Disable interrupts (solvs old DOS bug)
+	mov ss, ax	; Assign current stack segment
+	mov sp, 4096	; Setup our stack pointer
+	sti		; Enable interrupts (solvs old DOS bug)
+	mov ax, 07C0h	; 07C0h is where our program is located
+	mov ds, ax	; Set data segment to the load point of our program
+	call run	; Start the main loop
+
+;------------------------------------------------------------------------------
+; Constants
+;------------------------------------------------------------------------------
+s_hi db "Hello, World!", 0Dh, 0Ah, "- Brent", 0Dh, 0Ah, 00h
+s_nl db 0Dh, 0Ah, 00h
+
+;------------------------------------------------------------------------------
+; The main loop of our program
+;------------------------------------------------------------------------------
+run:
+	mov si, s_hi	; Set our si register to point to the hello message
+	call print	; Call our print subroutine to print the message
+.loop:
+	call read_keyboard
+	je .loop
+	call ah_to_str
+	mov si, c_nl
+	call print
+	jmp .loop	; Infinite loop to hold control of the computer
+
+;------------------------------------------------------------------------------
+; Reading keyboard input
+;------------------------------------------------------------------------------
+read_keyboard:
+	mov ah, 00h
+	int 16h
+	test ah, ah
+	ret
+	
+;------------------------------------------------------------------------------
+; Debug printing of bytes
+;------------------------------------------------------------------------------
+print_char:
+	push ax
+	push cx
+	mov al, ah
+	mov ah, 0Eh
+	mov bl, 01h
+	int 10h
+	pop cx
+	pop ax
+	ret
+
+ah_to_str:
+	push ax
+	push cx
+	mov ch, 80h
+	mov al, ah
+.ah_to_str_loop:
+	mov ah, al
+	and ah, ch
+	test ah, ah
+	je .ah_to_str_zero
+	mov ah, 31h
+	jmp .ah_to_str_print
+.ah_to_str_zero:
+	mov ah, 30h
+.ah_to_str_print:
+	call print_char
+	SHR ch, 01h
+	cmp ch, 00h
+	jne .ah_to_str_loop
+	pop cx
+	pop ax
+	ret
+
+;------------------------------------------------------------------------------
+; Print string subroutine (null terminated string print)
+;------------------------------------------------------------------------------
+print:
+	push ax		; Save the current value of the AX register
+	mov ah, 0Eh	; Our first BIOS interrupt:  Teletype output
+.repeat:
+	lodsb		; Load next character into AL register
+	cmp al, 00h	; Check if we are at end of string (0 = end of string)
+	je .done	; If AL is 0 then jump to done label
+	int 10h		; BIOS interrupt 10h (0x10 or 16 in decimal)
+	jmp .repeat	; Continue to next character in the string
+.done:
+	pop ax		; Restore the value to the AX register
+	ret		; Return to caller location
+
+;------------------------------------------------------------------------------
+; Boot loaders are 512 bytes in size so pad the remaining bytes with 0
+;------------------------------------------------------------------------------
+times 510-($-$$) db 0	; Pad (510 - current position) bytes of 0
+
+dw 0xAA55		; Boot sector code trailer
+```
 
 ### Hello pixel
 ***; TBD***
+```asm
+BITS 16			; Instruct the system this is 16-bit code
+
+; This is the entry point, nothing should happen before this
+; other than setting the instruction size
+main:
+	mov ax, 07C0h	; Setup 4KB stack space after this bootloader
+	add ax, 288	; (4096+515) / 16 bytes (aligned) per paragraph
+	cli		; Disable interrupts (solvs old DOS bug)
+	mov ss, ax	; Assign current stack segment
+	mov sp, 4096	; Setup our stack pointer
+	sti		; Enable interrupts (solvs old DOS bug)
+	mov ax, 07C0h	; 07C0h is where our program is located
+	mov ds, ax	; Set data segment to the load point of our program
+	call run	; Start the main loop
+
+;------------------------------------------------------------------------------
+; Constants
+;------------------------------------------------------------------------------
+s_hi db "Hello, World!", 0Dh, 0Ah, "- Brent", 0Dh, 0Ah, 00h
+s_nl db 0Dh, 0Ah, 00h
+
+;------------------------------------------------------------------------------
+; The main loop of our program
+;------------------------------------------------------------------------------
+run:
+	mov si, s_hi	; Set our si register to point to the hello message
+	call print	; Call our print subroutine to print the message
+	
+	mov ah, 00h
+	mov al, 12h	; 640x480 VGA
+	int 10h
+	
+	mov ah, 0Ch
+	mov bh, 00h
+	mov al, 0Fh
+	mov cx, 0Fh
+	mov dx, 0Fh
+	int 10h
+.loop:
+	call read_keyboard
+	je .loop
+	call ah_to_str
+	mov si, c_nl
+	call print
+	jmp .loop	; Infinite loop to hold control of the computer
+
+;------------------------------------------------------------------------------
+; Reading keyboard input
+;------------------------------------------------------------------------------
+read_keyboard:
+	mov ah, 00h
+	int 16h
+	test ah, ah
+	ret
+	
+;------------------------------------------------------------------------------
+; Debug printing of bytes
+;------------------------------------------------------------------------------
+print_char:
+	push ax
+	push cx
+	mov al, ah
+	mov ah, 0Eh
+	mov bl, 01h
+	int 10h
+	pop cx
+	pop ax
+	ret
+
+ah_to_str:
+	push ax
+	push cx
+	mov ch, 80h
+	mov al, ah
+.ah_to_str_loop:
+	mov ah, al
+	and ah, ch
+	test ah, ah
+	je .ah_to_str_zero
+	mov ah, 31h
+	jmp .ah_to_str_print
+.ah_to_str_zero:
+	mov ah, 30h
+.ah_to_str_print:
+	call print_char
+	SHR ch, 01h
+	cmp ch, 00h
+	jne .ah_to_str_loop
+	pop cx
+	pop ax
+	ret
+
+;------------------------------------------------------------------------------
+; Print string subroutine (null terminated string print)
+;------------------------------------------------------------------------------
+print:
+	push ax		; Save the current value of the AX register
+	mov ah, 0Eh	; Our first BIOS interrupt:  Teletype output
+.repeat:
+	lodsb		; Load next character into AL register
+	cmp al, 00h	; Check if we are at end of string (0 = end of string)
+	je .done	; If AL is 0 then jump to done label
+	int 10h		; BIOS interrupt 10h (0x10 or 16 in decimal)
+	jmp .repeat	; Continue to next character in the string
+.done:
+	pop ax		; Restore the value to the AX register
+	ret		; Return to caller location
+
+;------------------------------------------------------------------------------
+; Boot loaders are 512 bytes in size so pad the remaining bytes with 0
+;------------------------------------------------------------------------------
+times 510-($-$$) db 0	; Pad (510 - current position) bytes of 0
+
+dw 0xAA55		; Boot sector code trailer
+```
