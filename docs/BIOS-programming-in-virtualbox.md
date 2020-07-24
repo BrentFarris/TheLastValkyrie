@@ -110,7 +110,7 @@ times 510-($-$$) db 0	; Pad (510 - current position) bytes of 0
 dw 0xAA55		; Boot sector code trailer
 ```
 
-*; TODO:  Explain each pice of the above assembly behond what is in the comments*
+***; TODO:  Explain each pice of the above assembly behond what is in the comments***
 
 [Teletype BIOS interrupt Int 10/AH=0Eh](http://www.ctyme.com/intr/rb-0106.htm)
 
