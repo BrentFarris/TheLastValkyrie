@@ -1,10 +1,11 @@
 #theme: jekyll-theme-tactile
 remote_theme: BrentFarris/minima
 title: Brent's Website
-description: A personal log about things I like in computer programming, art, electronics, and other hobbies. Twitter: [@PhotonFalcon](https://twitter.com/PhotonFalcon)
+description: A personal log about things I like in computer programming, art, electronics, and other hobbies.
 tagline: Some Assembly required
 author: Brent Farris
 email: RetroScience@aquamail.net
+social.twitter: PhotonFalcon
 google_analytics: UA-154143529-1
 plugins:
   - jekyll-relative-links
