@@ -392,7 +392,7 @@ read_keyboard:
 	int 16h		; Call the BIOS interrupt for keyboard functions
 	test ah, ah	; AH will be 0 if no key was pressed, allow je after
 	ret		; Return to caller with ZF and AH set
-	
+
 ;------------------------------------------------------------------------------
 ; Debug printing of bytes
 ;------------------------------------------------------------------------------
@@ -455,6 +455,9 @@ times 510-($-$$) db 0	; Pad (510 - current position) bytes of 0
 dw 0xAA55		; Boot sector code trailer
 ```
 
+THERE! Do you see it!? Our beautiful single white pixel.
+![single-white-pixel](https://i.imgur.com/3TULPS5.png)
+
 Well, there you have it. A white pixel on the screen that you've plotted all on your own (with 99.99% the help of BIOS, and 0.01% from me of course). If you were curious enough to press some keys on your keyboard, you may have noticed it still prints text! Handy :). Hmm... wonder if we can change the color of the text being printed?... Of course we can, did you think I forgot about all those places in the code with the comment **Don't worry about me until the end of this guide**! Just need to drop in a little color instruction there now that we are in graphics mode:
 ```asm
 print_char:
@@ -468,6 +471,9 @@ print_char:
 	pop ax		; Restore the state of our AX register
 	ret		; Return to caller location
 ```
+
+Now look at that blue text that clobbered our white pixel.
+![blue-text](https://i.imgur.com/g6FT6tz.png)
 
 Okay, okay. Yes, the colors I'm picking seem like magic, how does `01h` mean blue and `0Fh` be white? You'll want to find a big ol [color pallet](https://www.fountainware.com/EXPL/vga_color_palettes.htm) table somewhere on the internet in order to see the full 255 colors.
 
