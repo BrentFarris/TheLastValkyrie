@@ -21,7 +21,7 @@ If you're viewing this guide it means you probably already know what BIOS is (ba
   - [Hello pixel](#hello-pixel)
 
 ## Tools setup
-**VirtualBox** - The first thing you are going to need is [VirtualBox](https://www.virtualbox.org/). You could do this stuff right on real hardware, but there are risks with doing such a thing and alos it will take an awfully long time to debug things. Using a virtual machine is helpful for rapid iteration.
+**VirtualBox** - The first thing you are going to need is [VirtualBox](https://www.virtualbox.org/). You could do this stuff right on real hardware, but there are risks with doing such a thing and also it will take an awfully long time to debug things. Using a virtual machine is helpful for rapid iteration.
 
 **NASM** - We are going to use the [NASM assembler](https://nasm.us/) to assemble our code. You can use this assembler on whatever operating system your on. I'm going to be using Linux on Windows to assemble my code quickly. In Linux just run `sudo apt-get install nasm build-essential` to install all that you need.
 
