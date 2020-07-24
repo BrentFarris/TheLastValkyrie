@@ -119,7 +119,7 @@ Armed with this code, you can run the `build.sh` shell script listed above or ju
 ![hello-world-in-action](https://i.imgur.com/2r2hRIg.png)
 
 ### Quick and dirty debug output
-***; TBD***
+As you could imagine, debugging something that runs in the boot sector is a bit difficult. We don't have the ability to hit breakpoints or anything like that, so what can we do? Well, we just learned that we can print things to the screen, so lets write a little helper function to write the value in the `ah` register to the screen in binary format. This will help us debug registers, return values, and flags packed into a byte. A lot of the code below is the same as above, but jump down to the section labeled **Debug printing of bytes** to see the sub-routine added for printing the `ah` register value.
 ```asm
 BITS 16			; Instruct the system this is 16-bit code
 
@@ -153,39 +153,38 @@ run:
 ;------------------------------------------------------------------------------
 ; Debug printing of bytes
 ;------------------------------------------------------------------------------
-print_char:
-	push ax
-	push cx
-	mov al, ah
-	mov ah, 0Eh
-	mov bl, 01h
-	int 10h
-	pop cx
-	pop ax
-	ret
-
 ah_to_str:
-	push ax
-	push cx
-	mov ch, 80h
-	mov al, ah
+	push ax			; Save the state of our AX register
+	push cx			; Save the state of our CX register
+	mov ch, 80h		; Set bit flag for AND as 10000000
+	mov al, ah		; Copy AH to AL so we can change AH
 .ah_to_str_loop:
-	mov ah, al
-	and ah, ch
-	test ah, ah
-	je .ah_to_str_zero
-	mov ah, 31h
-	jmp .ah_to_str_print
+	mov ah, al		; Restore original value of AH
+	and ah, ch		; Get the bit value for printing
+	test ah, ah		; Check to see if the bit is zero or 1
+	je .ah_to_str_zero	; The bit was 0 so jump to print 0
+	mov ah, 31h		; The bit was 1 so set AH to ascii 1
+	jmp .ah_to_str_print	; Jump to print the character
 .ah_to_str_zero:
-	mov ah, 30h
+	mov ah, 30h		; The bit was 0 so set AH to ascii 0
 .ah_to_str_print:
-	call print_char
-	SHR ch, 01h
-	cmp ch, 00h
-	jne .ah_to_str_loop
-	pop cx
-	pop ax
-	ret
+	call print_char		; Call our print_char routine below
+	SHR ch, 01h		; Shift CH right by 1 (0100000 first time)
+	cmp ch, 00h		; Check to see if we shifted all the way
+	jne .ah_to_str_loop	; If we haven't finished, return to loop
+	pop cx			; Restore the state of our CX register
+	pop ax			; Restore the state of our AX register
+	ret			; Return to caller location
+
+print_char:
+	push ax		; Save the state of our AX register
+	push cx		; Save the CX register (due to int 10h clobbering)
+	mov al, ah	; AL is used for the character to print
+	mov ah, 0Eh	; Teletype BIOS interrupt function
+	int 10h		; BIOS interrupt 10h (0x10 or 16 in decimal)
+	pop cx		; Restore the state of our CX register
+	pop ax		; Restore the state of our AX register
+	ret		; Return to caller location
 
 ;------------------------------------------------------------------------------
 ; Print string subroutine (null terminated string print)
@@ -211,8 +210,10 @@ times 510-($-$$) db 0	; Pad (510 - current position) bytes of 0
 dw 0xAA55		; Boot sector code trailer
 ```
 
+***NOTE***: Yes we have both duplicate and un-optimized code here that could be improved; but for the sake of example and readability, it is this way. I also just added in the debug print code without modifying the code from the previous "Hello, World!" example. I would highly suggest merging/refactoring the code later because it is wasting our precious 512 bytes we have to work with in our boot sector program.
+
 ### Hello keyboard input
-***; TBD***
+What's the point of having a program that just prints things, that is the job of paper! Let us turn this thing into a computer by adding keyboard input shall we? We are going to make use of that handy `print_ah` routine we just wrote so that we can print out the scan code of the key we press on the keyboard. This way we can ensure it is working and also check which key has what scan code. Most of this code is the same, you can jump down to the **Reading keyboard input** section of the code to see how simple it is. Also be sure to check out the `.loop:` section as it has changed for debug printing our keystrokes.
 ```asm
 BITS 16			; Instruct the system this is 16-bit code
 
@@ -239,61 +240,60 @@ s_nl db 0Dh, 0Ah, 00h
 ; The main loop of our program
 ;------------------------------------------------------------------------------
 run:
-	mov si, s_hi	; Set our si register to point to the hello message
-	call print	; Call our print subroutine to print the message
+	mov si, s_hi		; Set our SI register to hello message pointer
+	call print		; Call our print subroutine
 .loop:
-	call read_keyboard
-	je .loop
-	call ah_to_str
-	mov si, c_nl
-	call print
-	jmp .loop	; Infinite loop to hold control of the computer
+	call read_keyboard	; Call our keyboard input subroutine
+	je .loop		; Return to loop if no key was pressed
+	call ah_to_str		; A key was pressed, so let's print it!
+	mov si, c_nl		; Move the new line bytes into SI register
+	call print		; Print a new line for readability
+	jmp .loop		; Infinite loop to hold control of the computer
 
 ;------------------------------------------------------------------------------
 ; Reading keyboard input
 ;------------------------------------------------------------------------------
 read_keyboard:
-	mov ah, 00h
-	int 16h
-	test ah, ah
-	ret
+	mov ah, 00h	; 00h is the get key and clear buffer function in BIOS
+	int 16h		; Call the BIOS interrupt for keyboard functions
+	test ah, ah	; AH will be 0 if no key was pressed, allow je after
+	ret		; Return to caller with ZF and AH set
 	
 ;------------------------------------------------------------------------------
 ; Debug printing of bytes
 ;------------------------------------------------------------------------------
-print_char:
-	push ax
-	push cx
-	mov al, ah
-	mov ah, 0Eh
-	mov bl, 01h
-	int 10h
-	pop cx
-	pop ax
-	ret
-
 ah_to_str:
-	push ax
-	push cx
-	mov ch, 80h
-	mov al, ah
+	push ax			; Save the state of our AX register
+	push cx			; Save the state of our CX register
+	mov ch, 80h		; Set bit flag for AND as 10000000
+	mov al, ah		; Copy AH to AL so we can change AH
 .ah_to_str_loop:
-	mov ah, al
-	and ah, ch
-	test ah, ah
-	je .ah_to_str_zero
-	mov ah, 31h
-	jmp .ah_to_str_print
+	mov ah, al		; Restore original value of AH
+	and ah, ch		; Get the bit value for printing
+	test ah, ah		; Check to see if the bit is zero or 1
+	je .ah_to_str_zero	; The bit was 0 so jump to print 0
+	mov ah, 31h		; The bit was 1 so set AH to ascii 1
+	jmp .ah_to_str_print	; Jump to print the character
 .ah_to_str_zero:
-	mov ah, 30h
+	mov ah, 30h		; The bit was 0 so set AH to ascii 0
 .ah_to_str_print:
-	call print_char
-	SHR ch, 01h
-	cmp ch, 00h
-	jne .ah_to_str_loop
-	pop cx
-	pop ax
-	ret
+	call print_char		; Call our print_char routine below
+	SHR ch, 01h		; Shift CH right by 1 (0100000 first time)
+	cmp ch, 00h		; Check to see if we shifted all the way
+	jne .ah_to_str_loop	; If we haven't finished, return to loop
+	pop cx			; Restore the state of our CX register
+	pop ax			; Restore the state of our AX register
+	ret			; Return to caller location
+
+print_char:
+	push ax		; Save the state of our AX register
+	push cx		; Save the CX register (due to int 10h clobbering)
+	mov al, ah	; AL is used for the character to print
+	mov ah, 0Eh	; Teletype BIOS interrupt function
+	int 10h		; BIOS interrupt 10h (0x10 or 16 in decimal)
+	pop cx		; Restore the state of our CX register
+	pop ax		; Restore the state of our AX register
+	ret		; Return to caller location
 
 ;------------------------------------------------------------------------------
 ; Print string subroutine (null terminated string print)
@@ -318,6 +318,8 @@ times 510-($-$$) db 0	; Pad (510 - current position) bytes of 0
 
 dw 0xAA55		; Boot sector code trailer
 ```
+
+Okay, one thing worth explaining in this code is how we can just call `je .loop` after doing `call read_keyboard` and the program just magically knowing if a key was pressed? Well that is why we do `test ah, ah` before returning from the `read_keyboard` subroutine. The call to BIOS 16h will put the value `0` into `AH` if no key was pressed. So by doing `test ah, ah` we are setting the zero flag ZF to either 0 or 1 based on if anything is in `AH` (1 if `AH` is 0). So then we can do the jump if equal call `je .loop` if `AH` is equal to 0. Also returning from our `read_keyboard` subroutine, the `AH` register will be set to the scancode that was pressed, so we can use our handy debug print to print out the value of `AH`.
 
 ### Hello pixel
 ***; TBD***
