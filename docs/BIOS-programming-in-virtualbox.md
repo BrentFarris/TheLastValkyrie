@@ -46,3 +46,64 @@ So basically:
 ## Writing our BIOS enabled code
 The very last thing to do to see anything on the screen is to write our boot loader. Well, not so much of a boot loader because we aren't going to use it to load any other code or anything from our drives. Basically just our boot sector program which will execute some code and run BIOS commands to print stuff and set pixel colors.
 
+### Hello, World!
+Now I know you're eager to draw a pixel on the screen, but let's start with the very basic task of getting a "Hello, World!" on the screen.
+```asm
+BITS 16			; Instruct the system this is 16-bit code
+
+; This is the entry point, nothing should happen before this
+; other than setting the instruction size
+main:
+	mov ax, 0x07C0	; Setup 4KB stack space after this bootloader
+	add ax, 288	; (4096+515) / 16 bytes (aligned) per paragraph
+	cli		; Disable interrupts (solvs old DOS bug)
+	mov ss, ax	; Assign current stack segment
+	mov sp, 4096	; Setup our stack pointer
+	sti		; Enable interrupts (solvs old DOS bug)
+	mov ax, 0x07C0	; 0x07C0 is where our program is located
+	mov ds, ax	; Set data segment to the load point of our program
+	call run	; Start the main loop
+
+;------------------------------------------------------------------------------
+; Constants
+;------------------------------------------------------------------------------
+s_hi db "Hello, World!", 0Dh, 0Ah, "- Brent", 0Dh, 0Ah, 00h
+
+;------------------------------------------------------------------------------
+; The main loop of our program
+;------------------------------------------------------------------------------
+run:
+	mov si, s_hi	; Set our si register to point to the hello message
+	call print	; Call our print subroutine to print the message
+.loop:
+	jmp .loop	; Infinite loop to hold control of the computer
+
+;------------------------------------------------------------------------------
+; Print string subroutine (null terminated string print)
+;------------------------------------------------------------------------------
+print:
+	push ax		; Save the current value of the AX register
+	mov ah, 0Eh	; Our first BIOS interrupt:  Teletype output
+.repeat:
+	lodsb		; Load next character into AL register
+	cmp al, 0x00	; Check if we are at end of string (0 = end of string)
+	je .done	; If AL is 0 then jump to done label
+	int 10h		; BIOS interrupt 10h (0x10 or 16 in decimal)
+	jmp .repeat	; Continue to next character in the string
+.done:
+	pop ax		; Restore the value to the AX register
+	ret		; Return to caller location
+
+;------------------------------------------------------------------------------
+; Boot loaders are 512 bytes in size so pad the remaining bytes with 0
+;------------------------------------------------------------------------------
+times 510-($-$$) db 0	; Pad (510 - current position) bytes of 0
+
+dw 0xAA55		; Boot sector code trailer
+```
+
+*; TODO:  Explain each pice of the above assembly behond what is in the comments*
+
+[Teletype BIOS interrupt Int 10/AH=0Eh](http://www.ctyme.com/intr/rb-0106.htm)
+
+Armed with this code, you can run the `build.sh` shell script listed above or just run the commands found within it. From this point you can startup your VirtualBox VM and be in awe of your glorious "Hello, World!" program running directly on a machine without the aid of an operating system!
