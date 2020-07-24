@@ -62,13 +62,13 @@ BITS 16			; Instruct the system this is 16-bit code
 ; This is the entry point, nothing should happen before this
 ; other than setting the instruction size
 main:
-	mov ax, 0x07C0	; Setup 4KB stack space after this bootloader
+	mov ax, 07C0h	; Setup 4KB stack space after this bootloader
 	add ax, 288	; (4096+515) / 16 bytes (aligned) per paragraph
 	cli		; Disable interrupts (solvs old DOS bug)
 	mov ss, ax	; Assign current stack segment
 	mov sp, 4096	; Setup our stack pointer
 	sti		; Enable interrupts (solvs old DOS bug)
-	mov ax, 0x07C0	; 0x07C0 is where our program is located
+	mov ax, 07C0h	; 07C0h is where our program is located
 	mov ds, ax	; Set data segment to the load point of our program
 	call run	; Start the main loop
 
@@ -94,7 +94,7 @@ print:
 	mov ah, 0Eh	; Our first BIOS interrupt:  Teletype output
 .repeat:
 	lodsb		; Load next character into AL register
-	cmp al, 0x00	; Check if we are at end of string (0 = end of string)
+	cmp al, 00h	; Check if we are at end of string (0 = end of string)
 	je .done	; If AL is 0 then jump to done label
 	int 10h		; BIOS interrupt 10h (0x10 or 16 in decimal)
 	jmp .repeat	; Continue to next character in the string
@@ -112,7 +112,7 @@ dw 0xAA55		; Boot sector code trailer
 
 ***; TODO:  Explain each pice of the above assembly behond what is in the comments***
 
-[Teletype BIOS interrupt Int 10/AH=0Eh](http://www.ctyme.com/intr/rb-0106.htm)
+You may notice that we used the instruction `int 10h` which could have also been `int 0x10` or `int 16`. This particular interrupt calls into the BIOS for a range of visual functions. The function we used to print to teletype was function `0Eh` which could have also been written as `0x0E` or `14`. When we call a BIOS interrupt, we need to supply a function code in the `ah` register, thus why we used `mov ah, 0Eh` before `int 10h`. To know more about this and other interrupt functions, see this awesome website: [Teletype BIOS interrupt Int 10/AH=0Eh](http://www.ctyme.com/intr/rb-0106.htm).
 
 Armed with this code, you can run the `build.sh` shell script listed above or just run the commands found within it. From this point you can startup your VirtualBox VM and be in awe of your glorious "Hello, World!" program running directly on a machine without the aid of an operating system! You should see something similar to the following:
 ![hello-world-in-action](https://i.imgur.com/2r2hRIg.png)
