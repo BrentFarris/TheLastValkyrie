@@ -249,7 +249,7 @@ run:
 	call read_keyboard	; Call our keyboard input subroutine
 	je .loop		; Return to loop if no key was pressed
 	call ah_to_str		; A key was pressed, so let's print it!
-	mov si, c_nl		; Move the new line bytes into SI register
+	mov si, s_nl		; Move the new line bytes into SI register
 	call print		; Print a new line for readability
 	jmp .loop		; Infinite loop to hold control of the computer
 
@@ -360,7 +360,7 @@ run:
 	call read_keyboard	; Call our keyboard input subroutine
 	je .loop		; Return to loop if no key was pressed
 	call ah_to_str		; A key was pressed, so let's print it!
-	mov si, c_nl		; Move the new line bytes into SI register
+	mov si, s_nl		; Move the new line bytes into SI register
 	call print		; Print a new line for readability
 	jmp .loop		; Infinite loop to hold control of the computer
 
