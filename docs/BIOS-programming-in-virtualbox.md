@@ -326,6 +326,9 @@ dw 0xAA55		; Boot sector code trailer
 
 Okay, one thing worth explaining in this code is how we can just call `je .loop` after doing `call read_keyboard` and the program just magically knowing if a key was pressed? Well that is why we do `test ah, ah` before returning from the `read_keyboard` subroutine. The call to BIOS `16h` will put the value `0` into `AH` if no key was pressed. So by doing `test ah, ah` we are setting the zero flag ZF to either 0 or 1 based on if anything is in `AH` (1 if `AH` is 0). So then we can do the jump if equal call `je .loop` if `AH` is equal to 0. Also returning from our `read_keyboard` subroutine, the `AH` register will be set to the scancode that was pressed, so we can use our handy debug print to print out the value of `AH`.
 
+With this code we are able to type "text" on our keyboard and see the following output:
+![keyboard-text-debug-log](https://i.imgur.com/XtdQjQh.png)
+
 ### Hello pixel
 Last, but not least, the thing you probably came here for... Setting the color of a pixel on the screen. For with this power you can draw absolutely anything you want, even move it around now that you have keyboard input! Much like the other sections, I left the code the same and just added the needed code for setting the color of a single pixel on the screen. Jump down to the **Set graphics mode** and the **Plot a pixel** sections of the code. Also check out the code just before the `.loop:` section as it was slightly updated.
 ```asm
