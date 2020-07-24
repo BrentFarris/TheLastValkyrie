@@ -4,6 +4,11 @@ description: A quick getting started tutorial on how to write a minimal text/gra
 tags: bios x86 x64 assembly virtualbox graphics
 ---
 
+There are two things I want to explain how to do here, **(1)** basic BIOS interrupts and **(2)** setting the color of pixles plotted onto the screen. This is by no means suppose to be the most performant best way to do things, but I'm running this on a 4GHz processor list most anyone else who will be trying this; so I would consider it a great first step.
+
+If you're viewing this guide it means you probably already know what BIOS is (basic input output system) and you've probably already dabbled a bit in assembly. Both of these are technically not required since I'm going through all the steps, but knowing them probably will make the information here stick a bit better.
+
+
 **JMP**
 - [Tools setup](#tool-setup)
 - [VM setup](#vm-setup)
@@ -11,10 +16,6 @@ tags: bios x86 x64 assembly virtualbox graphics
 - [Writing our BIOS enabled code](#writing-our-bios-enabled-code)
 - [CUDA performance](#cuda-performance)
   - [Hello, World!](#hello-world)
-
-There are two things I want to explain how to do here, **(1)** basic BIOS interrupts and **(2)** setting the color of pixles plotted onto the screen. This is by no means suppose to be the most performant best way to do things, but I'm running this on a 4GHz processor list most anyone else who will be trying this; so I would consider it a great first step.
-
-If you're viewing this guide it means you probably already know what BIOS is (basic input output system) and you've probably already dabbled a bit in assembly. Both of these are technically not required since I'm going through all the steps, but knowing them probably will make the information here stick a bit better.
 
 ## Tools setup
 **VirtualBox** - The first thing you are going to need is [VirtualBox](https://www.virtualbox.org/). You could do this stuff right on real hardware, but there are risks with doing such a thing and alos it will take an awfully long time to debug things. Using a virtual machine is helpful for rapid iteration.
