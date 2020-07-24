@@ -58,7 +58,7 @@ So basically:
 The very last thing to do to see anything on the screen is to write our boot loader. Well, not so much of a boot loader because we aren't going to use it to load any other code or anything from our drives. Basically just our boot sector program which will execute some code and run BIOS commands to print stuff and set pixel colors.
 
 ### Hello, World!
-Now I know you're eager to draw a pixel on the screen, but let's start with the very basic task of getting a "Hello, World!" on the screen. Please be sure to read all the comments in any of the following assembly code files. The comments give you all the context you'll need to understand what is going on. Going through and writing a paragraph for each assebly instruction line seems superfluious and time consuming haha. I like documenting things, but let's let the code do the talking on this one :).
+Now I know you're eager to draw a pixel on the screen, but let's start with the very basic task of getting a "Hello, World!" on the screen. Please be sure to read all the comments in any of the following assembly code files. The comments give you all the context you'll need to understand what is going on. Going through and writing a paragraph for each assembly instruction line seems superfluious and time consuming haha. I like documenting things, but let's let the code do the talking on this one :).
 ```asm
 BITS 16			; Instruct the system this is 16-bit code
 
