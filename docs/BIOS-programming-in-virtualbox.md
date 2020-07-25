@@ -153,22 +153,8 @@ run:
 	mov ah, 09h		; Set the AH register to 9 so we can print it
 	call ah_to_str		; This should output 00001001 to the screen
 .loop:
-	call read_keyboard	; Call our keyboard input subroutine
-	je .loop		; Return to loop if no key was pressed
-	call ah_to_str		; A key was pressed, so let's print it!
-	mov si, s_nl		; Move the new line bytes into SI register
-	call print		; Print a new line for readability
 	jmp .loop		; Infinite loop to hold control of the computer
 
-;------------------------------------------------------------------------------
-; Reading keyboard input
-;------------------------------------------------------------------------------
-read_keyboard:
-	mov ah, 00h	; 00h is the get key and clear buffer function in BIOS
-	int 16h		; Call the BIOS interrupt for keyboard functions
-	test ah, ah	; AH will be 0 if no key was pressed, allow je after
-	ret		; Return to caller with ZF and AH set
-	
 ;------------------------------------------------------------------------------
 ; Debug printing of bytes
 ;------------------------------------------------------------------------------
