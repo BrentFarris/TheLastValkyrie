@@ -50,10 +50,10 @@ dd status=noxfer conv=notrunc if=boot.bin of=bootloader.vfd	# Stick our code int
 ```
 
 So basically:
-1) `nasm -f bin -o boot.bin main.asm` will assemble our asm file into binary.
-2) `rm ./bootloader.vfd` will delete our old image because we are going to write a new one
-3) `cp ./clean-floppy.vfd ./bootloader.vfd` will copy our clean (all 0s) floppy image so we can write using a blank slate
-4) `dd status=noxfer conv=notrunc if=boot.bin of=bootloader.vfd` Basically just slaps all the bytes in `boot.bin` that was generated from step (1) into the `bootloader.vfd` file. If you were to read the bytes of `bootloader.vfd` after doing this, you'll see that the first 512 bytes will match that of `boot.bin`.
+1. `nasm -f bin -o boot.bin main.asm` will assemble our asm file into binary.
+2. `rm ./bootloader.vfd` will delete our old image because we are going to write a new one
+3. `cp ./clean-floppy.vfd ./bootloader.vfd` will copy our clean (all 0s) floppy image so we can write using a blank slate
+4. `dd status=noxfer conv=notrunc if=boot.bin of=bootloader.vfd` Basically just slaps all the bytes in `boot.bin` that was generated from step (1) into the `bootloader.vfd` file. If you were to read the bytes of `bootloader.vfd` after doing this, you'll see that the first 512 bytes will match that of `boot.bin`.
 
 ## Writing our BIOS enabled code
 The very last thing to do to see anything on the screen is to write our boot loader. Well, not so much of a boot loader because we aren't going to use it to load any other code or anything from our drives. Basically just our boot sector program which will execute some code and run BIOS commands to print stuff and set pixel colors.
