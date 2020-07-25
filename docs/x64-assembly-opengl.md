@@ -33,7 +33,7 @@ I might come back and update this on how to get the libs setup for usage, howeve
 
 ## Main file
 The entry point for our program is going to be `main` just as described in the example on how to setup x64 assembly. There are a few libraries that you need to include before we can start using the various 3rd party dependencies that we've downloaded. Below is the bare bones **main.asm** file that we need to get started.
-```asm
+```nasm
 includelib legacy_stdio_definitions.lib	; printf, etc.
 includelib ucrt.lib			; malloc, calloc, free, etc.
 includelib vcruntime.lib		; memcpy, strstr, etc.
@@ -54,7 +54,7 @@ As you can see, since we are using libraries that were developed in C, we also n
 
 ## Calling GLFW initialize to check setup
 Now that we have the libraries setup and included all the libs that we needed, lets make sure everything is working by making a call to initialize GLFW and see the response code.
-```asm
+```nasm
 includelib legacy_stdio_definitions.lib	; printf, etc.
 includelib ucrt.lib			; malloc, calloc, free, etc.
 includelib vcruntime.lib		; memcpy, strstr, etc.
