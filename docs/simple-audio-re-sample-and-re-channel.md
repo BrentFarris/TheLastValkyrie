@@ -10,10 +10,11 @@ I was recently writing a VOIP program in C using OPUS and I found the need to re
 int32_t resample(float* out, const float* in, int32_t speakerSampleRate,
 	int32_t micSampleRate, size_t inSize, int channels)
 {
-	// We are assuming that the mic and speaker channels match, otherwise we will need to
-	// re-channel the input audio data (in) before we call the resample func (see below sample)
-	//micSampleRate = 44100
-	//speakerSampleRate = 48000
+	// We are assuming that the mic and speaker channels match,
+	// otherwise we will need to re-channel the input audio data (in)
+	// before we call the resample func (see below sample)
+	// micSampleRate = 44100
+	// speakerSampleRate = 48000
 	
 	// Get our current ratio to be able to interpolate
 	const double ratio = (double)speakerSampleRate / micSampleRate;
@@ -70,6 +71,9 @@ void rechannel(float* out, float* in,
 		}
 	}
 	else
-		memcpy_s(out, sampleSize * sizeof(float), in, sampleSize * sizeof(float));
+	{
+		memcpy_s(out, sampleSize * sizeof(float),
+			in, sampleSize * sizeof(float));
+	}
 }
 ```
