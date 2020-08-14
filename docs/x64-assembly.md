@@ -38,7 +38,7 @@ Below is a quick reference table of registers and their purpose. This isn't 100%
 
 There are some registers that have special behavior based on the instruction that you are using. **RCX** combined with the **loop** instruction is one such set. Below is an example that will increment the value in the `rax` register 8 times.
 
-```asm
+```nasm
 mov rcx, 8
 loop_8_times:
 inc rax
@@ -47,7 +47,7 @@ loop loop_8_times
 
 As you can see, the `loop` instruction basically decrements the `rcx` register until it reaches the value of 0. When `rcx` contains the value of 0 then the loop will end. Below is an example of the same code without the loop instruction to describe the behavior.
 
-```asm
+```nasm
 mov rcx, 8
 loop_8_times:
 inc rax
@@ -75,7 +75,7 @@ Lastly, when calling a procedure, the return value for the call (if any) will be
 
 ## Fast-call procedure shadow space (home space)
 When using fast-call it is important to note that if the routine is either to be called from another language such as C or C++, or if you are calling a function that is in another language like C or C++, you need to make sure to support **shadow space** also known as **home space**. I'll call it **shadow space** from now on because it sounds cooler. This shadow space is 32 bytes long (since we are in 64-bit assembly). Basically what it boils down to is that you need to move the stack pointer `RSP` 32 bytes before doing a `call` (keep in mind 16 byte alignment of the stack). Let's take a look at Microsoft's `HeapAlloc` function (basically `malloc`) as an example of how this would work. Below is our own implementation of `malloc` which we will call `halloc` and use the Windows api function `HeapAlloc`.
-```asm
+```nasm
 halloc PROC
 	mov r8, rcx		; Add the number of bytes to allocate
 	call GetProcessHeap	; Store the process heap address in RAX
@@ -90,7 +90,7 @@ halloc ENDP
 What you will notice in the above code is the instructions `sub rsp, 20h` and `add rsp, 20h` which are adding and removing the shadow space respectively. This is a little bit annoying but I personally don't require the shadow space when I am calling routines that I don't intend to expose to a higher level language like C. This means that I mainly only have to add it when I am calling into a function that I would like to use from the higher level language library. For a short added reading on this, check out this Microsoft [blog post](https://devblogs.microsoft.com/oldnewthing/20160623-00/?p=93735).
 
 Something I like to do is to have a routine for doing shadow space calling for me. Basically you pass the function you want to create shadow space for calling into `rax` (in my case) and then you add and remove the stack space around the call as you normally do.
-```asm
+```nasm
 ;*********************************************;
 ; RAX = Function that should be shadow called ;
 ; Returns whatever the function call returns  ;
@@ -108,7 +108,7 @@ The above instructions has a few things going on. The most interesting thing tha
 
 ## Shadow space and function arguments
 At this point you might be wondering, if there are more than 4 arguments to a function call and the remaining arguments are put onto the stack, how does this work with shadow space? Since the fast-call calling convention requires the shadow space (whether or not it uses it) and that alters the stack, your question should be, "do I push to args to the stack before or after adding the shadow space?". The answer is to push the args **before** you add the shadow space.
-```asm
+```nasm
 mov rcx, 1		; Arg 1
 mov rdx, 2		; Arg 2
 mov r8, 3		; Arg 3
@@ -121,13 +121,13 @@ add rsp, 20h		; Remove shadow space
 
 ## Stack 16 byte alignment
 Something I am aware of, but honestly haven't fully explored, is that the stack is on a 16-byte alignment. That is to say that if you are to push only 1 8-byte value onto the stack, you should padd it by adding the other 8 bytes. You could push the value 2x or, more preferrably, just move the stack pointer. Below is an example of this exact scenario.
-```asm
+```nasm
 mov rax, 99	; Some value from somewhere
 push rax	; Push an 8-byte value onto the stack
 sub rsp, 8	; Move the stack pointer by 8 bytes to keep it 16-byte aligned
 ```
 Often you'll want to start your program off on the right foot by aligning it. Believe it or not, it doesn't always start off aligned.
-```asm
+```nasm
 .code
 main PROC
 	and rsp, not 08h	; Make sure that the stack is 8-bytes aligned
@@ -183,7 +183,7 @@ Now that you have done all that setup, turn your debugger to x64 mode (through t
 What better way to learn something than through some code examples. Below are some ASCII string query routines that I have written in x64. *Note: these routines are slower, but it works good for example sake. I use a faster versions of these routine in my personal code that account for cache lines and heap access.*
 
 **strlen** - Get the length of a string. 
-```asm
+```nasm
 ;****************************************;
 ; RAX = The string to get the length for ;
 ; Returns length of string in RAX        ;
@@ -206,7 +206,7 @@ strleninline ENDP
 ```
 
 **strstartswith** - Determines if a string (haystack) starts with another string (needle)
-```asm
+```nasm
 ;*******************************************************;
 ; RAX = Needle string (string should be in start)       ;
 ; RBX = Haystack string (string to check within)        ;
@@ -235,7 +235,7 @@ strstartswith ENDP
 ```
 
 **strindexof** - Get the index of a string (needle) within another string (haystack)
-```asm
+```nasm
 ;*******************************************************;
 ; RAX = Haystack string (string to check within)        ;
 ; RBX = Needle string (string should be in start)       ;
