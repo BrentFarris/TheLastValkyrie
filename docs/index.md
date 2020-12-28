@@ -2,6 +2,8 @@
 
 Below is just a collection of thoughts and studies that I've done on my spare time. In no way are they suppose to be cohesive posts, most of them are probably just covering a single concept.
 
+12/27/2020 [GameBoy Assembly Programming on Winows/Linux](gameboy-assembly-programming.md)
+
 07/24/2020 [BIOS Programming in VirtualBox](BIOS-programming-in-virtualbox.md)
 
 06/25/2020 [Simple audio re-sample and re-channel](simple-audio-re-sample-and-re-channel.md)
