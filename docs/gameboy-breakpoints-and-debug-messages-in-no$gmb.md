@@ -5,7 +5,9 @@ tags: gameboy no$gmb debug-messages breakpoints
 image: https://i.imgur.com/0NiEvZu.png
 ---
 
-<iframe id="lbry-iframe" width="560" height="315" src="https://odysee.com/$/embed/gameboy-breakpoints-and-debug-messages-in-no-cash-gmb/2644dc9435274b58e835a0d35d54e6d8ab38928b?r=HP6i9hAVyEHmNWQo8j6iFo61fKRDg6G9" allowfullscreen></iframe>
+<div style="width:100%;padding-top:56.25%;position:relative;">
+<iframe id="lbry-iframe" style="min-width:100%;min-height:100%;position:absolute;top:0;" src="https://odysee.com/$/embed/gameboy-breakpoints-and-debug-messages-in-no-cash-gmb/2644dc9435274b58e835a0d35d54e6d8ab38928b?r=HP6i9hAVyEHmNWQo8j6iFo61fKRDg6G9" allowfullscreen></iframe>
+</div>
 
 The first thing you need to do is to turn on both breakpoints and debug messages inside of NO$GMB. To do this, open NO$GMB (a game does not need to be loaded) and then select `Options` in the top bar, then select `Debug eXception Setup` option. You will see the below window (mostly grayed out). Just select the following checkboxes to turn enable them:
 1. Enable User Settings
