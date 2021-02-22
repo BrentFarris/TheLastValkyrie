@@ -2,21 +2,23 @@
 
 Below is just a collection of thoughts and studies that I've done on my spare time. In no way are they suppose to be cohesive posts, most of them are probably just covering a single concept.
 
-12/27/2020 [GameBoy Assembly Programming on Winows/Linux](gameboy-assembly-programming.md)
+02/22/2021 [Gameboy breakpoints and debug messages in NO$GMB](gameboy-breakpoints-and-debug-messages-in-no$gmb.md)
+
+12/27/2020 [GameBoy assembly programming on Winows/Linux](gameboy-assembly-programming.md)
 
 07/24/2020 [BIOS Programming in VirtualBox](BIOS-programming-in-virtualbox.md)
 
 06/25/2020 [Simple audio re-sample and re-channel](simple-audio-re-sample-and-re-channel.md)
 
-05/15/2020 [Ray Tracing With Cuda](ray-tracing-with-cuda.md)
+05/15/2020 [Ray tracing with cuda](ray-tracing-with-cuda.md)
 
-04/26/2020: [Basic Cross Platform ncurses](basic-cross-platform-ncurses.md)
+04/26/2020: [Basic cross platform ncurses](basic-cross-platform-ncurses.md)
 
-03/26/2020: [Brent's C Programming Rules](brents-c-programming-rules.md)
+03/26/2020: [Brent's C programming rules](brents-c-programming-rules.md)
 
 02/29/2020: [Android NDK, JAR files, JNI, and Visual Studio](visual-studio-android-ndk-jar-files.md)
 
-12/05/2019: [Writing a 6502 Assembler](writing-6502-assembler.md)
+12/05/2019: [Writing a 6502 assembler](writing-6502-assembler.md)
 
 12/03/2019: [Drawing characters to screen on Commander X16 using 6502 Assembly](commander-x16-video-memory.md)
 
