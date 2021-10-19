@@ -4,9 +4,9 @@ Below is just a collection of thoughts and studies that I've done on my spare ti
 
 08/15/2021 [C++ Shortcomings](cpp-shortcomings.md)
 
-02/22/2021 [Gameboy breakpoints and debug messages in NO$GMB](gameboy-breakpoints-and-debug-messages-in-no$gmb.md)
+02/22/2021 [Game Boy breakpoints and debug messages in NO$GMB](gameboy-breakpoints-and-debug-messages-in-no$gmb.md)
 
-12/27/2020 [GameBoy assembly programming on Winows/Linux](gameboy-assembly-programming.md)
+12/27/2020 [Game Boy assembly programming on Winows/Linux](gameboy-assembly-programming.md)
 
 07/24/2020 [BIOS Programming in VirtualBox](BIOS-programming-in-virtualbox.md)
 
