@@ -1,5 +1,5 @@
 ---
-title: C++ Shortcomings
+title: C++ Shortcomings With Building Libraries
 description: Some issues with C++ when it comes to developing libraries that others can use
 tags: c++ c++-programming tips c++-issues dll-issues
 ---
