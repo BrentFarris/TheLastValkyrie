@@ -54,6 +54,3 @@ Some pencil sketches
 
 > 2020-03-08
 ![2020-03-08](https://i.imgur.com/P4WV1Xp.jpg)
-
-> 2020-03-08
-![2020-03-08](https://i.imgur.com/Aj2IMDz.jpg)
