@@ -6,6 +6,8 @@ Below is just a collection of thoughts and studies that I've done on my spare ti
 
 06/01/2021 [Graphical Game Engine Testing](graphical-game-engine.md)
 
+04/09/2021 [My Book Collection](my-book-collection.md)
+
 02/22/2021 [Game Boy breakpoints and debug messages in NO$GMB](gameboy-breakpoints-and-debug-messages-in-no$gmb.md)
 
 12/27/2020 [Game Boy assembly programming on Winows/Linux](gameboy-assembly-programming.md)
