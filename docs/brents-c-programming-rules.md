@@ -24,6 +24,7 @@ Below are some rules that I have developed over a long period of time writing C 
 - [If there is a standard, use it](#if-there-is-a-standard-use-it)
 - [Use float epsilon for 0 checking](#use-float-epsilon-for-0-checking)
 - [Zero set your structs](#zero-set-your-structs)
+- [Big types first](#big-types-first)
 - [More to come](#more-to-come)
 
 ## Pure encapsulation
@@ -269,6 +270,20 @@ Alternatively you can choose a fractionally small number like `0.0001F` to check
 
 ## Zero Set Your Structs
 One thing that would get me when developing in C is pointers inside of objects not being set to `NULL`. Now I know I speak about hating that the idea of `NULL` exists, but when working with other people's code it is impossible for you not to run into a situation where you need to set a pointer to `NULL`, pass a `NULL` or check a pointer against `NULL`. So do yourself a favor and always use `calloc` (or `memset(&thing, 0, sizeof(struct ThingType))` if it isn't a pointer or new memory). Of course this doesn't ban the use of `malloc`, in fact you should continue to use it on buffers, but as probrammers, we have a problem with not touching code that works and you think it is fine to just add in that extra field, but if it is a pointer and you don't initialize it to `NULL` where needed, you're in for a world of hurt.
+
+## Big types first
+When you create a structure, put the biggest types at the top of your struct and the smallest types at the bottom. Platforms like the x86 will magically help you with this (at a cost), but other platforms (like ARM) will generate SEGFALT if you don't properly do this. This is because of padding in a struct. If you put a `bool` as the first field and a `int32_t` as the second field in a struct, like the one below, you will have a problem where you pack 1 byte, then 4 bytes into the struct, effectively having a 5 byte struct. The problem here is that the CPU is optimized to read along memory boundaries. When you `malloc`, you won't get an odd memory address for example.
+```C
+struct Bad {
+	bool first;
+	int32_t second;
+};
+
+struct Good {
+	int32_t first;
+	bool second;
+};
+```
 
 ## More to come
 There are inevitably more things I've forgotten about, but I've written this all in one sitting so this is good enough for now until I can update!
