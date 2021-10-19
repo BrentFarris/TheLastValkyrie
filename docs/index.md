@@ -2,6 +2,8 @@
 
 Below is just a collection of thoughts and studies that I've done on my spare time. In no way are they suppose to be cohesive posts, most of them are probably just covering a single concept.
 
+10/19/2021 [C++ Shortcomings](cpp-shortcomings.md)
+
 02/22/2021 [Gameboy breakpoints and debug messages in NO$GMB](gameboy-breakpoints-and-debug-messages-in-no$gmb.md)
 
 12/27/2020 [GameBoy assembly programming on Winows/Linux](gameboy-assembly-programming.md)
