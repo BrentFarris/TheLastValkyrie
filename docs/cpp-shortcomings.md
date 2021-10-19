@@ -9,6 +9,7 @@ Before we begin, I'll be the first to tell you that I love C++, it is a great OO
 **JMP**
 - [Background information](#background-information)
 - [The V-Table](#the-v-table)
+- [Name mangling](#name-mangling)
 - [The ABI](#the-abi)
 - [Conclusion](#conclusion)
 
@@ -18,6 +19,9 @@ So to understand the topics to follow on why C++ has some shortcomings, I first 
 
 ## The V-Table
 The V-Table is what gives C++ it's magic ability to point objects to functions that operate on their members. The major problem here is that the V-Table is not a standard in C++. This means that some compilers could put it at the bottom top of the binary structure, where others could put it at the bottom, or even in the middle if they were really crazy. For those of you who use C and not C++, the V-Table can be visualized as a function pointer to a function that operates on the structure's instance. This table is a collection of the function pointers for a structure. Now being avid in C you know it is critical to know if this function table is going to be at the beginning or the end of a structure. If you were to serialize this structure for later reading or to send over the network, you will need to know how to reliably construct it on the other side. In C we take this for granted, the binary structure on the other side can easily be the same if the same struct is compiled in any C compiler. Now imagine you had a compiler that mixed up the structure on the other side, you will wind up clobbering other fields in the structure. For this reason, you should compile all your C++ code using the same compiler or force a very strict ABI.
+
+## Name mangling
+[Name mangling](https://www.ibm.com/docs/en/i/7.4?topic=linkage-name-mangling-c-only) is a feature in C++ that allows you to have many functions with the same name. This enables overriding of functions so that a function with the same name could have different return types and arguments. This is a great feature to reduce similar-but-different functions, however it becomes a huge problem when developing a library that you would share. The problem here is that there are no rules for name mangling, what's worse is that the same compiler may produce a different name internally for a function on re-compilation. In C, since there isn't a feature for function overriding, the function name in the library is not mangled, in fact this is part of the ISO standard. This allows libraries to be updated without fear of breaking function names, unless you change it of course. That being said, you can use `extern "C"` in C++ to overcome this issue, which I did for a while but it becomes messy.
 
 ## The ABI
 What is the ABI? It is the application binary interface. There is no standard in C++ for the ABI as there is in C. In C, the order you put the fields into your struct is the binary order they will be in. This does cause issues with memory boundaries if you were to put say a boolean as the first field and a pointer as the second. This would require you to pack your structure so that the space after the boolean is properly taken up. One of the rules in my [C rules post about big types first](brents-c-programming-rules.md#big-types-first) references this. C++ compilers will optimize for you and often this creates a binary interface that is not useable across different compilers. If you compiled with the same exact version of the same compiler, it will often have an ABI that it adheres to.
