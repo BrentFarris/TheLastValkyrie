@@ -6,6 +6,6 @@ tags: brent farris brent-farris contact
 
 [GitHub](https://github.com/brentfarris)
 
-[Twitter](https://twitter.com/PhotonFalcon)
+[Email](RetroScience@aquamail.net)
 
 [LinkedIn](https://www.linkedin.com/in/farrisbrent)
