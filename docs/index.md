@@ -2,7 +2,7 @@
 
 Below is just a collection of thoughts and studies that I've done on my spare time. In no way are they suppose to be cohesive posts, most of them are probably just covering a single concept.
 
-08/15/2021 [C++ Shortcomings](cpp-shortcomings.md)
+08/15/2021 [C++ Shortcomings With Building Libraries](cpp-shortcomings.md)
 
 06/01/2021 [Graphical Game Engine Testing](graphical-game-engine.md)
 
