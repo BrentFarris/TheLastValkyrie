@@ -1,7 +1,7 @@
 ---
-title: Gameboy breakpoints and debug messages in NO$GMB
-description: Quick tip on how to do debug messages and breakpoints in NO$GMB Gameboy emulator and debugger using RGBDS
-tags: gameboy no$gmb debug-messages breakpoints
+title: Game Boy breakpoints and debug messages in NO$GMB
+description: Quick tip on how to do debug messages and breakpoints in NO$GMB Game Boy emulator and debugger using RGBDS
+tags: gameboy game-boy no$gmb debug-messages breakpoints
 image: https://i.imgur.com/0NiEvZu.png
 ---
 
@@ -16,7 +16,7 @@ The first thing you need to do is to turn on both breakpoints and debug messages
 
 ![NO$GMB debug messages and breakpoints settings window](https://i.imgur.com/3xniIor.png)
 
-Below is the `MACRO` for the RGBDS assembler for being able to print debug messages to teh NO$GMB Gameboy emulator/debugger.
+Below is the `MACRO` for the RGBDS assembler for being able to print debug messages to teh NO$GMB Game Boy emulator/debugger.
 ```assembly
 IF !DEF(DEBUG_INC)
 DEBUG_INC SET 1
