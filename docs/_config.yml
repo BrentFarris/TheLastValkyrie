@@ -5,10 +5,6 @@ description: A personal log about things I like in computer programming, art, el
 tagline: Some Assembly required
 author: Brent Farris
 email: RetroScience@aquamail.net
-twitter_handle: PhotonFalcon
-minima:
-  social_links:
-    twitter: PhotonFalcon
 google_analytics: UA-154143529-1
 plugins:
   - jekyll-relative-links
