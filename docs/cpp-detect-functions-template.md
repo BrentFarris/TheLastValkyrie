@@ -1,5 +1,5 @@
 ---
-title: Detect If A Class Has A Function With Templates
+title: C++ Detect If A Class Has A Function Using Templates
 description: Some C++ template magic to detect if a class actually has a function that matches a given signature without the need of putting it in the base class
 tags: c++ c++-programming detect-function class templates
 ---
