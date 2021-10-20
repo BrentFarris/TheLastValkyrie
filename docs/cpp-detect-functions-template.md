@@ -15,6 +15,8 @@ struct SomeComponent {
 	void(*_free)(SomeComponent* self);
 };
 
+//...
+
 //SFINAE - https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error
 template<typename T> class component_has_initialize {
 	template<typename> static std::false_type test(...);
