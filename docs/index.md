@@ -4,6 +4,8 @@ Below is just a collection of thoughts and studies that I've done on my spare ti
 
 08/15/2021 [C++ Shortcomings With Building Libraries](cpp-shortcomings-with-building-libraries.md)
 
+07/03/2021 [C++ Detect If A Class Has A Function Using Templates](cpp-detect-functions-template.md)
+
 06/01/2021 [Graphical Game Engine Testing](graphical-game-engine.md)
 
 04/09/2021 [My Book Collection (Mostly Programming)](my-book-collection.md)
