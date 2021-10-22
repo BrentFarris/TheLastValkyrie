@@ -10,7 +10,7 @@ A lot of new developers often ask me what books I own. While I don't think a boo
 - [Programming](#programming)
 - [Computer science theory](#computer-science-theory)
 - [Operating system development](#operating-system-development)
-- [Books from the 70's - 80's](#books-from-the-70-s-and-80-s)
+- [Books from the 70's - 80's](#books-from-the-70s-and-80s)
 - [Electronics](#electronics)
 - [Mathematics](#mathematics)
 - [General Education](#general-education)
