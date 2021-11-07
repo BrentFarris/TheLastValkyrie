@@ -47,6 +47,8 @@ What you will see in the code above we have a line `assert eq hl, $00FF`. This w
 ## Available Assertions
 Below are 3 tables, the first table is explaining the syntax used, the second is the comparison options, and the third are the actual assertions (reference the 2 tables above it).
 
+**Keywords**
+
 | Keyword | Description |
 | :------: | :------ |
 | R | Any 8-bit register (a, f, b, c, d, e, h, l) |
@@ -56,6 +58,7 @@ Below are 3 tables, the first table is explaining the syntax used, the second is
 | <=> | Comparison operator (eq, neq, leq, geq, lt, gt) |
 
 **Comparison operators**
+
 | Keyword | Description |
 | :------: | :------ |
 | eq | Are equal |
@@ -64,6 +67,8 @@ Below are 3 tables, the first table is explaining the syntax used, the second is
 | geq | Left is greater than or equal to right |
 | lt | Left is less than right |
 | gt | Left is greater than right |
+
+**Assertion instructions**
 
 | Format | Description | Example |
 | :------: | :------ | :--------- |
