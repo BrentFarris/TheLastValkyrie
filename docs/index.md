@@ -2,6 +2,8 @@
 
 Below is just a collection of thoughts and studies that I've done on my spare time. In no way are they suppose to be cohesive posts, most of them are probably just covering a single concept.
 
+11/06/2021 [I Wrote a Game Boy Assembler and Emulator](gameboy-assembler-and-debugger.md)
+
 08/15/2021 [C++ Shortcomings With Building Libraries](cpp-shortcomings-with-building-libraries.md)
 
 07/03/2021 [C++ Detect If A Class Has A Function Using Templates](cpp-detect-functions-template.md)
