@@ -67,14 +67,14 @@ Below are 3 tables, the first table is explaining the syntax used, the second is
 
 | Format | Description | Example |
 | :------: | :------: | :----: |
-| assert <=> r, %x | Compares a register to an 8-bit value | `assert eq a, $3F` |
-| assert <=> r, r | Compares the value of 2 registers | `assert neq b, e` |
-| assert <=> rr, rr | Compares the values of 2 16-bit register pairs | `assert leq bc, de` |
-| assert <=> rr, %xx | Compares the values of a 16-bit register to a 16-bit value | `assert geq de, $020F` |
-| assert <=> [rr], %x | Compares the value in memory at address held in 16-bit register pair to an 8-bit value | `assert lt [hl], $03` |
-| assert <=> [rr], r | Compares the value in memory at address held in 16-bit register pair to a register value | `assert gt [hl], e` |
+| assert <=> R, %x | Compares a register to an 8-bit value | `assert eq a, $3F` |
+| assert <=> R, R | Compares the value of 2 registers | `assert neq b, e` |
+| assert <=> RR, RR | Compares the values of 2 16-bit register pairs | `assert leq bc, de` |
+| assert <=> RR, %xx | Compares the values of a 16-bit register to a 16-bit value | `assert geq de, $020F` |
+| assert <=> [RR], %x | Compares the value in memory at address held in 16-bit register pair to an 8-bit value | `assert lt [hl], $03` |
+| assert <=> [RR], R | Compares the value in memory at address held in 16-bit register pair to a register value | `assert gt [hl], e` |
 | assert <=> [%xx], %x | Compares the value in memory at address to an 8-bit value | `assert eq [$3F9A], $09` |
-| assert <=> [%xx], r | Compares the value in memory at address to a register value | `assert eq [$2000], a` |
+| assert <=> [%xx], R | Compares the value in memory at address to a register value | `assert eq [$2000], a` |
 
 ## Game Boy OpCodes
 TBD
