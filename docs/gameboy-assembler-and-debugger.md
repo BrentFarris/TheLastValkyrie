@@ -44,6 +44,24 @@ HL_minus_BC::
 ```
 What you will see in the code above we have a line `assert eq hl, $00FF`. This will test the code immediately after `pop af` has ran to determine if the value in `HL` is euqal to the value `$00FF`. This will then print out to the console if the assertian has passed or failed. This allows for quickly testing out subroutines to make sure they work as expected.
 
+Since the assertions are available on the state of the machine, you can use assertions to dynamically check code while it is running instead of doing static checking on that specific line. For example, here is some code that uses the `e` register as a temporary value to use in the assert in each iteration through the loop.
+
+```assembly
+check_my_sanity::
+	ld a, $09		; Increment value in memory at address $FF00 9x
+	ld hl, $FF00		; Address to increment
+	ld e, $00		; Our assertion checking device
+	ld [hl], e		; Start our value off as 0
+.loop
+	inc [hl]		; Increment the value at $FF00
+	inc e			; Increment our sanity checker
+	dec a			; Decrement our loop counter
+	assert eq [hl], e	; Assert on our dynamic value
+	jr nz, .loop
+```
+
+The above code uses the `e` register as a temp value to use in the assertions. Of course this follows the same rules for non-asserted code, so you'd probably want to push whatever is inside of `e` to save and restore it if you are going to do something like this.
+
 ## Available Assertions
 Below are 3 tables, the first table is explaining the syntax used, the second is the comparison options, and the third are the actual assertions (reference the 2 tables above it).
 
