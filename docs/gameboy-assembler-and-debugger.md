@@ -73,7 +73,9 @@ Below are 3 tables, the first table is explaining the syntax used, the second is
 | RR | Any 16-bit register pair (af, bc, de, hl) |
 | %x | Any 8-bit number (5, $3A) |
 | %xx | Any 16-bit number (536, $3A9E) |
+| %xxxx | Any 32-bit number (12345678, $F36B3A9E) |
 | <=> | Comparison operator (eq, neq, leq, geq, lt, gt) |
+| clocks | The number of clock cycles that have passed since start |
 
 **Comparison operators**
 
@@ -98,8 +100,10 @@ Below are 3 tables, the first table is explaining the syntax used, the second is
 | assert <=> [RR], R | `assert gt [hl], e` | Compares the value in memory at address held in 16-bit register pair to a register value |
 | assert <=> [%xx], %x | `assert eq [$3F9A], $09` | Compares the value in memory at address to an 8-bit value |
 | assert <=> [%xx], R | `assert eq [$2000], a` | Compares the value in memory at address to a register value |
+| assert <=> clocks, %xxxx | `assert lt clocks, 9` | Compares the number of clock cycles that have passed to the given value |
 
 ## Game Boy OpCodes
+
 | Instruction | OpCode | Clocks |
 | :---------: | :----: | :----: |
 | nop | 00 | 1 |
