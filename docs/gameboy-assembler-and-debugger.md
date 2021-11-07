@@ -1,6 +1,6 @@
 ---
-title: Game Boy Assembler & Debugger
-description: So I wrote a Game Boy assembler and debugger to make it easier to debug 
+title: Game Boy Assembler & Emulator/Debugger
+description: So I wrote a Game Boy assembler and emulator/debugger to make it easier to debug 
 tags: game-boy gameboy assembler assembly z80 debugger
 ---
 
