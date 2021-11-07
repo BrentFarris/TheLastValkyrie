@@ -45,8 +45,10 @@ HL_minus_BC::
 What you will see in the code above we have a line `assert eq hl, $00FF`. This will test the code immediately after `pop af` has ran to determine if the value in `HL` is euqal to the value `$00FF`. This will then print out to the console if the assertian has passed or failed. This allows for quickly testing out subroutines to make sure they work as expected.
 
 ## Available Assertions
-Below are 2 tables, the first table is explaining the syntax used for the second table
+Below are 3 tables, the first table is explaining the syntax used, the second is the comparison options, and the third are the actual assertions (reference the 2 tables above it).
+
 | Keyword | Description |
+| :------: | :------: |
 | R | Any 8-bit register (a, f, b, c, d, e, h, l) |
 | RR | Any 16-bit register pair (af, bc, de, hl) |
 | %x | Any 8-bit number (5, $3A) |
@@ -55,6 +57,7 @@ Below are 2 tables, the first table is explaining the syntax used for the second
 
 **Comparison operators**
 | Keyword | Description |
+| :------: | :------: |
 | eq | Are equal |
 | neq | Are not equal |
 | leq | Left is less than or equal to right |
@@ -63,6 +66,7 @@ Below are 2 tables, the first table is explaining the syntax used for the second
 | gt | Left is greater than right |
 
 | Format | Description | Example |
+| :------: | :------: | :----: |
 | assert <=> r, %x | Compares a register to an 8-bit value | `assert eq a, $3F` |
 | assert <=> r, r | Compares the value of 2 registers | `assert neq b, e` |
 | assert <=> rr, rr | Compares the values of 2 16-bit register pairs | `assert leq bc, de` |
