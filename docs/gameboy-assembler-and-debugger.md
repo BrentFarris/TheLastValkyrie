@@ -48,7 +48,7 @@ What you will see in the code above we have a line `assert eq hl, $00FF`. This w
 Below are 3 tables, the first table is explaining the syntax used, the second is the comparison options, and the third are the actual assertions (reference the 2 tables above it).
 
 | Keyword | Description |
-| :------: | :------: |
+| :------: | :------ |
 | R | Any 8-bit register (a, f, b, c, d, e, h, l) |
 | RR | Any 16-bit register pair (af, bc, de, hl) |
 | %x | Any 8-bit number (5, $3A) |
@@ -57,7 +57,7 @@ Below are 3 tables, the first table is explaining the syntax used, the second is
 
 **Comparison operators**
 | Keyword | Description |
-| :------: | :------: |
+| :------: | :------ |
 | eq | Are equal |
 | neq | Are not equal |
 | leq | Left is less than or equal to right |
@@ -66,7 +66,7 @@ Below are 3 tables, the first table is explaining the syntax used, the second is
 | gt | Left is greater than right |
 
 | Format | Description | Example |
-| :------: | :------: | :----: |
+| :------: | :------ | :--------- |
 | assert <=> R, %x | Compares a register to an 8-bit value | `assert eq a, $3F` |
 | assert <=> R, R | Compares the value of 2 registers | `assert neq b, e` |
 | assert <=> RR, RR | Compares the values of 2 16-bit register pairs | `assert leq bc, de` |
