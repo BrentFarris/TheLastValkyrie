@@ -9,22 +9,42 @@ I've been having some fun writing a Game Boy game with a co-worker, nothing fanc
 So I wrote both a non-graphical **emulator** and a custom **assembler** for the Game Boy.
 
 **JMP**
-- [The Basics](#the-basics)
 - [The Emulator](#the-emulator)
 - [The Assembler](#the-assembler)
 - [Writing Assertions](#writing-assertions)
+- [Available Assertions](#available-assertions)
 - [Game Boy OpCodes](#game-boy-opcodes)
 
-## The Basics
-TBD
-
 ## The Emulator
-TBD
+The emulator is being developed in C for maximum portability. I mainly wrote the emulator for debugging purposes. I wanted an easy way to test subroutines for the Game Boy without having to load up a big graphical debugger in order to do so. Also those debuggers often lack the things I would like where are mainly assertions to prove that values are what they should be at a given point in the code/memory. So this emulator is not a graphical emulator and I still have yet to do any of the timing based parts of the Game Boy to call it a complete emulator. What it is good at right now is being able to run the opcode instructions given to it and manipulate registers and memory.
 
 ## The Assembler
-TBD
+The assembler is being developed in C for maximum portability as well. In order to be able to make assertions directly in the code, it was important for me to write my own Assembler. It currently does not have any support for macros, `IF` statements or any fancy math, but it does have the ability to assemble the z80 code and labels into code that the emulator can run and test against. All of the Game Boy instruction set is supported in the current build of the Assembler and subroutines (with dot labels) are supported as well in order to be able to test loops, jumps and all that sort of stuff easily. It also strips comments from the code as well.
 
 ## Writing Assertions
+Here is an example of what the Assembler can do with assertions.
+```assembly
+; Subtract BC from HL and store the result in HL
+HL_minus_BC::
+	ld hl, $1104	; Our test LHS
+	ld bc, $1005	; Our test RHS
+	
+	push af
+	ld a, l			; Get low byte
+	sub c			; Subtract rhs low byte
+	jr nc, .skip	; If we didn't go negative, jump to skip
+	dec h			; Otherwise we decrement high byte
+.skip
+	ld l, a			; Set low byte to new value
+	ld a, h			; Get high byte
+	sub b			; Subtract rhs high byte
+	ld h, a			; Set high byte to new value
+	pop af
+	assert eq hl, $00FF
+```
+What you will see in the code above we have a line `assert eq hl, $00FF`. This will test the code immediately after `pop af` has ran to determine if the value in `HL` is euqal to the value `$00FF`. This will then print out to the console if the assertian has passed or failed. This allows for quickly testing out subroutines to make sure they work as expected.
+
+## Available Assertions
 TBD
 
 ## Game Boy OpCodes
