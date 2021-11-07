@@ -433,4 +433,4 @@ Below are 3 tables, the first table is explaining the syntax used, the second is
 | res h | CB84 | 2 |
 | res l | CB85 | 2 |
 | res [hl] | CB86 | 4 |
-
+| stop | 1000 | 1 |
