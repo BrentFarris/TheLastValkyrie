@@ -45,7 +45,32 @@ HL_minus_BC::
 What you will see in the code above we have a line `assert eq hl, $00FF`. This will test the code immediately after `pop af` has ran to determine if the value in `HL` is euqal to the value `$00FF`. This will then print out to the console if the assertian has passed or failed. This allows for quickly testing out subroutines to make sure they work as expected.
 
 ## Available Assertions
-TBD
+Below are 2 tables, the first table is explaining the syntax used for the second table
+| Keyword | Description |
+| R | Any 8-bit register (a, f, b, c, d, e, h, l) |
+| RR | Any 16-bit register pair (af, bc, de, hl) |
+| %x | Any 8-bit number (5, $3A) |
+| %xx | Any 16-bit number (536, $3A9E) |
+| <=> | Comparison operator (eq, neq, leq, geq, lt, gt) |
+
+**Comparison operators**
+| Keyword | Description |
+| eq | Are equal |
+| neq | Are not equal |
+| leq | Left is less than or equal to right |
+| geq | Left is greater than or equal to right |
+| lt | Left is less than right |
+| gt | Left is greater than right |
+
+| Format | Description | Example |
+| assert <=> r, %x | Compares a register to an 8-bit value | `assert eq a, $3F` |
+| assert <=> r, r | Compares the value of 2 registers | `assert neq b, e` |
+| assert <=> rr, rr | Compares the values of 2 16-bit register pairs | `assert leq bc, de` |
+| assert <=> rr, %xx | Compares the values of a 16-bit register to a 16-bit value | `assert geq de, $020F` |
+| assert <=> [rr], %x | Compares the value in memory at address held in 16-bit register pair to an 8-bit value | `assert lt [hl], $03` |
+| assert <=> [rr], r | Compares the value in memory at address held in 16-bit register pair to a register value | `assert gt [hl], e` |
+| assert <=> [%xx], %x | Compares the value in memory at address to an 8-bit value | `assert eq [$3F9A], $09` |
+| assert <=> [%xx], r | Compares the value in memory at address to a register value | `assert eq [$2000], a` |
 
 ## Game Boy OpCodes
 TBD
