@@ -62,6 +62,15 @@ check_my_sanity::
 
 The above code uses the `e` register as a temp value to use in the assertions. Of course this follows the same rules for non-asserted code, so you'd probably want to push whatever is inside of `e` to save and restore it if you are going to do something like this.
 
+Also, for those of you who enjoy counting clock cycles to see how fast you can make a piece of code, you can assert on cycles as well. You can check `==`, `!=`, `<=`, `>=`, `<`, `>` in your `clocks` assert. Below is an example of checking clock cycles at a given line. You can imagine checking `eq` clocks might not be as useful as using `lt` though!
+
+```assembly
+; Just loading up some stuff, both take 3 clock cycles
+ld hl, $1104	; Our test LHS
+ld bc, $1005	; Our test RHS
+assert eq clocks, $06
+```
+
 ## Available Assertions
 Below are 3 tables, the first table is explaining the syntax used, the second is the comparison options, and the third are the actual assertions (reference the 2 tables above it).
 
