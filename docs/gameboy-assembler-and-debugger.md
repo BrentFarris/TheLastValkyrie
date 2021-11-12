@@ -19,7 +19,7 @@ So I wrote both a non-graphical **emulator** and a custom **assembler** for the 
 ## WebASM Demo
 Below is a demo of the C code compiled for WebASM. You can test out it's functionality. To know how to use it, check out the descriptions below the demo.
 
- <iframe id="lbry-iframe" style="min-width:100%;min-height:100%;position:absolute;top:0;" src="https://brentfarris.github.io/TheLastValkyrieBuilds/gbasmemu/"></iframe>
+<iframe src="https://brentfarris.github.io/TheLastValkyrieBuilds/gbasmemu/" style="min-width:100%;min-height:375px;"></iframe>
 
 ## The Emulator
 The emulator is being developed in C for maximum portability. I mainly wrote the emulator for debugging purposes. I wanted an easy way to test subroutines for the Game Boy without having to load up a big graphical debugger in order to do so. Also those debuggers often lack the things I would like where are mainly assertions to prove that values are what they should be at a given point in the code/memory. So this emulator is not a graphical emulator and I still have yet to do any of the timing based parts of the Game Boy to call it a complete emulator. What it is good at right now is being able to run the opcode instructions given to it and manipulate registers and memory.
