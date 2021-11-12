@@ -9,7 +9,7 @@ I've been having some fun writing a Game Boy game with a co-worker, nothing fanc
 So I wrote both a non-graphical **emulator** and a custom **assembler** for the Game Boy.
 
 **JMP**
-- [](#webasm-demo)
+- [WebASM Demo](#webasm-demo)
 - [The Emulator](#the-emulator)
 - [The Assembler](#the-assembler)
 - [Writing Assertions](#writing-assertions)
