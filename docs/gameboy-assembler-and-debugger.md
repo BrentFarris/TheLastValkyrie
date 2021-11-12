@@ -13,6 +13,7 @@ So I wrote both a non-graphical **emulator** and a custom **assembler** for the 
 - [WebASM Demo](#webasm-demo)
 - [The Emulator](#the-emulator)
 - [The Assembler](#the-assembler)
+- [Printing](#printing)
 - [Writing Assertions](#writing-assertions)
 - [Available Assertions](#available-assertions)
 - [Game Boy OpCodes](#game-boy-opcodes)
@@ -27,6 +28,42 @@ The emulator is being developed in C for maximum portability. I mainly wrote the
 
 ## The Assembler
 The assembler is being developed in C for maximum portability as well. In order to be able to make assertions directly in the code, it was important for me to write my own Assembler. It currently does not have any support for macros, `IF` statements or any fancy math, but it does have the ability to assemble the z80 code and labels into code that the emulator can run and test against. All of the Game Boy instruction set is supported in the current build of the Assembler and subroutines (with dot labels) are supported as well in order to be able to test loops, jumps and all that sort of stuff easily. It also strips comments from the code as well.
+
+## Printing
+Though you can get a print out of the value of registers or number of clock cycles that have passed when doing assertions, you may not want to kill the program with the wrong assert value. For this reason I've added the ability to print out any of the registers in 8-bit mode or 16-bit pair mode (including the stack pointer and program counter). You can also print out the number of clock cycles that have passed (great for performance testing). Below is an example of how to print out things.
+
+```assembly
+ld hl, $2021  ; Load a value int HL
+ld [hl], $09  ; Save the value 9 to memory at HL
+print hl      ; Print what the current value of HL is
+print h       ; Print the high byte of HL
+print l       ; Print the low byte of HL
+print [hl]    ; Print the value in memory pointed to by HL
+```
+
+## Available Prints
+Below is a list of all prints that you can do currently.
+
+| Keywords | Description |
+| :------: | :------ |
+| print a | Prints the value in the A register |
+| print f | Prints the value in the F register |
+| print b | Prints the value in the B register |
+| print c | Prints the value in the C register |
+| print d | Prints the value in the D register |
+| print e | Prints the value in the E register |
+| print h | Prints the value in the H register |
+| print l | Prints the value in the L register |
+| print af | Prints the 16-bit value in the AF register pair |
+| print bc | Prints the 16-bit value in the BC register pair |
+| print de | Prints the 16-bit value in the DE register pair |
+| print hl | Prints the 16-bit value in the HL register pair |
+| print [bc] | Prints the value in memory pointed to by [BC] |
+| print [de] | Prints the value in memory pointed to by [DE] |
+| print [hl] | Prints the value in memory pointed to by [HL] |
+| print sp | Prints the value of the stack pointer |
+| print pc | Prints the value of the program counter |
+| print clocks | Prints the number of clock cycles that have passed |
 
 ## Writing Assertions
 Here is an example of what the Assembler can do with assertions.
