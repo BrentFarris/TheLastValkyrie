@@ -82,7 +82,7 @@ In this way we are able to expose the fields of the struct to the rest of the co
 // employee.c file
 
 void employee_set_age(struct Employee* employee, int newAge) {
-	// Cast to pointer and set it's value, the compiler should optimize this for you
+	// Cast away the const and set it's value, the compiler should optimize this for you
 	*(int*)&employee->age = newAge;
 }
 ```
