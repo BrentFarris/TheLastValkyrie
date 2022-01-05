@@ -1,15 +1,14 @@
 ---
 title: Brent's Encapsulated C Programming Rules
-description: A bunch of tips and rules I've created for myself for developing encapsulated programs in the C programming language 
-tags: c c-programming c-coding c-rules rules programming-rules tips encapsulation
+description: A bunch of tips and rules I've created for myself for developing programs in the C programming language 
+tags: c c-programming c-coding c-rules rules programming-rules tips
 ---
 
 Below are some rules that I have developed over a long period of time writing fully encapsulated C programs. C is my favorite language and I love the freedom and exploration it allows me. I also love that it is so close to Assembly and I love writing assembly for much of the same reasons!
 
-*NOTE: These rules are related to programming in a 100% encapsulated way. As with all things, there is never 1 rule fits all. I actually have a completely different set of rules for optimal inlining and performance code.*
-
 **JMP**
 - [Pure encapsulation](#pure-encapsulation)
+- [No encapsulation performance](#no-encapsulation-performance)
 - [Memory ownership](#memory-ownership)
 - [Avoid void*](#avoid-void)
 - [Don't over-complicate strings](#dont-over-complicate-strings)
@@ -54,6 +53,37 @@ struct Vec3 {
 ```
 
 As you can see in the above code sample, if you were just to have the header file, you would not know that this vector is implemented using 3 `floats`. This is very important for pure encapsulation. With this, you can completely control the behavior of the struct and it's contents using readable functions and not worry about the developer using the code directly mutating the members of your `struct`. Now that you've created pure encapsulation, you are able to feel safe knowing that developers can't new up the struct or abuse it's contents from anywhere other than through the code you've written in your `c` file.
+
+## No encapsulation performance
+One of the flaws with pure encapsulation is that you can see a drop in performance. Having a bunch of functions to get inner members of a structure also blocks the compiler from optimizing it's best. Member hiding is not usually because we don't trust the end developer with the secrets of our structures, but is often so they don't make mistakes by changing things they shouldn't and so that we can easily update our code without changing the interface that developers rely on.
+
+That being said, if we are dealing with performance critical code, or just want extra optimization by our compiler (and/or to write less code); we can expose the members of our structure. However, let's be smart about exposing these members so that developers don't accidentally make mistakes with their new found power.
+
+Enter `const`, our best friend in this scenario. We can not only mark our members as `const` before their type, but also after their type. The general rule of thumb to remember is, if it is a pointer, the `const` goes after the type, otherwise put it before the type. In the simple example below, you can see how pointers have the `const` after, and the rest have `const` before their type declaration.
+
+```c
+struct Employer {
+	char* const name;
+	const int years;
+};
+
+struct Employee {
+	struct Employer* const employer;
+	char* const name;
+	const int age;
+};
+```
+
+In this way we are able to expose the fields of the struct to the rest of the code for compiler optimizations, ease of access, etc; while also being able to prevent developers from directly assigning/changing the values of those fields. The obvious downside to this is that you will need to either create a macro, or manually cast assign the fields to change them in the implementation C file. I would recommend, if you are using C17, to use `_Generic` and macros so you can create a single `#define OVERRIDE(field)` type of macro and have the compiler throw if it finds an un-expected type. Below is an example of how we can tell the compiler we want to explicitly change the value in the implementation c file.
+
+```c
+// employee.c file
+
+void employee_set_age(struct Employee* employee, int newAge) {
+	// Cast to pointer and set it's value, the compiler should optimize this for you
+	*(int*)&employee->age = newAge;
+}
+```
 
 ## Memory ownership
 With perfect encapsulation you are most of the way towards having good memory ownership. If you purely encapsulate your structs the only way for a developer to create a new instance of the struct would be through functions you create yourself. From this point you can create the `new` and `free` functions to manage the memory of your struct. Below is an example building upon the previous code sample.
