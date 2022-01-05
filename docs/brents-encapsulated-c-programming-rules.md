@@ -1,7 +1,7 @@
 ---
 title: Brent's Encapsulated C Programming Rules
-description: A bunch of tips and rules I've created for myself for developing programs in the C programming language 
-tags: c c-programming c-coding c-rules rules programming-rules tips
+description: A bunch of tips and rules I've created for myself for developing encapsulated programs in the C programming language 
+tags: c c-programming c-coding c-rules rules programming-rules tips encapsulation
 ---
 
 Below are some rules that I have developed over a long period of time writing fully encapsulated C programs. C is my favorite language and I love the freedom and exploration it allows me. I also love that it is so close to Assembly and I love writing assembly for much of the same reasons!
