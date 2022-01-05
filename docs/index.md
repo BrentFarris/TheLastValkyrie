@@ -26,7 +26,7 @@ Below is just a collection of thoughts and studies that I've done on my spare ti
 
 04/26/2020: [Basic cross platform ncurses](basic-cross-platform-ncurses.md)
 
-03/26/2020: [Brent's encapsulated C programming rules](brents-encapsulated-c-programming-rules.md)
+03/26/2020: [Brent's C programming rules](brents-c-programming-rules.md)
 
 02/29/2020: [Android NDK, JAR files, JNI, and Visual Studio](visual-studio-android-ndk-jar-files.md)
 
