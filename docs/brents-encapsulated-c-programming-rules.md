@@ -1,5 +1,5 @@
 ---
-title: Brent's C Programming Rules
+title: Brent's Encapsulated C Programming Rules
 description: A bunch of tips and rules I've created for myself for developing programs in the C programming language 
 tags: c c-programming c-coding c-rules rules programming-rules tips
 ---
