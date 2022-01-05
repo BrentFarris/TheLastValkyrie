@@ -74,7 +74,7 @@ struct Employee {
 };
 ```
 
-In this way we are able to expose the fields of the struct to the rest of the code for compiler optimizations, ease of access, etc; while also being able to prevent developers from directly assigning/changing the values of those fields. The obvious downside to this is that you will need to either create a macro, or manually cast assign the fields to change them in the implementation C file. I would recommend, if you are using C17, to use `_Generic` and macros so you can create a single `#define OVERRIDE(field)` type of macro and have the compiler throw if it finds an un-expected type. Below is an example of how we can tell the compiler we want to explicitly change the value in the implementation c file.
+In this way we are able to expose the fields of the struct to the rest of the code for compiler optimizations, ease of access, etc; while also being able to prevent developers from directly assigning/changing the values of those fields. The obvious downside to this is that you will need to either create a macro, or manually cast assign the fields to change them in the implementation C file. I would recommend, if you are using C17, to use `_Generic` and macros so you can create a single `#define OVERRIDE(field)` type of macro and have the compiler throw if it finds an un-expected type. Of course, if you don't want to use a macro, you can also create separate `inline` functions to do the same (just might be harder to manage). Below is an example of how we can tell the compiler we want to explicitly change the value in the implementation c file.
 
 ```c
 // employee.c file
