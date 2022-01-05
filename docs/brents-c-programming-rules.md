@@ -6,6 +6,8 @@ tags: c c-programming c-coding c-rules rules programming-rules tips
 
 Below are some rules that I have developed over a long period of time writing fully encapsulated C programs. C is my favorite language and I love the freedom and exploration it allows me. I also love that it is so close to Assembly and I love writing assembly for much of the same reasons!
 
+*NOTE:  You may see references to 'perfect encapsulation' throughout. I offer both a 'performance' and a 'pure encapsulation' approach to C here (first two headers). So feel free to interpret the rest of the rules based on the approach.*
+
 **JMP**
 - [Pure encapsulation](#pure-encapsulation)
 - [No encapsulation performance](#no-encapsulation-performance)
