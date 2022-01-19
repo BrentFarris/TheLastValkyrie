@@ -78,6 +78,8 @@ A lot of new developers often ask me what books I own. While I don't think a boo
 - The Elements
 - The Magic of Math
 - Trigonometry for Dummies
+- Discrete Mathematics
+- My best Mathematical and Logic Puzzles
 
 ## General Education
 - Business Adventures
