@@ -5,15 +5,15 @@ tags: bios x86 x64 assembly virtualbox memory floppy
 image: https://user-images.githubusercontent.com/1002223/169617662-7debd52f-d8c9-4df3-a84c-e17e380f9e95.png
 ---
 
-So in the [last document about BIOS programming](BIOS-programming-in-virtualbox.md) we looked at how to get setup to writing a boot loader that will run from a floppy drive on VirtualBox using BIOS. In this document we'll take a look at how we can jailbreak out of the boot sector and make it so we are not stuck with 512 bytes memory for our code. The way we'll do this is by loading up some more data from the floppy drive using BIOS interrupts and then jumping off into our newly loaded code. This will give us much more space for our programs.
+So in the [last document about BIOS programming](BIOS-programming-in-virtualbox.md) we looked at how to get setup to writing a boot loader that will run from a floppy drive on VirtualBox using BIOS. In this document we'll take a look at how we can jailbreak out of the boot sector and make it so we are not stuck with 512 bytes memory for our code. The way we'll do this is by loading up some more data from the floppy drive using BIOS interrupts and then jumping off into our newly loaded code. This will give us much more space for our programs. We'll also look at how to use VirtualBox debug tools as they'll really come in handy for debugging and testing.
 
 **JMP**
 - [Prerequisite](#prerequisite)
 - [Loading data into memory](#loading-data-into-memory)
 - [Debugging in VirtualBox](#debugging-in-virtualbox)
-	- Launching debug VirtualBox
-	- Printing out register values
-	- Printing out memory values
+	- [Launching debug VirtualBox](launching-debug-virtualbox)
+	- [Printing out register values](printing-out-register-values)
+	- [Printing out memory values](printing-out-memory-values)
 
 ## Prerequisite
 In order to follow along with this document, you probably will want to check out the [previous document](BIOS-programming-in-virtualbox.md) to get the starter code and your VM setup in VirtualBox.
