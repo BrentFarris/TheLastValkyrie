@@ -2,6 +2,8 @@
 
 Below is just a collection of thoughts and studies that I've done on my spare time. In no way are they suppose to be cohesive posts, most of them are probably just covering a single concept.
 
+05/20/2022 [BIOS Programming in VirtualBox Part 2](BIOS-programming-in-virtualbox-2.md)
+
 11/19/2021 [Hacking Pokemon Red to say Hello - Game Boy](hacking-pokemon-red-to-say-hello.md)
 
 11/06/2021 [I Wrote a Game Boy Assembler and Emulator](gameboy-assembler-and-debugger.md)
