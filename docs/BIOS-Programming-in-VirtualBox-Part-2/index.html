@@ -27,8 +27,7 @@
             </div>
         </header>
         <div class="wrapper">
-            <article class="post">
-                <!--#include file="view.shtml" -->
+            <article id="post" class="post">
                 <!--<iframe id="view" src="view.html"></iframe>-->
             </article>
         </div>
@@ -51,6 +50,17 @@
                 </div>
             </div>
         </footer>
+        <script type="application/javascript">
+            var request = new XMLHttpRequest();
+            request.open('GET', '/view.html', true);
+            request.onload = function() {
+                if (request.status >= 200 && request.status < 400) {
+                    var resp = request.responseText;
+                    document.querySelector('#post').innerHTML = resp;
+                }
+            };
+            request.send();
+        </script>
         <!--<script type="application/javascript">
             window.onload = function() {
                 let f = document.getElementById("view");
