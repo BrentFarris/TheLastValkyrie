@@ -277,7 +277,7 @@ main {
 	display:block;
 }
 
-img {
+img, iframe img {
     width: inherit !important;
     height: inherit !important;
 	max-width:100% !important;
