@@ -60,7 +60,13 @@
                 }
             };
             request.send();*/
-            let reloadOnce = 0;
+            let lastHeight = 0;
+            function resize() {
+                let f = document.getElementById("view");
+                let h = f.contentWindow.document.body.scrollHeight;
+                if (h != f.height)
+                    f.height = h;
+            }
             function iframeLoad() {
                 let f = document.getElementById("view");
                 f.height = f.contentWindow.document.body.scrollHeight;
@@ -72,8 +78,7 @@
                 for (let i = 0; i < anchors.length; ++i)
                     if (anchors[i].href.indexOf("retroscience.net") >= 0 && anchors[i].href.indexOf("#") === -1)
                         anchors[i].target = "_parent";
-                if (reloadOnce++ === 0)
-                    setTimeout(iframeLoad, 1000);
+                setInterval(resize, 1000);
             }
             window.onload = function() {
                 let f = document.getElementById("view");
