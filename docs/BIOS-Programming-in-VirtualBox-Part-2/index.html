@@ -73,7 +73,7 @@
                     if (anchors[i].href.indexOf("retroscience.net") >= 0 && anchors[i].href.indexOf("#") === -1)
                         anchors[i].target = "_parent";
                 if (reloadOnce++ === 0)
-                    setTimeout(iframeLoad, 3000);
+                    setTimeout(iframeLoad, 1000);
             }
             window.onload = function() {
                 let f = document.getElementById("view");
