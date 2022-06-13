@@ -12,8 +12,14 @@ a {
 	text-decoration:none;
 }
 
+a.link {
+	color:#2a7ae2;
+	text-decoration:none;
+}
+
 a:visited {
 	color:#1756a9;
+	text-decoration:none;
 }
 
 a:hover {
