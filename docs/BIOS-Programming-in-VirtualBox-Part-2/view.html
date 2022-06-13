@@ -22,10 +22,10 @@ w\:* {behavior:url(#default#VML);}
  <o:DocumentProperties>
   <o:Author>Brent Farris</o:Author>
   <o:LastAuthor>Brent Farris</o:LastAuthor>
-  <o:Revision>4</o:Revision>
-  <o:TotalTime>73</o:TotalTime>
+  <o:Revision>6</o:Revision>
+  <o:TotalTime>194</o:TotalTime>
   <o:Created>2022-06-12T21:50:00Z</o:Created>
-  <o:LastSaved>2022-06-12T22:31:00Z</o:LastSaved>
+  <o:LastSaved>2022-06-13T00:32:00Z</o:LastSaved>
   <o:Pages>1</o:Pages>
   <o:Words>1377</o:Words>
   <o:Characters>7855</o:Characters>
@@ -2394,9 +2394,9 @@ class=SpellE><span style='font-size:13.5pt;font-family:Consolas;mso-fareast-font
 style='font-size:13.5pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
 mso-bidi-font-family:"Times New Roman";color:#657B83'> </span><span
 style='font-size:13.5pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
-mso-bidi-font-family:"Times New Roman";color:#2AA198'>“Hello, World!”, 0Dh,
-0Ah, “- Brent”</span><span style='font-size:13.5pt;font-family:Consolas;
-mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman";
+mso-bidi-font-family:"Times New Roman";color:#2AA198'>&quot;Hello, World!&quot;,
+0Dh, 0Ah, &quot;- Brent&quot;</span><span style='font-size:13.5pt;font-family:
+Consolas;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman";
 color:#657B83'>, </span><span style='font-size:13.5pt;font-family:Consolas;
 mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman";
 color:#D33682'>0Dh</span><span style='font-size:13.5pt;font-family:Consolas;
@@ -3112,7 +3112,7 @@ class=SpellE><span style='font-size:13.5pt;font-family:Consolas;mso-fareast-font
 style='font-size:13.5pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
 mso-bidi-font-family:"Times New Roman";color:#657B83'> </span><span
 style='font-size:13.5pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
-mso-bidi-font-family:"Times New Roman";color:#2AA198'>“You're free!”</span><span
+mso-bidi-font-family:"Times New Roman";color:#2AA198'>&quot;You're free!&quot;</span><span
 style='font-size:13.5pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
 mso-bidi-font-family:"Times New Roman";color:#657B83'>, </span><span
 style='font-size:13.5pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
@@ -3124,7 +3124,7 @@ mso-bidi-font-family:"Times New Roman";color:#657B83'><o:p></o:p></span></p>
 widow-orphan no-line-numbers;background:#FDFDFD'><span style='font-size:12.0pt;
 font-family:"Segoe UI",sans-serif;mso-fareast-font-family:"Times New Roman";
 color:#111111'><br>
-There are only 3 new sections of code in this from the previous document’s
+There are only 3 new sections of code in this from the previous document's
 examples. The code below&nbsp;</span><span style='font-family:Consolas;
 color:black;mso-color-alt:windowtext;background:#FDF6E3'><a href="#line40"><span
 style='font-size:11.5pt;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:
@@ -3173,14 +3173,14 @@ color:black;mso-color-alt:windowtext;background:#FDF6E3'><a href="#line92new3"><
 style='font-size:11.5pt;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:
 "Segoe UI"'>(New 3)</span></a></span><span style='font-size:12.0pt;font-family:
 "Segoe UI",sans-serif;mso-fareast-font-family:"Times New Roman";color:#111111'>
-which is a simple piece of code that will just print the string “You’re free!”
-to the screen.&nbsp;<b>WARNING!</b>&nbsp;We are using&nbsp;</span><span
+which is a simple piece of code that will just print the string &quot;You're
+free!&quot; to the screen.&nbsp;<b>WARNING!</b>&nbsp;We are using&nbsp;</span><span
 style='font-size:11.5pt;font-family:Consolas;mso-fareast-font-family:"Times New Roman";
 mso-bidi-font-family:"Segoe UI";color:#111111;background:#FDF6E3'>call print</span><span
 style='font-size:12.0pt;font-family:"Segoe UI",sans-serif;mso-fareast-font-family:
 "Times New Roman";color:#111111'>&nbsp;here; the assembler may choose to use
 the relative offset to call the routine. If you are working in another file, or
-even this file in the future, I’d handle that a little differently using the assembler
+even this file in the future, I'd handle that a little differently using the assembler
 tools for addressing. It could be that we load the new sectors from the floppy
 to some memory that is not directly consecutive with the boot code, so then the
 relative address would be incorrect.<o:p></o:p></span></p>
@@ -3252,12 +3252,12 @@ class=SpellE><span style='font-size:11.5pt;font-family:Consolas;mso-fareast-font
 "Times New Roman";mso-bidi-font-family:"Segoe UI";color:#111111;background:
 #FDF6E3'>VirtualBoxVM</span></span><span style='font-size:11.5pt;font-family:
 Consolas;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Segoe UI";
-color:#111111;background:#FDF6E3'> --<span class=SpellE>startvm</span> “Booter”
+color:#111111;background:#FDF6E3'> --<span class=SpellE>startvm</span> &quot;Booter&quot;
 --<span class=SpellE>dbg</span></span><span style='font-size:12.0pt;font-family:
 "Segoe UI",sans-serif;mso-fareast-font-family:"Times New Roman";color:#111111'>.
-You will want to replace “Booter” with whatever your virtual machine name is.
-This will add an extra “Debug” menu option in the menu bar of the running
-instance, and conveniently launch your VM.<o:p></o:p></span></p>
+You will want to replace &quot;Booter&quot; with whatever your virtual machine
+name is. This will add an extra &quot;Debug&quot; menu option in the menu bar
+of the running instance, and conveniently launch your VM.<o:p></o:p></span></p>
 
 <p class=MsoNormal align=center style='margin-bottom:11.25pt;text-align:center;
 line-height:normal;mso-pagination:widow-orphan no-line-numbers;background:#FDFDFD'><span
