@@ -372,8 +372,8 @@ pre>code {
 	max-width:calc(800px - (30px));
 	margin-right:auto;
 	margin-left:auto;
-	/*padding-right:15px;
-	padding-left:15px;*/
+	padding-right:15px;
+	padding-left:15px;
     width: 100%;
 }
 
@@ -381,8 +381,8 @@ pre>code {
 	.wrapper {
         max-width:-webkit-calc(800px - (30px * 2));
         max-width:calc(800px - (30px * 2));
-        /*padding-right:30px;
-        padding-left:30px;*/
+        padding-right:15px;
+        padding-left:15px;
     }
 }
 
