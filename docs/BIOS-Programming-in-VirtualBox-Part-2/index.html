@@ -60,18 +60,27 @@
                 }
             };
             request.send();*/
-            window.onload = function() {
+            function iframeLoad() {
                 let f = document.getElementById("view");
-                if (!f) return;
                 f.height = f.contentWindow.document.body.scrollHeight;
                 let frameHead = f.contentDocument.getElementsByTagName("head")[0];
                 let style = f.contentDocument.createElement("style");
                 style.textContent = "img{width:inherit !important;height:inherit !important;max-width:100% !important;display:block;border:1px solid black;margin:10px 0 10px 0;}";
                 frameHead.appendChild(style);
-                let anchors = f.contentDocument.querySelector('a');
+                let anchors = f.contentDocument.querySelectorAll('a');
                 for (let i = 0; i < anchors.length; ++i)
-                    if (anchors[i].href.indexOf("retroscience.net") >= 0)
+                    if (anchors[i].href.indexOf("retroscience.net") >= 0 && anchors[i].href.indexOf("#") === -1)
                         anchors[i].target = "_parent";
+            }
+            window.onload = function() {
+                let f = document.getElementById("view");
+                if (!f) return;
+                let cw = f.contentWindow;
+                if ((f.src == "about:blank" || (f.src != "about:blank" && cw.location.href != "about:blank"))
+                    && cw.document.readyState == "complete") {
+                    iframeLoad();
+                } else
+                    cw.addEventListener("load", iframeLoad);
             }
         </script>
     </body>
