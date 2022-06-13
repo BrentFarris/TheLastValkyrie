@@ -441,6 +441,7 @@ table td {
 	min-height:55.95px;
 	line-height:54px;
 	position:relative;
+    padding-left:15px;
 }
 
 .site-title {
