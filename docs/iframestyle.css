@@ -8,21 +8,26 @@ img {
 }
 
 a {
-	color:#2a7ae2;
-	text-decoration:none;
+	color:#2a7ae2 !important;
+	text-decoration:none !important;
+}
+
+a:link, span.MsoHyperlink {
+	color:#2a7ae2 !important;
+	text-decoration:none !important;
 }
 
 a.link {
-	color:#2a7ae2;
-	text-decoration:none;
+	color:#2a7ae2 !important;
+	text-decoration:none !important;
 }
 
 a:visited {
-	color:#1756a9;
-	text-decoration:none;
+	color:#1756a9 !important;
+	text-decoration:none !important;
 }
 
 a:hover {
-	color:#111;
-	text-decoration:underline;
+	color:#111 !important;
+	text-decoration:underline !important;
 }
