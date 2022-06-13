@@ -379,13 +379,11 @@ pre>code {
 
 @media screen and (min-width: 800px) {
 	.wrapper {
-	max-width:-webkit-calc(800px - (30px * 2));
-	max-width:calc(800px - (30px * 2));
-	padding-right:30px;
-	padding-left:30px;
-}
-
-;
+        max-width:-webkit-calc(800px - (30px * 2));
+        max-width:calc(800px - (30px * 2));
+        /*padding-right:30px;
+        padding-left:30px;*/
+    }
 }
 
 .wrapper:after,.footer-col-wrapper:after {
