@@ -1,0 +1,22 @@
+img {
+	width:inherit !important;
+	height:inherit !important;
+	max-width:100% !important;
+	display:block;
+	border:1px solid black;
+	margin:10px 0 10px 0;
+}
+
+a {
+	color:#2a7ae2;
+	text-decoration:none;
+}
+
+a:visited {
+	color:#1756a9;
+}
+
+a:hover {
+	color:#111;
+	text-decoration:underline;
+}
