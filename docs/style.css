@@ -278,12 +278,12 @@ main {
 }
 
 img {
-	max-width:100%;
-	vertical-align:middle;
-}
-
-figure>img {
+    width: inherit !important;
+    height: inherit !important;
+	max-width:100% !important;
 	display:block;
+	border:1px solid black;
+	margin:10px 0 10px 0;
 }
 
 figcaption {
@@ -759,13 +759,6 @@ iframe {
 
 video {
 	max-width:100%;
-}
-
-img {
-	display:block;
-	border:1px solid black;
-	margin:10px 0 10px 0;
-    max-width: 100%;
 }
 
 article {
