@@ -39,12 +39,6 @@ if (navigator.userAgent.includes('Firefox')) {
             else if (anchors[i].href.indexOf("youtube.com/embed/") > 0)
                 anchors[i].innerHTML = '<iframe width="560" height="315" src="' + anchors[i].href + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
         }
-        // TODO:  Do this on Firefox
-        //v:shapes="Video_
-        let imgs = f.contentDocument.querySelectorAll("img");
-        for (let i = 0; i < imgs.length; ++i)
-            if (imgs[i].outerHTML.indexOf("v:shapes") > 0)
-                replaceYouTube(imgs[i]);
         setInterval(resize, 1000);
     }
     window.onload = function() {
