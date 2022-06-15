@@ -1,3 +1,6 @@
+local path = arg[1]
+assert(#path > 0, "File was expected to be supplied")
+
 ---trim
 ---@param str string
 ---@return string
@@ -15,7 +18,20 @@ function extract(html, tag)
 	return trim(html:sub(r0+1, l1-1))
 end
 
-local htmlIn = assert(io.open(arg[1], "r"))
+function embed_youtube(html)
+	local src = html
+	local l, r = src:find("<a%shref=\"https://www.youtube.com/embed/.-</a>")
+	while l and r do
+		local el, er = src:find("https://www.youtube.com/embed/%g+?", l)
+		local href = src:sub(el, er-1)
+		local yt = '<iframe width="560" height="315" src="'..href..'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+		src = src:sub(0, l-1)..yt..src:sub(r+1)
+		l, r = src:find("<a%shref=\"https://www.youtube.com/embed/.-</a>")
+	end
+	return src
+end
+
+local htmlIn = assert(io.open(path, "r"))
 local html = htmlIn:read("*all")
 assert(htmlIn:close())
 
@@ -32,10 +48,10 @@ local foot = footIn:read("*all")
 assert(footIn:close())
 
 local addHead = extract(html, "head")
-local addBody = extract(html, "body")
+local addBody = embed_youtube(extract(html, "body"))
 
-local slash = arg[1]:find("/[^/]*$")
-local to = arg[1]:sub(1,slash).."index.html"
+local slash = path:find("/[^/]*$")
+local to = path:sub(1, slash).."index.html"
 
 local fout = assert(io.open(to, "w"))
 --local fout = assert(io.open("test.html", "w"))
