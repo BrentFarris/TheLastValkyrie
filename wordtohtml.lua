@@ -20,13 +20,13 @@ end
 
 function embed_youtube(html)
 	local src = html
-	local l, r = src:find("<a%shref=\"https://www.youtube.com/embed/.-</a>")
+	local l, r = src:find("<a%s?%s?href=\"https://www.youtube.com/embed/.-</a>")
 	while l and r do
 		local el, er = src:find("https://www.youtube.com/embed/%g+?", l)
 		local href = src:sub(el, er-1)
-		local yt = '<iframe width="560" height="315" src="'..href..'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+		local yt = '<iframe width="560" height="315" src="'..href..'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
 		src = src:sub(0, l-1)..yt..src:sub(r+1)
-		l, r = src:find("<a%shref=\"https://www.youtube.com/embed/.-</a>")
+		l, r = src:find("<a%s?%s?href=\"https://www.youtube.com/embed/.-</a>")
 	end
 	return src
 end
