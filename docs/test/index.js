@@ -6,11 +6,12 @@
 
 	function get_json() {
 		var req = new XMLHttpRequest();
-		req.open("GET", "search.json", true);
+		req.open("GET", "../search.json", true);
 		req.onload = function() {
-			if (request.status >= 200 && request.status < 400)
+			if (req.status >= 200 && req.status < 400)
 				read(JSON.parse(req.responseText));
 		}
+		req.send();
 	}
 
 	get_json();
