@@ -60,7 +60,13 @@ if infoFile then
 	end
 end
 
-local head = [[
+local htmlIn = assert(io.open(path, "r"))
+local html = htmlIn:read("*all")
+assert(htmlIn:close())
+local addHead = extract(remove_if_comments(html), "head")
+local addBody = embed_youtube(extract(remove_comments(html), "body"))
+
+local doc = [[
 <!DOCTYPE html>
 <html lang="en">
  <head>
@@ -83,23 +89,44 @@ local head = [[
   <meta property="twitter:title" content="]]..info.title..[[">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"]]..info.author..[["},"description":"]]..info.description..[[","headline":"]]..info.title..[[","image":"]]..info.image..[[","url":"]]..info.url..[["}</script>
   <link rel="stylesheet" href="../style.css">
+  ]]..addHead..[[
+ </head>
+ <body>
+  <header class="site-header">
+   <div class="wrapper">
+    <div style="display:table-row-group;">
+     <a class="site-title" rel="author" href="/">Brent's Website</a>
+    </div>
+    <div class="site-tagline">Some Assembly required</div>
+   </div>
+  </header>
+  <div class="wrapper">
+   <article id="post" class="post">
+    ]]..addBody..[[
+   </article>
+  </div>
+  <br />
+  <footer class="site-footer h-card">
+   <data class="u-url" href="/"></data>
+   <div class="wrapper">
+    <div class="footer-col-wrapper">
+     <div class="footer-col one-half">
+      <h2 class="footer-heading">Brent's Website</h2>
+      <ul class="contact-list">
+      <li class="p-name">Brent Farris</li><li><a class="u-email" href="mailto:RetroScience@aquamail.net">RetroScience@aquamail.net</a></li></ul>
+     </div>
+     <div class="footer-col one-half">
+      <p>A personal log about things I like in computer programming, art, electronics, and other hobbies.</p>
+      <p style="text-align:left;color:#AAA"><em>Only poor craftsmen blame their tools</em></p>
+     </div>
+     <div class="social-links"><ul class="social-media-list"></ul></div>
+    </div>
+   </div>
+  </footer>
+ </body>
+</html>
 ]]
 
-local chinIn = assert(io.open("chin.html", "r"))
-local chin = remove_comments(chinIn:read("*all"))
-assert(chinIn:close())
-
-local htmlIn = assert(io.open(path, "r"))
-local html = htmlIn:read("*all")
-assert(htmlIn:close())
-
-local footIn = assert(io.open("foot.html", "r"))
-local foot = remove_comments(footIn:read("*all"))
-assert(footIn:close())
-
-local addHead = extract(remove_if_comments(html), "head")
-local addBody = embed_youtube(extract(remove_comments(html), "body"))
-
 local fout = assert(io.open(folder.."/index.html", "w"))
-fout:write(head..addHead..chin..addBody..foot)
+fout:write(doc)
 assert(fout:close())

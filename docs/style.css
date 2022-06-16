@@ -763,3 +763,8 @@ video {
 article {
     display: flex;
 }
+
+span:only-child {
+  display: table;
+  margin: 0 auto;
+}
