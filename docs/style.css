@@ -764,7 +764,7 @@ article {
     display: flex;
 }
 
-[align=center] span:only-child {
+p[align=center] span:only-child {
   display: table;
   margin: 0 auto;
 }
