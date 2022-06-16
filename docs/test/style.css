@@ -278,8 +278,8 @@ main {
 }
 
 img {
-    width: inherit !important;
-    height: inherit !important;
+	width: inherit !important;
+	/* height: inherit !important; */
 	max-width:100% !important;
 	display:block;
 	border:1px solid black;
