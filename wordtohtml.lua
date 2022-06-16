@@ -48,6 +48,7 @@ local info = {
 	author = "Brent Farris",
 	title = "Some Assembly required",
 	description = "A personal log about things I like in computer programming, art, electronics, and other hobbies.",
+	keywords = "Programming, Blog, Art, Tutorials, Electronics",
 	image = "https://retroscience.net/Changing-the-Buttons-on-a-Game-Boy-Advance/view_files/image011.jpg",
 	url = "https://retroscience.net"
 }
@@ -78,6 +79,7 @@ local doc = [[
   <meta name="author" content="]]..info.author..[[">
   <meta property="og:locale" content="en_US">
   <meta name="description" content="]]..info.description..[[">
+  <meta name="keywords" content="]]..info.keywords..[[">
   <meta property="og:description" content="]]..info.description..[[">
   <link rel="canonical" href="]]..info.url..[[">
   <meta property="og:url" content="]]..info.url..[[">
