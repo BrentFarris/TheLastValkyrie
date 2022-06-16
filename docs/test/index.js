@@ -14,9 +14,9 @@
 	function read(json) {
 		let arr = [];
 		for (let i = 0; i < json.length; ++i)
-			if (json[i].stat)
+			if (json[i].date != "0000-00-00")
 				arr.push(json[i]);
-		arr.sort(function(a, b) { new Date(a.date) - new Date(b.date); });
+		arr.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
 		for (let i = 0; i < arr.length; ++i)
 			create_article(arr[i]);
 	}
