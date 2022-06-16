@@ -768,7 +768,3 @@ p[align=center] span:only-child {
   display: table;
   margin: 0 auto;
 }
-
-span img {
-	text-align: revert-layer;
-}
