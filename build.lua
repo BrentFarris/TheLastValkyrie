@@ -1,11 +1,30 @@
-local path = arg[1]
-assert(#path > 0, "File was expected to be supplied")
-local folder = path
-if path:find(".html") == (#path - 4) then
-	local slash = path:find("/[^/]*$")
-	folder = path:sub(1, slash-1)
+local json = require("json")
+local root = "docs"
+
+package.path = "./"..root.."/?.lua;"..package.path
+
+function file_exists(file)
+	local f = io.open(file, "r")
+	if f then
+		assert(f:close())
+		return true
+	else
+		return false
+	end    
 end
-package.path = "./"..folder.."/?.lua;"..package.path
+
+function dirs(path)
+	local i, t, popen = 0, {}, io.popen
+	local pfile = popen("find "..path.." -maxdepth 1 -type d")
+	for filename in pfile:lines() do
+		if file_exists(filename.."/view.html") then
+			i = i + 1
+			t[i] = filename
+		end
+	end
+	pfile:close()
+	return t
+end
 
 ---trim
 ---@param str string
@@ -43,7 +62,7 @@ function remove_if_comments(html)
 	return html:gsub("<!%-%-%[if.-%-%->", "")
 end
 
-local info = {
+local defaultInfo = {
 	site = "Brent's Website",
 	author = "Brent Farris",
 	title = "Some Assembly required",
@@ -52,22 +71,55 @@ local info = {
 	image = "https://retroscience.net/Changing-the-Buttons-on-a-Game-Boy-Advance/view_files/image011.jpg",
 	url = "https://retroscience.net"
 }
-local infoFile = io.open(folder.."/info.lua", "r")
-if infoFile then
-	assert(infoFile:close())
-	local mergeInfo = require(folder.."/info")
-	for k,v in pairs(mergeInfo) do
+
+function create_info(path, file)
+	local info = {}
+	for k, v in pairs(defaultInfo) do
 		info[k] = v
 	end
+	info.path = path:sub(#(root.."/")+1)
+	local pfile
+	if file then
+		pfile = io.popen("stat "..file.." | grep 'Birth:'")
+	else
+		pfile = io.popen("stat "..path.."/index.html | grep 'Birth:'")
+	end
+	local stat = pfile:lines()()
+	pfile:close()
+	local sl, sr = stat:find("%d")
+	info.stat = stat:sub(sl)
+	if file_exists(path.."/info.lua") then
+		local mergeInfo = require(path.."/info")
+		for k,v in pairs(mergeInfo) do
+			info[k] = v
+		end
+	end
+	return info
 end
 
-local htmlIn = assert(io.open(path, "r"))
-local html = htmlIn:read("*all")
-assert(htmlIn:close())
-local addHead = extract(remove_if_comments(html), "head")
-local addBody = embed_youtube(extract(remove_comments(html), "body"))
+function create_search(all)
+	local search = {}
+	for i=1, #all do
+		search[#search+1] = create_info(all[i])
+	end
+	local fout = assert(io.open(root.."/search.json", "w"))
+	fout:write(json.encode(search))
+	assert(fout:close())
+end
 
-local doc = [[
+function write_index(path)
+	local folder = path
+	if path:find(".html") == (#path - 4) then
+		local slash = path:find("/[^/]*$")
+		folder = path:sub(1, slash-1)
+	end
+	local info = create_info(folder, path)
+	local htmlIn = assert(io.open(path, "r"))
+	local html = htmlIn:read("*all")
+	assert(htmlIn:close())
+	local addHead = extract(remove_if_comments(html), "head")
+	local addBody = embed_youtube(extract(remove_comments(html), "body"))
+	local doc = [[
 <!DOCTYPE html>
 <html lang="en">
  <head>
@@ -128,7 +180,14 @@ local doc = [[
  </body>
 </html>
 ]]
+	local fout = assert(io.open(folder.."/index.html", "w"))
+	fout:write(doc)
+	assert(fout:close())
+end
 
-local fout = assert(io.open(folder.."/index.html", "w"))
-fout:write(doc)
-assert(fout:close())
+local all = dirs(root.."/")
+for i=1, #all do
+    print(all[i])
+	write_index(all[i].."/view.html")
+end
+create_search(all)
