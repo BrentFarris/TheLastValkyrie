@@ -4,7 +4,10 @@
 
 /* Image container */
 .article div {
-	
+	height: 253px;
+	justify-content: center;
+	display: flex;
+	align-items: center;
 }
 
 .article div img {
@@ -12,8 +15,9 @@
 }
 
 /* Title */
-.article span {
-	
+.article h2 {
+	font-size: 20px;
+	margin-bottom: 5px;
 }
 
 /* Description */
@@ -25,4 +29,5 @@
 	display: grid;
 	column-gap: 50px;
 	row-gap: 50px;
+	grid-template-columns: repeat(2, 50%);
 }
