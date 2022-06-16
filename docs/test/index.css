@@ -1,3 +1,7 @@
+article {
+	display: block !important;
+}
+
 /* Image container */
 .article div {
 	justify-content: center;

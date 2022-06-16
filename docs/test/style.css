@@ -277,6 +277,10 @@ main {
 	display:block;
 }
 
+.post {
+	padding: 10px;
+}
+
 img {
 	width: inherit !important;
 	max-width:100% !important;
@@ -573,7 +577,7 @@ thead {
 
 .site-footer {
 	border-top:1px solid #e8e8e8;
-	padding:30px 0;
+	padding:30px 10px;
 }
 
 .footer-heading {
@@ -701,9 +705,6 @@ thead {
 	}
 	.post-content h4 {
 		font-size:20px;
-	}
-	.post {
-		padding: 10px;
 	}
 }
 
