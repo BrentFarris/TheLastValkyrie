@@ -9,7 +9,7 @@
 		req.open("GET", "search.json", true);
 		req.onload = function() {
 			if (request.status >= 200 && request.status < 400)
-				read(JSON.parse(req.responseText);
+				read(JSON.parse(req.responseText));
 		}
 	}
 
