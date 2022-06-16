@@ -1,34 +1,36 @@
 .article {
-	
+	border: 1px solid black;
+	border-radius: 5px;
+	overflow: hidden;
 }
 
 /* Image container */
 .article div {
-	height: 253px;
 	justify-content: center;
 	display: flex;
 	align-items: center;
 }
 
 .article div img {
-	
+	border: none !important;
+	margin: 0 0 10px 0 !important;
 }
 
 /* Title */
 .article h2 {
 	font-size: 20px;
 	margin-bottom: 5px;
-	height: 3em;
+	border: 0 5px 0 5px
 }
 
 /* Description */
 .article p {
-	
+	border: 0 5px 0 5px
 }
 
 #content {
 	display: grid;
-	column-gap: 50px;
-	row-gap: 50px;
+	column-gap: 10px;
+	row-gap: 10px;
 	grid-template-columns: repeat(2, 50%);
 }
