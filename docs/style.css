@@ -277,6 +277,10 @@ main {
 	display:block;
 }
 
+.post {
+	padding: 10px;
+}
+
 img {
 	width: inherit !important;
 	max-width:100% !important;
@@ -701,9 +705,6 @@ thead {
 	}
 	.post-content h4 {
 		font-size:20px;
-	}
-	.post {
-		padding: 10px;
 	}
 }
 
