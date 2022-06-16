@@ -82,6 +82,7 @@ local head = [[
   <meta property="twitter:image" content="]]..info.image..[[">
   <meta property="twitter:title" content="]]..info.title..[[">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"]]..info.author..[["},"description":"]]..info.description..[[","headline":"]]..info.title..[[","image":"]]..info.image..[[","url":"]]..info.url..[["}</script>
+  <link rel="stylesheet" href="../style.css">
 ]]
 
 local chinIn = assert(io.open("chin.html", "r"))
