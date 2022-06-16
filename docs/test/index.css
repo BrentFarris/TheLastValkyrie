@@ -26,11 +26,11 @@
 	.article h2 {
 		font-size: 20px;
 		margin-bottom: 5px;
-		border: 0 5px 0 5px
+		padding: 0 5px 0 5px
 	}
 	/* Description */
 	.article p {
-		border: 0 5px 0 5px
+		padding: 0 5px 0 5px
 	}
 	#content {
 		display: grid;
