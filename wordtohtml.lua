@@ -1,5 +1,11 @@
 local path = arg[1]
 assert(#path > 0, "File was expected to be supplied")
+local folder = path
+if path:find(".html") == (#path - 4) then
+	local slash = path:find("/[^/]*$")
+	folder = path:sub(1, slash-1)
+end
+package.path = "./"..folder.."/?.lua;"..package.path
 
 ---trim
 ---@param str string
@@ -35,9 +41,46 @@ local htmlIn = assert(io.open(path, "r"))
 local html = htmlIn:read("*all")
 assert(htmlIn:close())
 
-local headIn = assert(io.open("head.html", "r"))
-local head = headIn:read("*all")
-assert(headIn:close())
+local info = {
+	site = "Brent's Website",
+	author = "Brent Farris",
+	title = "Some Assembly required",
+	description = "A personal log about things I like in computer programming, art, electronics, and other hobbies.",
+	image = "https://retroscience.net/Changing-the-Buttons-on-a-Game-Boy-Advance/view_files/image011.jpg",
+	url = "https://retroscience.net"
+}
+local infoFile = io.open(folder.."/info.lua", "r")
+if infoFile then
+	assert(infoFile:close())
+	local mergeInfo = require(folder.."/info")
+	for k,v in pairs(mergeInfo) do
+		info[k] = v
+	end
+end
+
+local head = [[
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>]]..info.title..[[ | ]]..info.site..[[</title>
+  <meta property="og:title" content="]]..info.title..[[">
+  <meta name="author" content="]]..info.author..[[">
+  <meta property="og:locale" content="en_US">
+  <meta name="description" content="]]..info.description..[[">
+  <meta property="og:description" content="]]..info.description..[[">
+  <link rel="canonical" href="]]..info.url..[[">
+  <meta property="og:url" content="]]..info.url..[[">
+  <meta property="og:site_name" content="]]..info.site..[[">
+  <meta property="og:image" content="]]..info.image..[[">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:image" content="]]..info.image..[[">
+  <meta property="twitter:title" content="]]..info.title..[[">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"]]..info.author..[["},"description":"]]..info.description..[[","headline":"]]..info.title..[[","image":"]]..info.image..[[","url":"]]..info.url..[["}</script>
+]]
 
 local chinIn = assert(io.open("chin.html", "r"))
 local chin = chinIn:read("*all")
@@ -50,10 +93,6 @@ assert(footIn:close())
 local addHead = extract(html, "head")
 local addBody = embed_youtube(extract(html, "body"))
 
-local slash = path:find("/[^/]*$")
-local to = path:sub(1, slash).."index.html"
-
-local fout = assert(io.open(to, "w"))
---local fout = assert(io.open("test.html", "w"))
+local fout = assert(io.open(folder.."/index.html", "w"))
 fout:write(head..addHead..chin..addBody..foot)
 assert(fout:close())
