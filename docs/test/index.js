@@ -12,8 +12,13 @@
 	}
 
 	function read(json) {
+		let arr = [];
 		for (let i = 0; i < json.length; ++i)
-			create_article(json[i]);
+			if (json[i].stat)
+				arr.push(json[i]);
+		arr.sort(function(a, b) { new Date(a.date) - new Date(b.date); });
+		for (let i = 0; i < arr.length; ++i)
+			create_article(arr[i]);
 	}
 
 	function get_json() {

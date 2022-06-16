@@ -69,7 +69,8 @@ local defaultInfo = {
 	description = "A personal log about things I like in computer programming, art, electronics, and other hobbies.",
 	keywords = "Programming, Blog, Art, Tutorials, Electronics",
 	image = "https://retroscience.net/Changing-the-Buttons-on-a-Game-Boy-Advance/view_files/image011.jpg",
-	url = "https://retroscience.net"
+	url = "https://retroscience.net",
+	date = "0000-00-00"
 }
 
 function create_info(path, file)
@@ -78,7 +79,8 @@ function create_info(path, file)
 		info[k] = v
 	end
 	info.path = path:sub(#(root.."/")+1)
-	local pfile
+--[[
+    local pfile
 	if file then
 		pfile = io.popen("stat "..file.." | grep 'Birth:'")
 	else
@@ -88,6 +90,7 @@ function create_info(path, file)
 	pfile:close()
 	local sl, sr = stat:find("%d")
 	info.stat = stat:sub(sl)
+]]
 	if file_exists(path.."/info.lua") then
 		local mergeInfo = require(path.."/info")
 		for k,v in pairs(mergeInfo) do
