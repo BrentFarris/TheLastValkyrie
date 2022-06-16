@@ -37,6 +37,11 @@ for i=1, #all do
                 info[k] = v
         end
 	info.path = all[i]:sub(#(root.."/")+1)
+	local pfile = io.popen("stat "..all[i].."/index.html | grep 'Birth:'")
+	local stat = pfile:lines()()
+	pfile:close()
+	local sl, sr = stat:find("%d")
+	info.stat = stat:sub(sl)
 	local infoFile = io.open(all[i].."/info.lua", "r")
 	if infoFile then
 	        assert(infoFile:close())
