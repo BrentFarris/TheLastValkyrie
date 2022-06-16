@@ -1,7 +1,8 @@
 (function() {
 	let body = document.getElementById("content");
 	function create_article(info) {
-		let article = document.createElement("article");
+		let article = document.createElement("div");
+		article.className = "article";
 		article.innerHTML = `<div></div><span>${info.title}</span><p>${info.description}</p>`;
 		if (info.image) {
 			let div = article.firstChild;
