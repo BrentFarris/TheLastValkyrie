@@ -11,9 +11,7 @@ package.path = "./"..folder.."/?.lua;"..package.path
 ---@param str string
 ---@return string
 function trim(str)
-	local _
-	local res, _ = str:gsub("^%s*(.-)%s*$", "%1")
-	return res
+	return str:gsub("^%s*(.-)%s*$", "%1")
 end
 
 function extract(html, tag)
@@ -37,9 +35,13 @@ function embed_youtube(html)
 	return src
 end
 
-local htmlIn = assert(io.open(path, "r"))
-local html = htmlIn:read("*all")
-assert(htmlIn:close())
+function remove_comments(html)
+	return html:gsub("<!%-%-.-%-%->", "")
+end
+
+function remove_if_comments(html)
+	return html:gsub("<!%-%-%[if.-%-%->", "")
+end
 
 local info = {
 	site = "Brent's Website",
@@ -83,15 +85,19 @@ local head = [[
 ]]
 
 local chinIn = assert(io.open("chin.html", "r"))
-local chin = chinIn:read("*all")
+local chin = remove_comments(chinIn:read("*all"))
 assert(chinIn:close())
 
+local htmlIn = assert(io.open(path, "r"))
+local html = htmlIn:read("*all")
+assert(htmlIn:close())
+
 local footIn = assert(io.open("foot.html", "r"))
-local foot = footIn:read("*all")
+local foot = remove_comments(footIn:read("*all"))
 assert(footIn:close())
 
-local addHead = extract(html, "head")
-local addBody = embed_youtube(extract(html, "body"))
+local addHead = extract(remove_if_comments(html), "head")
+local addBody = embed_youtube(extract(remove_comments(html), "body"))
 
 local fout = assert(io.open(folder.."/index.html", "w"))
 fout:write(head..addHead..chin..addBody..foot)
