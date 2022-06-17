@@ -49,3 +49,7 @@ Below is just a collection of thoughts and studies that I've done on my spare ti
 ---
 
 *Only poor craftsmen blame their tools*
+
+---
+
+[test new index](/test/index.html)
