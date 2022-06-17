@@ -60,6 +60,18 @@ function embed_youtube(html)
 	return src
 end
 
+function embed_iframe(html)
+	local src = html
+	local l, r = src:find("%[iframe%s.-/%]")
+	while l and r do
+		local s = src:sub(l, r)
+		s = s:gsub("&quot;", '"'):gsub("%[", "<"):gsub("%]", ">")
+		src = src:sub(0, l-1)..s..src:sub(r+1)
+		l, r = src:find("%[iframe%s.-/%]")
+	end
+	return src
+end
+
 function remove_comments(html)
 	return html:gsub("<!%-%-.-%-%->", "")
 end
@@ -127,7 +139,7 @@ function write_index(path)
 	local html = htmlIn:read("*all")
 	assert(htmlIn:close())
 	local addHead = extract(remove_if_comments(html), "head")
-	local addBody = embed_youtube(extract(remove_comments(html), "body"))
+	local addBody = embed_youtube(embed_iframe(extract(remove_comments(html), "body")))
 	local doc = [[
 <!DOCTYPE html>
 <html lang="en">
