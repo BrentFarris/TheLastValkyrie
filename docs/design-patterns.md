@@ -3,7 +3,7 @@ title: Design Patterns
 description: Just a list of object oriented design patterns for programming / computer science
 tagline: Just a list of object oriented design patterns for programming / computer science
 tags: programming, computer science, design patterns, object oriented design patterns, oop design patterns
-date: 11/25/2019
+date: November 25, 2019
 ---
 
 **JMP**

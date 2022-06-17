@@ -3,7 +3,7 @@ title: Hacking Pokemon Red to say Hello! - Game Boy
 description: I decided, for fun, to hack Pokemon Red Version for the Game Boy and change it's code to say hello. I'll go through what I did, how I did it, and even the mistakes I made.
 tags: game boy, gameboy, hacking, reverse engineering, pokemon, pokemon red
 image: https://spee.ch/1/d645e087ad106b01.png
-date: 11/19/2021
+date: November 19, 2021
 ---
 
 I created a video showing how to do a little bit of hacking/reverse programming on the Game Boy game Pokemon Red Version. This is a simple hack where we replace some text in the ROM. This video is not intended to be a tutorial, it is really just me setting down and recording myself going through the process of doing this hack. I've never done this particular kind of thing before on a Game Boy ROM so in a way we are learning it together.

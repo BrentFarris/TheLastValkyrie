@@ -2,7 +2,7 @@
 title: My Book Collection (Mostly Programming)
 description: A list of my book collection, mostly programming books really
 tags: books, book collection, programming books
-date: 04/09/2021
+date: April 9, 2021
 ---
 
 A lot of new developers often ask me what books I own. While I don't think a book is worth much in respect to actaully learning a field; it is a fantastic tool to give some direction and learn cool tricks you may not otherwise think of on your own.

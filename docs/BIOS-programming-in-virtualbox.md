@@ -3,7 +3,7 @@ title: BIOS Programming in VirtualBox
 description: A quick getting started tutorial on how to write a minimal text/graphics program in VirtualBox without an operating system
 tags: bios, x86, x64, assembly, virtualbox, graphics
 image: https://i.imgur.com/XtdQjQh.png
-date: 07/24/2020
+date: July 24, 2020
 ---
 
 There are three things I want to explain how to do here, **(1)** basic BIOS interrupts, **(2)** reading keyboard input, and **(3)** setting the color of pixels plotted onto the screen. This is by no means suppose to be the most performant best way to do things, but I'm running this on a 4GHz processor (probably like anyone else who will be trying this); so I would consider it a great first step.

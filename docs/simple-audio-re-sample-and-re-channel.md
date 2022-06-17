@@ -2,7 +2,7 @@
 title: Simple audio re-channel and re-sample
 description: A quick example of how to re-sample and re-channel audio in C
 tags: audio, sample, sample rate, re-sample, re-channel, c
-date: 06/25/2020
+date: June 25, 2020
 ---
 
 ### Re-Sample

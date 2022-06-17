@@ -3,7 +3,7 @@ title: Game Boy breakpoints and debug messages in NO$GMB
 description: Quick tip on how to do debug messages and breakpoints in NO$GMB Game Boy emulator and debugger using RGBDS
 tags: gameboy, game boy, no$gmb, debug messages, breakpoints
 image: https://i.imgur.com/0NiEvZu.png
-date: 02/22/2021
+date: February 22, 2021
 ---
 
 <div style="width:100%;padding-top:56.25%;position:relative;">
