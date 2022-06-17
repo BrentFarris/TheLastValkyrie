@@ -65,7 +65,7 @@ function embed_iframe(html)
 	local l, r = src:find("%[iframe%s.-/%]")
 	while l and r do
 		local s = src:sub(l, r)
-		s = s:gsub("&quot;", '"'):gsub("%[", "<"):gsub("%]", ">")
+		s = s:gsub("&quot;", '"'):gsub("%[", "<"):gsub("/%]", "></iframe>")
 		src = src:sub(0, l-1)..s..src:sub(r+1)
 		l, r = src:find("%[iframe%s.-/%]")
 	end
