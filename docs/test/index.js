@@ -3,7 +3,7 @@
 	function create_article(info) {
 		let article = document.createElement("div");
 		article.className = "article";
-		article.innerHTML = `<div></div><a href="/${info.path}"><h2>${info.title}</h2></a><p>${info.description}</p>`;
+		article.innerHTML = `<div></div><a href="${info.path}"><h2>${info.title}</h2></a><p>${info.description}</p>`;
 		if (info.image) {
 			let div = article.firstChild;
 			div.innerHTML = `<a href="/${info.path}"><img src="${info.image}" /></a>`;
