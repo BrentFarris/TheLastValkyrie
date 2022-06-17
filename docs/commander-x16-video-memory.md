@@ -1,8 +1,9 @@
 ---
 title: Commander X16 Video Memory (6502 Assembly)
 description: How to write some stuff to video memory to display in the Commander X16
-tags: 6502 assembly acme commander-x16 8-bit-guy video-memory
+tags: 6502, assembly, acme, commander x16, 8 bit guy, video memory
 image: https://i.imgur.com/VqNrLYh.png
+date: 12/03/2019
 ---
 
 First of all, if you don't know how to make a 6502 Assembled project from scratch and run it on the Commander X16, check out the [Commander X16 hello world 6502 Assembly](commander-x16-hello-world-6502-assembly.md) page I made on how to do that.

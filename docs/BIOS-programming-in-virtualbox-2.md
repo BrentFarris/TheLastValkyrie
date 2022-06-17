@@ -1,8 +1,9 @@
 ---
 title: BIOS Programming in VirtualBox Part 2
 description: Part 2 to my previous BIOS programming tutorial, we'll be looking at getting out of the boot sector
-tags: bios x86 x64 assembly virtualbox memory floppy
+tags: bios, x86, x64, assembly, virtualbox, memory, floppy
 image: https://user-images.githubusercontent.com/1002223/169617662-7debd52f-d8c9-4df3-a84c-e17e380f9e95.png
+date: 05/20/2022
 ---
 
 So in the [last document about BIOS programming](BIOS-programming-in-virtualbox.md) we looked at how to get setup to writing a boot loader that will run from a floppy drive on VirtualBox using BIOS. In this document we'll take a look at how we can jailbreak out of the boot sector and make it so we are not stuck with 512 bytes memory for our code. The way we'll do this is by loading up some more data from the floppy drive using BIOS interrupts and then jumping off into our newly loaded code. This will give us much more space for our programs. We'll also look at how to use VirtualBox debug tools as they'll really come in handy for debugging and testing.

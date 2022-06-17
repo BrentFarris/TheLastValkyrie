@@ -1,7 +1,8 @@
 ---
 title: C++ Detect If A Class Has A Function Using Templates
 description: Some C++ template magic to detect if a class actually has a function that matches a given signature without the need of putting it in the base class
-tags: c++ c++-programming detect-function class templates
+tags: c++, c++ programming, detect function, class, templates
+date: 07/03/2021
 ---
 
 So something I wanted to test out recently is to see if I could detect if a function in a derived class existed, if it did, the function would be mapped to a function pointer, if it didn't a proxy function would be supplied. This is kind-of silly because you could have the base class have a blank base method, but I was more interested in testing out my C++ template-foo.

@@ -32,9 +32,6 @@ function dirs(path)
 	return t
 end
 
----trim
----@param str string
----@return string
 function trim(str)
 	return str:gsub("^%s*(.-)%s*$", "%1")
 end

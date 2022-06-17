@@ -1,8 +1,9 @@
 ---
 title: Game Boy Assembly Programming on Winows/Linux
 description: In this video we will learn how to make our own Game Boy game using the RGBDS assembler and the NO$GMB debugger. This tutorial will be for both Windows and Linux
-tags: programming assembly gameboy game-boy nintendo tutorial
+tags: programming, assembly, gameboy, game boy, nintendo, tutorial
 image: https://i.imgur.com/ZOKNL0G.png
+date: 12/27/2020
 ---
 
 ## Video Tutorial

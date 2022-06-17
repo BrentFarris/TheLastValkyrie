@@ -23,7 +23,7 @@
 
 	function get_json() {
 		var req = new XMLHttpRequest();
-		req.open("GET", "../search.json", true);
+		req.open("GET", "../md.json", true);
 		req.onload = function() {
 			if (req.status >= 200 && req.status < 400)
 				read(JSON.parse(req.responseText));

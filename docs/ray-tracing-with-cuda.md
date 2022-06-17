@@ -1,8 +1,9 @@
 ---
 title: Writing A Ray Tracer using CUDA
 description: How I wrote a ray tracer that took over 30 seconds on CPU and remade it in CUDA to render in ~20 milliseconds
-tags: ray-tracer ray-tracing cuda nvidia gpu-programming gpgpu
+tags: ray tracer, ray tracing, cuda, nvidia, gpu programming, gpgpu
 image: https://i.imgur.com/GXtGeT3.png
+date: 05/15/2020
 ---
 
 ***What took the CPU (1 thread) over 30 seconds to render, I was able to get CUDA to render in ~20 milliseconds.***

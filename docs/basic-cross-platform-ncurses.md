@@ -1,7 +1,8 @@
 ---
 title: Basic Cross Platform ncurses
 description: I'm currently trying to write a terminal/console application in C that works on both Windows and Linux but my problem is ncurses is not on windows
-tags: c c-programming cross-platform ncurses windows command-prompt cmd
+tags: c, c programming, cross platform, ncurses, windows, command prompt, cmd
+date: 04/26/2020
 ---
 
 I'm currently in the process of writing my LTTP (Lightweight Text Transfer Protocol) and in the process of creating a text-based client I hit a snag where I needed `ncurses` functionality but I also didn't want people on Windows to need to enable the Linux subsystem in Windows 10 in order to use the lttp client. For this I wrapped some of the most primitive functions that I needed for both ncurses and the [Windows Console API](https://docs.microsoft.com/en-us/windows/console/console-functions).

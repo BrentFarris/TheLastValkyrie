@@ -1,8 +1,9 @@
 ---
 title: Writing a 6502 Assembler
 description: Going through and explaining the 6502 assembler that I wrote
-tags: 6502 assembly assembler writing-6502 writing-assembler
+tags: 6502, assembly, assembler, writing 6502, writing assembler
 image: https://i.imgur.com/Ja6zIYk.png
+date: 12/05/2019
 ---
 
 So I wrote a 6502 Assembler which uses the same syntax you would find in most online tutorials like [this one](https://skilldrick.github.io/easy6502/index.html). I found the syntax simple and straight forward to what I needed and the documentation for many other assemblers fairly shotty and with their own unique symbols for things. Like not being able to do `define thing $9F` in other assemblers is fairly frustrating. For example, if you were to just copy the snake game directly from the above tutorial link, and paste it into a file, then run it through my assembler, it will assemble it to the same exact hexcode of the site. There are some additions that are required (such as program address offset) but we'll cover that stuff further down this page.

@@ -1,7 +1,8 @@
 ---
 title: C++ Shortcomings With Building Libraries
 description: Some issues with C++ when it comes to developing libraries that others can use
-tags: c++ c++-programming tips c++-issues dll-issues
+tags: c++, c++ programming, tips, c++ issues, dll issues
+date: 08/15/2021
 ---
 
 Before we begin, I'll be the first to tell you that I love C++, it is a great OOP language with a vast feature set. It is also one of my most favorite languages, second only to C. It's vast amount of features can be one of it's crippling issues when it comes to new developers learning it. Many developers over-use it's features or select the wrong tool for the job due to this. However, what I mainly want to focus on here is the troubles I've had with C++ while developing a GUI based game engine in C++. I've moved all of the code for my engine to C because of these shortcomings and to be able to expand the engine for games faster as a solo developer.

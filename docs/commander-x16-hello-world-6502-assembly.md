@@ -1,8 +1,9 @@
 ---
 title: Commander X16 Hello World (6502 Assembly)
 description: How to get a program built and running on the Commander X16 using 6502 Assembly
-tags: 6502 assembly acme commander-x16 8-bit-guy
+tags: 6502, assembly, acme, commander x16, 8 bit guy
 image: https://i.imgur.com/VqNrLYh.png
+date: 12/01/2019
 ---
 
 Something that I've always wanted to do, but haven't had enough time to do, is to write a game on an 8-bit computer like the Commodore 64 (C64). I was watching some videos ([Part 1](https://youtu.be/ayh0qebfD2g) & [Part 2](https://youtu.be/sg-6Cjzzg8s)) by David Murry (The 8-Bit guy) where he was talking about this project he started up named the Commander X16. This was very interesting to me because it was an 8-bit computer which uses a 6502 processor. The computer was inspired by (and seemingly based on) the Commodore 64. I thought, what better way to make a game on an 8-bit computer than one that is being made now days and uses (mostly) all off-the-shelf parts. There are some upgrades such as a VGA video output and 2MB of bank-switching ram for starters (which is nice).

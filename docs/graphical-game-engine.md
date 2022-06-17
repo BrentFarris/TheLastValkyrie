@@ -1,7 +1,8 @@
 ---
 title: Game Engine GUI Tests
 description: Just some visual testing of my game engine using GTK
-tags: c c-programming game-engine gtk c++ c++-programming
+tags: c, c programming, game engine, gtk, c++, c++ programming
+date: 06/01/2021
 ---
 
 I've been developing a game engine for fun for years. It's bobbed back and forth in C and C++ and has been similar to a framework the whole time (pure code). I decided to play around and try to add a GUI to visualize all the game engine code using GTK. Below are a series of updates of some stuff I've been messing with in the engine (mostly related to the GUI stuff). These updates are in the order that they were made in, except for the first one that does an overview.
