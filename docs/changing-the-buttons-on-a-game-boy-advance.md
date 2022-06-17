@@ -3,7 +3,7 @@ title: Changing the Buttons on a Game Boy Advance
 description: A short guide to changing the buttons on your Game Boy Advance
 tags: Game Boy Advance, Game Boy, Modding, Game Boy Mod
 image: https://retroscience.net/images/changing-the-buttons-on-a-game-boy-advance/game-boy-advance-red-mod-pokemon-red.jpg
-date: 06/11/2022
+date: June 11, 2022
 ---
 
 In this document, I will be going over how to replace the buttons on your Gameboy Advance. The video below shows the steps of replacing the game boy buttons in detail, I didn't bother explaining the steps of what I'm doing in the video as the video clips are detailed enough and it seemed redundant.
