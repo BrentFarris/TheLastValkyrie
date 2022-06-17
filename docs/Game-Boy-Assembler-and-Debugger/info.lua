@@ -1,8 +1,8 @@
 return {
-	title = "BIOS Programming in VirtualBox Part 2",
-	description = "Part 2 to my previous BIOS programming tutorial, we’ll be looking at getting out of the boot sector",
-	keywords = "BIOS, x86, x64, Assembly, Virtualbox, Memory, Floppy",
-	image = "https://retroscience.net/BIOS-Programming-in-VirtualBox-Part-2/view_files/image002.png",
-	url = "https://retroscience.net/BIOS-Programming-in-VirtualBox-Part-2/index.html",
-	date = "2022-05-22"
+	title = "Game Boy Assembler & Emulator/Debugger",
+	description = "So I wrote a Game Boy assembler and emulator/debugger to make it easier to debug",
+	keywords = "Game Boy, gameboy, assembler, emulator, z80, debugger",
+	image = "https://retroscience.net/Game-Boy-Assembler-and-Debugger/view_files/1NFkPGp.png",
+	url = "https://retroscience.net/Game-Boy-Assembler-and-Debugger/index.html",
+	date = "2021-11-06"
 }
