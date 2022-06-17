@@ -310,17 +310,17 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 a {
-	color:#2a7ae2;
-	text-decoration:none;
+	color:#2a7ae2 !important;
+	text-decoration:none !important;
 }
 
 a:visited {
-	color:#1756a9;
+	color:#1756a9 !important;
 }
 
 a:hover {
-	color:#111;
-	text-decoration:underline;
+	color:#111 !important;
+	text-decoration:underline !important;
 }
 
 .social-media-list a:hover {
