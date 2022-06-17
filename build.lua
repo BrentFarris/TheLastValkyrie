@@ -15,7 +15,13 @@ end
 
 function dirs(path)
 	local i, t, popen = 0, {}, io.popen
-	local pfile = popen("find "..path.." -maxdepth 1 -type d")
+	local cmd
+	if WINDOWS then
+		cmd = "for /D /R %i in ("..path.."/*.*) do @echo "..path.."%~nsxi"
+	else
+		cmd = "find "..path.." -maxdepth 1 -type d"
+	end
+	local pfile = popen(cmd)
 	for filename in pfile:lines() do
 		if file_exists(filename.."/view.html") then
 			i = i + 1
@@ -183,7 +189,8 @@ function write_index(path)
  </body>
 </html>
 ]]
-	local fout = assert(io.open(folder.."/index.html", "w"))
+	local filePath = folder.."/index.html"
+	local fout = assert(io.open(filePath, "w"))
 	fout:write(doc)
 	assert(fout:close())
 end
