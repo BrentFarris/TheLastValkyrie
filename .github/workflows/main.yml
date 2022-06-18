@@ -24,9 +24,14 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - name: Run luamd.lua
         # You may pin to the exact commit or the version.
         # uses: MilesChou/lua-action@29d9d758438e3c8856f521d4e3ae7b012893cde0
         uses: MilesChou/lua-action@v0.0.1
         with:
           args: lua buildmd.lua
+          
+      - uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          add: '*.json'
