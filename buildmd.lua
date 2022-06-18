@@ -6,35 +6,25 @@ function trim(str)
 end
 
 function markdown_files(path)
-	local t = {}
-	local i = 0
-	local addIfmd = function(fName)
-		if fName:find(".md") then
-			i = i + 1
-			t[i] = fName
-			print("Adding file "..fName)
-		end
-	end
-	if arg[1] == "ghaction" then
-		local lfs = require"lfs"
-		for fileName in lfs.dir(path) do
-			addIfmd(fileName)
-		end
+	local i, t, popen = 0, {}, io.popen
+	local cmd
+	print("Attempting to pipe the command "..cmd)
+	if WINDOWS then
+		cmd = "for /R %i in ("..path.."/*.*) do @echo "..path.."/%~nsxi"
 	else
-		local popen = io.popen
-		local cmd
-		if WINDOWS then
-			cmd = "for /R %i in ("..path.."/*.*) do @echo "..path.."/%~nsxi"
-		else
-			cmd = "find "..path.." -maxdepth 1 -type d"
-		end
-		local pipe = popen(cmd)
-		if pipe then
-			for fileName in pipe:lines() do
-				addIfmd(fileName)
+		cmd = "find "..path.." -maxdepth 1 -type d"
+	end
+	print("Attempting to pipe the command "..cmd)
+	local pipe = popen(cmd)
+	if pipe then
+		for fileName in pipe:lines() do
+			if fileName:find(".md") then
+				i = i + 1
+				t[i] = fileName
+				print("Adding file "..fileName)
 			end
-			pipe:close()
 		end
+		pipe:close()
 	end
 	return t
 end
