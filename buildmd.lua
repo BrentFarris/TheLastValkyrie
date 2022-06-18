@@ -11,7 +11,7 @@ function markdown_files(path)
 	if WINDOWS then
 		cmd = "for /R %i in ("..path.."/*.*) do @echo "..path.."/%~nsxi"
 	else
-		cmd = "find "..path.." -maxdepth 1 -type d"
+		cmd = "find "..path.." -maxdepth 1 -type f"
 	end
 	print("Attempting to pipe the command "..cmd)
 	local pipe = popen(cmd)
