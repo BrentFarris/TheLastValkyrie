@@ -25,6 +25,8 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: |
-          apt install -y lua5.3
-          lua buildmd.lua
+        # You may pin to the exact commit or the version.
+        # uses: MilesChou/lua-action@29d9d758438e3c8856f521d4e3ae7b012893cde0
+        uses: MilesChou/lua-action@v0.0.1
+        with:
+          args: lua buildmd.lua
