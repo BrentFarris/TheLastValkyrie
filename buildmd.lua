@@ -8,7 +8,6 @@ end
 function markdown_files(path)
 	local i, t, popen = 0, {}, io.popen
 	local cmd
-	print("Attempting to pipe the command "..cmd)
 	if WINDOWS then
 		cmd = "for /R %i in ("..path.."/*.*) do @echo "..path.."/%~nsxi"
 	else
