@@ -29,7 +29,9 @@ jobs:
         # uses: MilesChou/lua-action@29d9d758438e3c8856f521d4e3ae7b012893cde0
         uses: MilesChou/lua-action@v0.0.1
         with:
-          args: lua buildmd.lua
+          args: |
+            luarocks install luafilesystem
+            lua buildmd.lua ghaction
           
       - uses: EndBug/add-and-commit@v9
         with:
