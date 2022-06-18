@@ -2,7 +2,7 @@
 title: BIOS Programming in VirtualBox
 description: A quick getting started tutorial on how to write a minimal text/graphics program in VirtualBox without an operating system
 tags: bios, x86, x64, assembly, virtualbox, graphics
-image: https://i.imgur.com/XtdQjQh.png
+image: https://retroscience.net/images/BIOS%20programming%20in%20VirtualBox/keyboard-text-debug-log.png
 date: July 24, 2020
 ---
 
