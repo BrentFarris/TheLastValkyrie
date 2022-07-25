@@ -10,4 +10,5 @@ I am not that great of a carver, in fact, probably every carving you see here is
 My normal process that I try for these are to draw something I like in my sketchbook, then transfrer that over to a stamp block and carve it out; nothing fancy. Sometimes I'll print out the image on my printer to trace if I had done the drawing digitally, but I don't do too much of drawing digitally these days.
 
 > 2022-07-24
+> The block I carved this into had paper all stuck to it before/while I was carving it, so it came out blotchy unfortunately
 ![cat-carving](https://user-images.githubusercontent.com/1002223/180695530-0a638226-0db3-46c6-9357-4f7cc46404ce.jpeg)
