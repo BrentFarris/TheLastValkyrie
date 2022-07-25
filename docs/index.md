@@ -46,7 +46,7 @@ Below is just a collection of thoughts and studies that I've done on my spare ti
 
 11/25/2019: [Object oriented design patterns](design-patterns.md)
 
-<br/><br/><br/><br/>
+<br/><br/><br/><br/> 
 
 ---
 
