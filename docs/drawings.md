@@ -9,6 +9,21 @@ I have yet to make any original art, but here are some drawings I've done while 
 
 I really like Kim Jung Gi's style and have been drawing a lot only with a sharpie recently so here are some drawings from those exercises.
 
+> 2022-11-13
+![2020-06-17](images/Drawings/IMG_20221114_081819.jpg)
+
+> 2022-11-12
+![2020-06-17](images/Drawings/IMG_20221114_081602.jpg)
+![2020-06-17](images/Drawings/IMG_20221114_081700.jpg)
+![2020-06-17](images/Drawings/IMG_20221114_081801.jpg)
+
+> 2022-11-11
+![2020-06-17](images/Drawings/IMG_20221114_081517.jpg)
+![2020-06-17](images/Drawings/IMG_20221114_081545.jpg)
+
+> 2022-11-10
+![2020-06-17](images/Drawings/IMG_20221114_081640.jpg)
+
 > 2020-06-17
 ![2020-06-17](https://i.imgur.com/BC55YTN.png)
 
