@@ -5,6 +5,8 @@ tags: brent-drawing brents-drawings drawings art pen-art
 image: https://i.imgur.com/JXHXk6L.jpg
 ---
 
+[Home](index.md) / [Drawings](drawings.md) / [Carvings](carvings.md) / [About](about.md) / [Contact Me](contact.md)
+
 I have yet to make any original art, but here are some drawings I've done while practicing. Some are from life but many are based on other artists I like (I guess you can call it fan art) and some random drawings I've seen that I liked a piece of and wanted to try myself.
 
 I really like Kim Jung Gi's style and have been drawing a lot only with a sharpie recently so here are some drawings from those exercises.
