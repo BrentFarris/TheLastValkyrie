@@ -193,57 +193,40 @@ char* utf8 = u8"Hello World!";
 
 So in closing on the UTF-8 topic, please stop using `wchar_t`, `char16_t`, and all those other variants (except when you are forced to, due to 3rd party libraries). With that, I'll leave you with this helper function to get you started:
 ```c
-size_t utf8len(const char* const str)
-{
-	size_t len = 0;
-	unsigned char c = str[0];
-	for (size_t i = 1; c != 0; ++len, ++i)
-	{
-		if ((c & 0x80))
-		{
-			if (c < 192)	// Invalid increment
-				return 0;
-			c >>= 4;
-			if (c == 12)
-				c++;
-			i += c - 12;
-		}
-		c = str[i];
-	}
-	return len;
+size_t utf8len(const char* const str) {
+    size_t len = 0;
+    unsigned char c = str[0];
+    for (size_t i = 0; c != 0; ++len) {
+        int v0 = (c & 0x80) >> 7;
+        int v1 = (c & 0x40) >> 6;
+        int v2 = (c & 0x20) >> 5;
+        int v3 = (c & 0x10) >> 4;
+        i += 1 + v0 * v1 + v0 * v1 * v2 + v0 * v1 * v2 * v3;
+        c = str[i];
+    }
+    return len;
 }
 ```
 *Note:* This does not validate the utf8 string. I am not fond of making the length function also validate the string, for that we should create a separate method for validation. Using [this table I found on Wikipedia](https://en.wikipedia.org/wiki/UTF-8#Description) we can construct a validation function (also this table was used for the length function).
 ```c
-bool utf8valid(const char* const str)
-{
-	if (str == NULL)
-		return false;
-	unsigned char c = str[0];
-	for (size_t i = 1, inc = 0; c != 0; ++i)
-	{
-		if (inc > 1)
-		{
-			if ((c & 0xC0) != 0x80)
-				return false;
-			inc--;
-		}
-		else
-		{
-			inc = 1;
-			if ((c & 0x80))
-			{
-				if (c < 0xC0 || c >= 0xF8)
-					return false;
-				c >>= 4;
-				if (c == 12)
-					c++;
-				inc += c - 12;
-			}
-		}
-		c = str[i];
-	}
-	return true;
+bool utf8valid(const char* const str) {
+    if (str == NULL)
+        return false;
+    const char* c = str;
+    bool valid = true;
+    for (size_t i = 0; c[0] != 0 && valid;) {
+        valid = (c[0] & 0x80) == 0
+            || ((c[0] & 0xE0) == 0xC0 && (c[1] & 0xC0) == 0x80)
+            || ((c[0] & 0xF0) == 0xE0 && (c[1] & 0xC0) == 0x80 && (c[2] & 0xC0) == 0x80)
+            || ((c[0] & 0xF8) == 0xF0 && (c[1] & 0xC0) == 0x80 && (c[2] & 0xC0) == 0x80 && (c[3] & 0xC0) == 0x80);
+        int v0 = (c[0] & 0x80) >> 7;
+        int v1 = (c[0] & 0x40) >> 6;
+        int v2 = (c[0] & 0x20) >> 5;
+        int v3 = (c[0] & 0x10) >> 4;
+        i += 1 + v0 * v1 + v0 * v1 * v2 + v0 * v1 * v2 * v3;
+        c = str + i;
+    }
+    return valid;
 }
 ```
 
