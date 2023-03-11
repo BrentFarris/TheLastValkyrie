@@ -195,14 +195,12 @@ So in closing on the UTF-8 topic, please stop using `wchar_t`, `char16_t`, and a
 ```c
 size_t utf8len(const char* const str) {
     size_t len = 0;
-    unsigned char c = str[0];
-    for (size_t i = 0; c != 0; ++len) {
-        int v0 = (c & 0x80) >> 7;
-        int v1 = (c & 0x40) >> 6;
-        int v2 = (c & 0x20) >> 5;
-        int v3 = (c & 0x10) >> 4;
-        i += 1 + v0 * v1 + v0 * v1 * v2 + v0 * v1 * v2 * v3;
-        c = str[i];
+    for (size_t i = 0; *str != 0; ++len) {
+        int v0 = (*str & 0x80) >> 7;
+        int v1 = (*str & 0x40) >> 6;
+        int v2 = (*str & 0x20) >> 5;
+        int v3 = (*str & 0x10) >> 4;
+        str += 1 + v0 * v1 + v0 * v1 * v2 + v0 * v1 * v2 * v3;
     }
     return len;
 }
