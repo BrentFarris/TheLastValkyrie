@@ -1,7 +1,8 @@
 #theme: jekyll-theme-tactile
 remote_theme: BrentFarris/minima
 title: Brent's Website
-description: A personal log about things I like in computer programming, art, electronics, and other hobbies.\n\nAll code on my website is free for anyone to use (public domain). All that I ask is that you display attribution ("Brent Farris") in source code comments and/or in credits.
+description: A personal log about things I like in computer programming, art, electronics, and other hobbies.
+notice: All code on my website is free for anyone to use (public domain). All that I ask is that you display attribution ("Brent Farris") in source code comments and/or in credits.
 tagline: Some Assembly required
 author: Brent Farris
 email: RetroScience@aquamail.net
