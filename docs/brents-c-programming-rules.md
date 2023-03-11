@@ -207,7 +207,7 @@ size_t utf8len(const char* const str) {
     return len;
 }
 ```
-*Note:* This does not validate the utf8 string. I am not fond of making the length function also validate the string, for that we should create a separate method for validation. Using [this table I found on Wikipedia](https://en.wikipedia.org/wiki/UTF-8#Description) we can construct a validation function (also this table was used for the length function).
+*NOTE 1:* This does not validate the utf8 string. I am not fond of making the length function also validate the string, for that we should create a separate method for validation. Using [this table I found on Wikipedia](https://en.wikipedia.org/wiki/UTF-8#Description) we can construct a validation function (also this table was used for the length function).
 ```c
 bool utf8valid(const char* const str) {
     if (str == NULL)
@@ -229,6 +229,8 @@ bool utf8valid(const char* const str) {
     return valid;
 }
 ```
+
+*NOTE 2*: Something that developers trip on is the file encoding for their source file. Be sure you are using UTF-8 encoding for your source file when typing UTF-8 strings directly into your source code. If you use the wrong encoding, the compiler may compile the inline string with the incorrect encoding, even with the `u8` prefix.
 
 ## Don't use char for memory array, use uint8_t
 In making code readable, you should only use `char*` or `unsigned char*` for strings (character arrays). If you want a block of bytes/memory pointer, then you should use `uint8_t*` where `uint8_t` is part of `stdint.h`. This makes the code much more readable where memory is represented as an unsighned 8-bit array of numbers (byte array). Now you can trust when you see a `char*` that it is referring to a UTF-8 (or ASCII) character array (text).
