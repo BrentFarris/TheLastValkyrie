@@ -2,6 +2,7 @@
 title: Go Generate and AST
 description: A description of how to use Go's built in generator and AST to generate code 
 tags: go, generate, ast, go generate, go ast
+image: https://imgur.com/Aj9yrAP
 date: October 13, 2023
 ---
 
