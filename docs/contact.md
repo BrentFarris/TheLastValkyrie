@@ -12,7 +12,7 @@ tags: brent farris brent-farris contact
 
 [YouTube](https://www.youtube.com/@BrentFarris)
 
-[Twitter](https://twitter.com/BrentArtAndCode)
+[Twitter](https://twitter.com/KaijuCoder)
 
 [Email](mailto:RetroScience@aquamail.net)
 
