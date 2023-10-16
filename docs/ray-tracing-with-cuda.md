@@ -85,3 +85,6 @@ So, you think, well because of Rule #3 I should just spread out across more and 
 [Understanding the profiler](https://docs.nvidia.com/nsight-visual-studio-edition/2019.4/Nsight_Visual_Studio_Edition_User_Guide.htm#Profile_CUDA_Settings.htm%3FTocPath%3DAnalysis%2520Tools%7CCUDA%2520Experiments%7C_____0)
 
 [Writing a raytracer 3 books](https://raytracing.github.io/)
+
+## The CUDA code
+For those interested in seeing the CUDA code, [here is](https://gist.github.com/BrentFarris/062e974457932c49f19e901805e632fd#file-old-cuda-trace-kernel-cu) the un-commented toy code I pulled from the repo and the [batch file](https://gist.github.com/BrentFarris/062e974457932c49f19e901805e632fd#file-bake-bat) I used to bake the animation.
