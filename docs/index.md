@@ -4,6 +4,8 @@ Below is just a collection of thoughts and studies that I've done on my spare ti
 
 07/26/2024 [Programming with Formal Logic](programming-with-formal-logic.md)
 
+06/24/2024 [Reverse engineering Casio FX-991CW QR code encoding](reverse-engineering-casio-fx-991cw-qr-code-encoding.md)
+
 10/14/2023 [The rise of programming specialists](the-rise-of-programming-specialists.md)
 
 10/13/2023 [Go Generate and AST](go-generate-and-ast.md)
