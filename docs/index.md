@@ -2,6 +2,8 @@
 
 Below is just a collection of thoughts and studies that I've done on my spare time. In no way are they suppose to be cohesive posts, most of them are probably just covering a single concept.
 
+07/26/2024 [Programming with Formal Logic](programming-with-formal-logic.md)
+
 10/14/2023 [The rise of programming specialists](the-rise-of-programming-specialists.md)
 
 10/13/2023 [Go Generate and AST](go-generate-and-ast.md)
