@@ -2,6 +2,8 @@
 
 Below is just a collection of thoughts and studies that I've done on my spare time. In no way are they suppose to be cohesive posts, most of them are probably just covering a single concept.
 
+11/12/2024 [On C++](on-cplusplus.md)
+
 07/26/2024 [Programming with Formal Logic](programming-with-formal-logic.md)
 
 06/24/2024 [Reverse engineering Casio FX-991CW QR code encoding](reverse-engineering-casio-fx-991cw-qr-code-encoding.md)
