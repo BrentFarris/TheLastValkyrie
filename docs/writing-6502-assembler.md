@@ -70,9 +70,9 @@ What the assembler does, is during the line analysis phase in the beginning, it 
 ## Special symbols (#< and #>)
 While developing in 6502 assembly you are going to want to get the address high byte and low byte for labels. This will help you to store jump addresses within the zero page of memory so you can essentially pass a label as an argument to a routine. Though this is primarily useful for labels, you could also just use the standard address syntax here as well. Below is an example of how it is used and what it will produce when used.
 ```asm
-LDA #>try_something
-STA $00
 LDA #<try_something
+STA $00
+LDA #>try_something
 STA $01
 NOP
 try_something:  ; For learning, assume the address for this label is $18F3
