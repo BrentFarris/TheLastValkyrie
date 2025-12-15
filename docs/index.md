@@ -1,5 +1,11 @@
 [Home](index.md) / [Drawings](drawings.md) / [About](about.md) / [Contact Me](contact.md)
 
+---
+
+*We do science, because we expect design in nature.*
+
+---
+
 Below is just a collection of thoughts and studies that I've done on my spare time. In no way are they suppose to be cohesive posts, most of them are probably just covering a single concept.
 
 11/12/2024 [On C++](on-cplusplus.md)
