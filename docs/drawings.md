@@ -11,6 +11,8 @@ I have yet to make any original art, but here are some drawings I've done while 
 
 I really like Kim Jung Gi's style and have been drawing a lot only with a sharpie recently so here are some drawings from those exercises.
 
+![2020-06-17](images/Drawings/signal-2025-12-20-190828.jpeg)
+
 > 2022-11-13
 ![2020-06-17](images/Drawings/IMG_20221114_081819.jpg)
 
